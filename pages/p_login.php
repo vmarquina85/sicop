@@ -52,7 +52,7 @@
 			<div class="login-header">
 				<div class="brand">
 					<span class='logo'></span>
-					<strong class='text-white sombrear'>Sicop</strong>
+					<strong class='text-white sombrear'>SICOP</strong>
 					<small>Sistema de Control Patrimonial</small>
 				</div>
 				
@@ -65,12 +65,6 @@
 					<div class="form-group m-b-20">
 						<input type="text" class="form-control input-lg" placeholder="Usuario" id='usuario'   required/>
 					</div>
-                           <!--  <div class="form-group m-b-20">
-                       <select id="sl_dependenciasUsuario" class="form-control input-lg">
-                       	<option value="" >--Seleccionar Depenencia--</option>
-
-                       </select>
-                   </div> -->
                    <div class="form-group m-b-20">
                    	<input type="password" class="form-control input-lg" placeholder="Contraseña" id='password' required />
                    </div>

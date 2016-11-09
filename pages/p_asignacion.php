@@ -357,18 +357,34 @@ require '../class/config/session_val.php';
                                             <input type="text" id="txt_cod_1" class="form-control "  disabled > 
                                             <span class="input-group-addon">-</span>   
                                             <input type="text" id="txt_cod_2" class="form-control width-50" maxlength='4' onkeypress="ValidaSoloNumeros();" >       
-                                         </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="control-label">Observacion:</label>
                                             <div class='row'>
                                                 <div class="col-md-9"><input type="text" id="txt_dni_d" class="form-control input-sm  m-b-5"  disabled ></div>
-                                                <div class="col-md-3"> <a class='btn btn-sm btn-success'><i class='fa fa-plus'></i> Agregar</a></div>
+                                                <div class="col-md-3"> <a class='btn btn-sm btn-success'><i class='fa fa-plus'></i></a></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <table class='table table-bordered f-s-11'>
+                                    <thead  style='background-color: rgba(100,100,100,0.1);'>
+                                        <tr>
+                                            <th class='p-0 text-center  bg-grey-200'>Codigo</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Clase</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Descripcion</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Marca</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Serie</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Modelo</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='tb_detalles'>
+
+                                    </tbody>
+                                </table>
                             </form>
                         </div>
                         <div class="modal-footer">
