@@ -1,0 +1,117 @@
+function get_papeletas(limit,offset){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  };
+  var url = '../get/get_pasignacionIndividual.php';
+  var numero=document.getElementById("txt_numero").value;
+  var origen=document.getElementById("sl_origen").value;
+  var destino=document.getElementById("sl_destino").value;  
+  var estado=document.getElementById("sl_estado").value;
+  var modurl = url+ "?limit="+ limit +"&offset=" + offset+"&numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado;
+  http.open("GET", modurl, false);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById("tb_asignaciones").innerHTML = (resultado); 
+      };
+    }; 
+  });
+  http.send(null);
+}
+function llenarPersonalDestino(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  };
+  var idpersonal= document.getElementById("sl_des_Entrega").value;
+  var url = "../get/datosPersonalDestino.php?idpersonal="+idpersonal;
+  http.open("GET", url, false);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById("datosDestino").innerHTML = (resultado); 
+      };
+    }; 
+  });
+  http.send(null);
+}
+function limpiar(){
+  document.getElementById("sl_area_d").value="";
+  document.getElementById("sl_oficina_d").value="";
+  document.getElementById("sl_cargo_d").value="";
+  document.getElementById("txt_dni_d").value="";
+}
+function obtener_personal(){
+  limpiar();
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  };
+  var url = '../get/get_select_personal.php';
+  var destino=document.getElementById("sl_asignacionDestino").value;  
+  var modurl = url+ "?destino="+destino;
+  http.open("GET", modurl, false);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById("sl_des_Entrega").innerHTML = (resultado); 
+      };
+    }; 
+  });
+  http.send(null);
+}
+function init_paginador(index){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  };
+  var url = '../get/get_pagination.php';
+  var numero=document.getElementById("txt_numero").value;
+  var origen=document.getElementById("sl_origen").value;
+  var destino=document.getElementById("sl_destino").value;  
+  var estado=document.getElementById("sl_estado").value;
+  var modurl = url+ "?numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado+"&pn="+index+"&page=asignacion";
+  http.open("GET", modurl, false);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById("paginator").innerHTML = (resultado);
+      };
+    }; 
+  });
+  http.send(null);
+}
+function search(index){
+  if (index<1) {
+    index=1;
+  };
+  get_papeletas(20,(20*(index-1)));
+  init_paginador(index);
+}
+function vertodos(){
+//reniiciando selects
+$('#sl_origen').val("*");
+$('#sl_destino').val("*");
+$('#sl_estado').val("*");
+//limpiando imputs
+$('#txt_numero').val("");
+search(1);
+}
+function  nuevoRegistro(){
+  $('#mymodal').modal();
+// limpiarFormulario('#formulario');
+}
+function obtenerCodigo() {
+var codigo=document.getElementById("sl_tipobien").value ;
+return codigo.substr(0,8);
+}
+function setCodigo(){
+  $('#txt_cod_1').val(obtenerCodigo());
+}
+function ValidaSoloNumeros() {
+    if ((event.keyCode < 48) || (event.keyCode > 57)) {
+        event.returnValue = false;
+    };
+
+};
