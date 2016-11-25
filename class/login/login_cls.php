@@ -58,6 +58,7 @@ if (pg_num_rows($result) > 0) {
     $_SESSION['s_area']=$usr_area;
     $_SESSION['s_cargo']=$usr_cargo;
     $_SESSION['s_dni'] =$usr_dni;
+    $_SESSION['id_dep']=$idoperativo;
     $_SESSION['usr_idper'] = $query["id_personal"];
     $_SESSION['acceso'] = "yes";
     $_SESSION['matriz'] = array();

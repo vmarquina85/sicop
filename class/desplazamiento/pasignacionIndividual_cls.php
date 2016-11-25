@@ -28,7 +28,7 @@ class asignacion extends conectar
 						inner join oficinas ot on a.mov_areatra=ot.id_area and a.mov_tar=ot.id_dep and a.mov_ofitra=ot.id_oficina
 						inner join tablatipo ce on a.mov_carper=ce.id_tipo and ce.id_tabla='10'
 						inner join tablatipo cr on a.mov_cartra=cr.id_tipo and cr.id_tabla='10'
-						where a.mov_motivo='2'";
+						where a.mov_tipo='5'";
 		if ($nro!='') {
 			$sql=$sql."and substring(a.mov_orden,2,7)='" . $nro . "'";
 		}
@@ -74,7 +74,7 @@ class asignacion extends conectar
 						inner join oficinas ot on a.mov_areatra=ot.id_area and a.mov_tar=ot.id_dep and a.mov_ofitra=ot.id_oficina
 						inner join tablatipo ce on a.mov_carper=ce.id_tipo and ce.id_tabla='10'
 						inner join tablatipo cr on a.mov_cartra=cr.id_tipo and cr.id_tabla='10'
-						where a.mov_motivo='2'";
+						where a.mov_tipo='5'";
 		if ($nro!='') {
 			$sql=$sql."and substring(a.mov_orden,2,7)='" . $nro . "'";
 		}

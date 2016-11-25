@@ -224,15 +224,15 @@ require '../class/config/session_val.php';
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="">Fecha:</label>
-                                            <input type="text" disabled class='form-control input-sm' disabled value='<?php echo date('d/m/Y'); ?>'>
+                                            <input id='txtFecha' type="text" disabled class='form-control input-sm' disabled value='<?php echo date('d/m/Y'); ?>'>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="">Motivo:</label>
-                                            <input type="text" class='form-control input-sm' value='ASIGNACION' disabled>
+                                            <input id='txtMotivo' type="text" class='form-control input-sm' value='ASIGNACION' disabled>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="">Nro Orden:</label>
-                                            <input type="text" disabled class='form-control input-sm'>
+                                            <input id='txtOrden' type="text" disabled class='form-control input-sm'>
                                         </div></div>
                                     </div>
                                 </div>
@@ -363,25 +363,27 @@ require '../class/config/session_val.php';
                                         <div class="form-group">
                                             <label class="control-label">Observacion:</label>
                                             <div class='row'>
-                                                <div class="col-md-9"><input type="text" id="txt_dni_d" class="form-control input-sm  m-b-5"  disabled ></div>
-                                                <div class="col-md-3"> <a class='btn btn-sm btn-success'><i class='fa fa-plus'></i></a></div>
+                                                <div class="col-md-9"><input type="text" id="txt_asignacionObservacion" class="form-control input-sm  m-b-5"></div>
+                                                <div class="col-md-3"> <a href='javascript:agregar_detalle();' id='btnAgregar' title='Agregar Bien' class='btn btn-sm btn-success'><i class='fa fa-plus'></i></a></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <table class='table table-bordered f-s-11'>
+                                <table id='tb_detalles' class='table table-bordered f-s-11'>
                                     <thead  style='background-color: rgba(100,100,100,0.1);'>
                                         <tr>
-                                            <th class='p-0 text-center  bg-grey-200'>Codigo</th>
-                                            <th class='p-0 text-center  bg-grey-200'>Clase</th>
+                                            <th class='p-0 text-center  bg-grey-200'>ID Patrimonial</th>
                                             <th class='p-0 text-center  bg-grey-200'>Descripcion</th>
                                             <th class='p-0 text-center  bg-grey-200'>Marca</th>
-                                            <th class='p-0 text-center  bg-grey-200'>Serie</th>
                                             <th class='p-0 text-center  bg-grey-200'>Modelo</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Color</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Serie</th>
                                             <th class='p-0 text-center  bg-grey-200'>Estado</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Observacion</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Eliminar</th>
                                         </tr>
                                     </thead>
-                                    <tbody id='tb_detalles'>
+                                    <tbody>
 
                                     </tbody>
                                 </table>
@@ -389,7 +391,7 @@ require '../class/config/session_val.php';
                         </div>
                         <div class="modal-footer">
                             <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                            <a href="javascript:;" class="btn btn-sm btn-success">Grabar</a>
+                            <a href="javascript:grabarAsignacion();" class="btn btn-sm btn-success">Grabar</a>
                         </div>
                     </div>
                 </div>
@@ -422,6 +424,7 @@ require '../class/config/session_val.php';
 <script src="../assets/js/apps.min.js"></script>
 <script src="../class/ajax/ajax.js"></script>
 <script src="../class/desplazamiento/pasignacionIndividual.js"></script>
+
 <!--   <script src="../class/login/killerSession.js"></script>-->
 
 <!-- ================== END PAGE LEVEL JS ================== -->
@@ -430,11 +433,14 @@ require '../class/config/session_val.php';
 //------------------------------------------------------------
 $(document).ready(function () {
     App.init();
+$('#btnAgregar').tooltip();
     search(1);
     $(".datepicker-default").datepicker({
         todayHighlight: !0,
         format: 'dd/mm/yyyy'
     })
+
+    
 });
 
 </script> 
