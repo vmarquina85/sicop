@@ -8,4 +8,3 @@ Autor: Victor Marquina Cardenas
 cargo: Programador / Especialista en Base de datos
 <br>
 Fecha 08/11/2016
-

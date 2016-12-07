@@ -96,7 +96,7 @@ require '../class/config/session_val.php';
                             <span>Mantenimiento</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="../pages/p_asignacion.php">Bienes</a></li>
+                            <li><a href="../pages/p_bienes.php">Bienes</a></li>
                             <li><a href="../pages/p_traslados.php">Personal</a></li>
                             <li><a href="../pages/p_generarActa.php">Usuarios</a></li>     
                             <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
