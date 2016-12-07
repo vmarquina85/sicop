@@ -204,7 +204,7 @@ require '../class/config/session_val.php';
                         <form id='formulario'>
                             <div class='text-center'>
                             </div>
-                            <h5>Datos de Papeleta</h5>
+                            <h5 class='resaltar'>Datos de Papeleta</h5>
                             <br>
                             <div class="row">
                                 <div class="col-md-3">
@@ -232,7 +232,7 @@ require '../class/config/session_val.php';
                                         </div>
                                         <div class="col-md-4">
                                             <label for="">Nro Orden:</label>
-                                            <input id='txtOrden' type="text" disabled class='form-control input-sm'>
+                                            <input id='txtOrden' type="text" disabled class='form-control input-sm resaltar'>
                                         </div></div>
                                     </div>
                                 </div>
@@ -241,7 +241,7 @@ require '../class/config/session_val.php';
                                 <div class="row">
                                     <div class="col-md-6">
                                         <legend>
-                                            <h5><strong>Datos de Origen</strong></h5>
+                                            <h5 class='resaltar'><strong>Datos de Origen</strong></h5>
                                         </legend>
                                         <div class="form-group m-t-25">
                                             <label class="col-md-2 control-label">Entrega:</label>
@@ -288,7 +288,7 @@ require '../class/config/session_val.php';
                                     </div>
                                     <div class="col-md-6">
                                         <legend>
-                                            <h5><strong>Datos de Destino</strong></h5>
+                                            <h5 class='resaltar'><strong>Datos de Destino</strong></h5>
                                         </legend>
                                         <div class="form-group m-t-25">
                                             <label class="col-md-2 control-label">Entrega:</label>

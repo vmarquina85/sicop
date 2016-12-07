@@ -29,7 +29,7 @@ class parametricas extends conectar
 	}
 	function Get_detalleBien($idp){
 		$sql="Select a.id_alterno, a.id_patrimonial, a.serie, a.modelo, a.observacion, a.id_estado, a.id_asignado, a.est_bien,
-		b.descripcion as tipo_equipo, d.descripcion as marca, e.descripcion as color, f.descripcion as estado
+		b.descripcion as tipo_equipo,a.id_alterno, d.descripcion as marca, e.descripcion as color, f.descripcion as estado
 		from equipos a 
 		left join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5'
 		left join tablatipo d on a.id_marca=d.id_tipo and d.id_tabla='6'

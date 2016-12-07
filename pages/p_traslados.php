@@ -89,6 +89,19 @@ require '../class/config/session_val.php';
             <div id="top-menu" class="top-menu">
                 <!-- begin top-menu nav -->
                 <ul class="nav">
+                          <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="material-icons">receipt</i>
+                            <span>Mantenimiento</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="../pages/p_asignacion.php">Bienes</a></li>
+                            <li><a href="../pages/p_traslados.php">Personal</a></li>
+                            <li><a href="../pages/p_generarActa.php">Usuarios</a></li>     
+                            <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
+                        </ul>
+                    </li>
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -199,274 +212,212 @@ require '../class/config/session_val.php';
                         </div>
                     </div>
                 </div>
-                <div id='mymodal' class="modal fade"  aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">Registro de Bienes</h4>
+
+       <div id='mymodal' class="modal fade"  aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Nueva Asignación</h4>
+                    </div>
+                    <div class="modal-body scrolled">
+                        <form id='formulario'>
+                            <div class='text-center'>
                             </div>
-                            <div class="modal-body scrolled">
+                            <h5 class='resaltar'>Datos de Papeleta</h5>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Origen:</label>
+                                    <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo $_SESSION['s_operativo']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Destino:</label>
+                                    <select onchange='obtener_personal();' id="sl_asignacionDestino" class='form-control input-sm m-r-10  m-b-5'>
+                                        <option value="*">--Seleccionar Destino--</option>
+                                        <?php for ($i = 0; $i < sizeof($rs_destino); $i++) { ?>
+                                        <option value="<?php echo utf8_encode($rs_destino[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_destino[$i]['descripcion']); ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="">Fecha:</label>
+                                            <input id='txtFecha' type="text" disabled class='form-control input-sm' disabled value='<?php echo date('d/m/Y'); ?>'>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="">Motivo:</label>
+                                            <input id='txtMotivo' type="text" class='form-control input-sm' value='ASIGNACION' disabled>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="">Nro Orden:</label>
+                                            <input id='txtOrden' type="text" disabled class='form-control input-sm resaltar'>
+                                        </div></div>
+                                    </div>
+                                </div>
+                                <br>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <legend>
+                                            <h5 class='resaltar'><strong>Datos de Origen</strong></h5>
+                                        </legend>
+                                        <div class="form-group m-t-25">
+                                            <label class="col-md-2 control-label">Entrega:</label>
+                                            <div class="col-md-10">
+                                                <select name="" id="sl_entrega_o" class="form-control input-sm  m-b-5" disabled>
+                                                    <option value="<?php echo $_SESSION['usr_idper'] ?>"><?php echo $_SESSION['usr_name'] ?></option>
+                                                </select>  
+                                                <!--   <input type="text" id="txt_entrega_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>"> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Area:</label>
+                                            <div class="col-md-10">
+                                                <select name="" id="sl_area_o" class="form-control input-sm  m-b-5" disabled>
+                                                    <option value="<?php echo $_SESSION['id_area']; ?>"><?php echo $_SESSION['s_area']; ?></option>
+                                                </select> 
 
-                                <form id='formulario'>
-                                    <h5>Datos del Bien</h5>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Oficina:</label>
+                                            <div class="col-md-10">
+                                                <select name="" id="sl_oficina_o" class="form-control input-sm  m-b-5" disabled>
+                                                    <option value="<?php echo $_SESSION['id_oficina']; ?>"><?php echo $_SESSION['s_oficina']; ?></option>
+                                                </select> 
 
-                                    <!-- fila 1 -->
-                                    <div class="input-group m-b-5 ">
-                                        <span class="input-group-addon input-sm" >Denominación</span>
-                                        <input type="text" class="form-control input-sm" >
-                                    </div>
-                                    <!-- fila2 -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm" >Grupo Genérico</span>
-                                                <input type="text" class="form-control input-sm" >
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm" >Clase</span>
-                                                <input type="text" class="form-control input-sm" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 3 -->
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm" >Codigo Patrimonial</span>
-                                                <input type="text" class="form-control input-sm" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm" >Nro Generado</span>
-                                                <input type="text" class="form-control input-sm" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 4 -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm" >Tipo de Cta.</span>
-                                                <select class="form-control input-sm">
-                                                    <option value="">-- Seleccione Tipo --</option>
-                                                    <option value=""></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio"  id='radio1' value="">
-                                                    Activo Fijo
-                                                </label>
-                                                <label>
-                                                    <input type="radio" id='radio1' value="">
-                                                    Cuenta de Orden
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 5 -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Cuenta Contable</span>
-                                                <select  class='form-control input-sm'>
-                                                    <option value="">-- Seleccione Cuenta --</option>
-                                                    <option value=""></option>
-                                                    <option value=""></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 6 -->
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Forma Adq.</span>
-                                                <select name="" id="" class='form-control input-sm'>
-                                                    <option value="">-- Seleccione Forma --</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Cargo:</label>
+                                            <div class="col-md-10">
+                                                <select name="" id="sl_cargo_o" class="form-control input-sm  m-b-5" disabled>
+                                                    <option value="<?php echo $_SESSION['id_cargo']; ?>"><?php echo $_SESSION['s_cargo']; ?></option>
+                                                </select> 
 
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-group m-b-5 ">
-                                                <input type="text" class="form-control input-sm datepicker-default" id="" placeholder="Fecha Adq.">
-                                                <span class="input-group-addon input-sm">
-                                                    <img src="../assets/img/date.png" alt="">
-                                                </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Cod. Interno</span>
-                                                <input type="text" class='form-control input-sm' >
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">D.N.I.:</label>
+                                            <div class="col-md-10">
+                                                <input type="text" id="txt_dni_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['s_dni']; ?>">
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- fila7 -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Resolución alta</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 8 -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Valor Adq.</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Valor Libros</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 9 -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Estado del Bien</span>
-                                                <select name="" id="" class='form-control input-sm'>
-                                                    <option value="">-- Seleccione Forma --</option>
+                                    <div class="col-md-6">
+                                        <legend>
+                                            <h5 class='resaltar'><strong>Datos de Destino</strong></h5>
+                                        </legend>
+                                        <div class="form-group m-t-25">
+                                            <label class="col-md-2 control-label">Entrega:</label>
+                                            <div class="col-md-10">
+                                                <select onchange='llenarPersonalDestino();' name='sl_des_Entrega' id="sl_des_Entrega" class='form-control input-sm m-r-10  m-b-5'>
+                                                    <option value="*">--Seleccionar Entrega--</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">
-                                                    Asegurado
-                                                </label>
+                                        <div id='datosDestino'>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Area:</label>
+                                                <div class="col-md-10">
+                                                    <select name="" id="sl_area_d" class='form-control input-sm  m-b-5' disabled>
+
+                                                        <option value="*" >--Seleccionar--</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Oficina:</label>
+                                                <div class="col-md-10">
+                                                    <select name="" id="sl_oficina_d" class='form-control input-sm  m-b-5' disabled>
+
+                                                        <option value="*" >--Seleccionar--</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Cargo:</label>
+                                                <div class="col-md-10">
+                                                    <select name="" id="sl_cargo_d" class='form-control input-sm  m-b-5' disabled>
+
+                                                        <option value="*" >--Seleccionar--</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">D.N.I.:</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" id='txt_dni_d' class='form-control input-sm m-b-5' disabled>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group m-b-5 ">
-                                        <span class="input-group-addon input-sm">Usuario</span>
-                                        <select name="" id="" class='form-control input-sm'>
-                                            <option value="">-- Seleccione Usuario --</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group m-b-5 ">
-                                        <span class="input-group-addon input-sm">Local</span>
-                                        <select name="" id="" class='form-control input-sm'>
-                                            <option value="">-- Seleccione Forma --</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group m-b-5 ">
-                                        <span class="input-group-addon input-sm">Area</span>
-                                        <select name="" id="" class='form-control input-sm'>
-                                            <option value="">-- Seleccione Area --</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group m-b-5 ">
-                                        <span class="input-group-addon input-sm">Oficina</span>
-                                        <select name="" id="" class='form-control input-sm'>
-                                            <option value="">-- Seleccione Oficina --</option>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <h5>Detalle Tecnico</h5>
-                                    <!-- fila 11 -->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Marca</span>
-                                                <select name="" id="" class='form-control input-sm'>
-                                                    <option value="">-- Seleccione Marca --</option>
-                                                </select>
-                                            </div>
+                                </div>   
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Tipo de Bien:</label>
+                                            <select id="sl_tipobien" class='form-control input-sm m-r-10 m-b-5' onChange='setCodigo();'>
+                                                <option value="*">--Seleccionar Tipo--</option>
+                                                <?php for ($i = 0; $i < sizeof($rs_tipobien); $i++) { ?>
+                                                <option value="<?php echo $rs_tipobien[$i]['prefijo'] . '@' . $rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Modelo</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
+                                    </div>
+                                    <div class="col-md-3">             
+                                        <label class="control-label">Codigo Patrimonial:</label>
+                                        <div class='input-group input-group-sm  m-b-5'>
+                                            <input type="text" id="txt_cod_1" class="form-control "  disabled > 
+                                            <span class="input-group-addon">-</span>   
+                                            <input type="text" id="txt_cod_2" class="form-control width-50" maxlength='4' onkeypress="ValidaSoloNumeros();" >       
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Tipo</span>
-                                                <input type="text" class='form-control input-sm' >
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="control-label">Observacion:</label>
+                                            <div class='row'>
+                                                <div class="col-md-9"><input type="text" id="txt_asignacionObservacion" class="form-control input-sm  m-b-5"></div>
+                                                <div class="col-md-3"> <a href='javascript:agregar_detalle();' id='btnAgregar' title='Agregar Bien' class='btn btn-sm btn-success'><i class='fa fa-plus'></i></a></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- fila 12 -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Dimensión</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 13 -->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Color</span>
-                                                <select name="" id="" class='form-control input-sm'>
-                                                    <option value="">-- Seleccione Color --</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Serie</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Placa</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 14 -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Nro Motor</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Nro Chasis</span>
-                                                <input type="text" class='form-control input-sm' >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- fila 15 -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group m-b-5 ">
-                                                <span class="input-group-addon input-sm">Observación</span>
-                                                <textarea name="" id="" rows="3" class='form-control'></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                                <a href="javascript:;" class="btn btn-sm btn-success">Crear</a>
-                            </div>
+                                </div>
+                                <table id='tb_detalles' class='table table-bordered f-s-11'>
+                                    <thead  style='background-color: rgba(100,100,100,0.1);'>
+                                        <tr>
+                                            <th class='p-0 text-center  bg-grey-200'>ID Patrimonial</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Descripcion</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Marca</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Modelo</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Color</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Serie</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Estado</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Observacion</th>
+                                            <th class='p-0 text-center  bg-grey-200'>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                            <a href="javascript:grabarAsignacion();" class="btn btn-sm btn-success">Grabar</a>
                         </div>
                     </div>
                 </div>
+            </div>
+
+
 
 
             </div>

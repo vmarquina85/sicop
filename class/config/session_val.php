@@ -4,4 +4,6 @@
 			header("location:../index.php");
 			exit();
 		}
+	$_SESSION['matriz'] = array();
+	
 		?>
