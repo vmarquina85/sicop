@@ -34,7 +34,7 @@ require '../class/config/session_val.php';
     <!-- ================== END BASE JS ================== -->
 
 </head>
-<body class='main-bg'>
+<body>
     <!-- begin #page-loader -->
     <div id="page-loader">
         <div class="material-loader">
@@ -88,48 +88,62 @@ require '../class/config/session_val.php';
         </div>
         <!-- end #header -->
         <!-- begin #top-menu -->
-        <div id="top-menu" class="top-menu">
-            <!-- begin top-menu nav -->
-            <ul class="nav">
-                <li class="has-sub">
-                    <a href="javascript:;">
-                        <b class="caret pull-right"></b>
-                        <i class="material-icons">receipt</i>
-                        <span>Procesos</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
-                        <li><a href="../pages/p_traslados.php">Translados</a></li>
-                        <li><a href="../pages/p_traslados.php">Acta de Devolución</a></li>     
-                        <li><a href="email_inbox.html">Levantamiento de Inventario</a></li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;">
-                        <b class="caret pull-right"></b>
-                        <i class="material-icons">pie_chart</i>
-                        <span>Reportes</span> 
-                    </a>
-                    <ul class="sub-menu">
-                        <li><a href="email_inbox.html">Bienes Activos</a></li>
-                        <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-                        <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-                        <li><a href="email_inbox.html">Locales de la Entidad</a></li>
-                        <li><a href="email_inbox.html">Areas por Local</a></li>
-                        <li><a href="email_inbox.html">Estadistica General</a></li>
-                        <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-                        <li><a href="email_inbox.html">Historial</a></li>
-                    </ul>
-                </li>
-            </li>
-            <li class="menu-control menu-control-left">
-                <a href="#" data-click="prev-menu"><i class="material-icons">arrow_back</i></a>
-            </li>
-            <li class="menu-control menu-control-right">
-                <a href="#" data-click="next-menu"><i class="material-icons">arrow_forward</i></a>
-            </li>
-        </ul>
-    </div>
+            <div id="top-menu" class="top-menu">
+                <!-- begin top-menu nav -->
+                <ul class="nav">
+                          <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="material-icons">receipt</i>
+                            <span>Mantenimiento</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="../pages/p_bienes.php">Bienes</a></li>
+                            <li><a href="../pages/p_traslados.php">Personal</a></li>
+                            <li><a href="../pages/p_generarActa.php">Usuarios</a></li>     
+                            <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="material-icons">receipt</i>
+                            <span>Procesos</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
+                            <li><a href="../pages/p_traslados.php">Translados</a></li>
+                            <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>     
+                            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="material-icons">pie_chart</i>
+                            <span>Reportes</span> 
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="email_inbox.html">Bienes Activos</a></li>
+                            <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
+                            <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
+                            <li><a href="email_inbox.html">Locales de la Entidad</a></li>
+                            <li><a href="email_inbox.html">Areas por Local</a></li>
+                            <li><a href="email_inbox.html">Estadistica General</a></li>
+                            <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
+                            <li><a href="email_inbox.html">Historial</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="menu-control menu-control-left">
+                        <a href="#" data-click="prev-menu"><i class="material-icons">arrow_back</i></a>
+                    </li>
+                    <li class="menu-control menu-control-right">
+                        <a href="#" data-click="next-menu"><i class="material-icons">arrow_forward</i></a>
+                    </li>
+                </ul>
+            </div>
+
     <div id="content" class="content">
         <div class="panel panel-success">
             <div class="panel-heading">

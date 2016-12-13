@@ -38,7 +38,7 @@ require '../class/config/session_val.php';
   <!-- ================== END BASE JS ================== -->
 
 </head>
-<body class='main-bg'>
+<body>
   <!-- begin #page-loader -->
   <div id="page-loader">
    <div class="material-loader">

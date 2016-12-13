@@ -50,11 +50,11 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/material/
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dd0e1', endColorstr='#00acc1',GradientType=0 ); /* IE6-9 */
 }
 .pace-progress {
-    background: #00BCD4;
+    background: #64FFDA;
 }
 .pace .pace-activity {
-    border-top-color: #00BCD4;
-    border-left-color: #00BCD4;
+    border-top-color: #64FFDA;
+    border-left-color: #64FFDA;
 }
 
 
