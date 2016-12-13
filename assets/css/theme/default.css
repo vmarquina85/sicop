@@ -10,11 +10,11 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/material/
 .login .login-header .brand .logo {
     border-color: #56F3FF #069DA9  #2B797F;
 }
-.sidebar .nav > li.active > a, 
-.sidebar .nav > li.active > a:focus, 
+.sidebar .nav > li.active > a,
+.sidebar .nav > li.active > a:focus,
 .sidebar .nav > li.active > a:hover,
-.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a, 
-.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a, 
+.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a,
+.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a,
 .page-sidebar-minified .sidebar .nav > li.has-sub.active > a,
 .label.label-theme,
 .btn.btn-scroll-to-top {
@@ -32,16 +32,16 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/material/
 /* Added in v1.5 */
 
 .gradient-enabled .navbar.navbar-inverse .navbar-brand,
-.gradient-enabled .sidebar .nav > li.active > a, 
-.gradient-enabled .sidebar .nav > li.active > a:focus, 
+.gradient-enabled .sidebar .nav > li.active > a,
+.gradient-enabled .sidebar .nav > li.active > a:focus,
 .gradient-enabled .sidebar .nav > li.active > a:hover,
-.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a, 
-.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a, 
+.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:focus > a,
+.gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active:hover > a,
 .gradient-enabled.page-sidebar-minified .sidebar .nav > li.has-sub.active > a,
 .gradient-enabled .label.label-theme,
 .gradient-enabled .btn.btn-scroll-to-top,
-.gradient-enabled .top-menu .nav > li.active > a, 
-.gradient-enabled .top-menu .nav > li.active > a:focus, 
+.gradient-enabled .top-menu .nav > li.active > a,
+.gradient-enabled .top-menu .nav > li.active > a:focus,
 .gradient-enabled .top-menu .nav > li.active > a:hover {
     background: #4dd0e1; /* Old browsers */
     background: -moz-linear-gradient(top,  #4dd0e1 0%, #00acc1 100%); /* FF3.6-15 */
@@ -76,8 +76,8 @@ Website: http://www.seantheme.com/color-admin-v2.0/admin/material/
 
 /* Added in v1.9 */
 
-.top-menu .nav > li.active > a, 
-.top-menu .nav > li.active > a:focus, 
+.top-menu .nav > li.active > a,
+.top-menu .nav > li.active > a:focus,
 .top-menu .nav > li.active > a:hover {
     background: #00BCD4;
 }

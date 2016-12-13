@@ -15,7 +15,7 @@
 
       	<meta content="" name="description" />
       	<meta content="" name="author" />
-      	
+
       	<!-- ================== BEGIN BASE CSS STYLE ================== -->
       	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
       	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,7 +25,7 @@
       	<link href="../assets/css/animate.min.css" rel="stylesheet" />
       	<link href="../assets/css/style.min.css" rel="stylesheet" />
       	<link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
-        <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />	
+        <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
         <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
@@ -77,7 +77,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown navbar-user">
                 <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
-                  <img src="../assets/img/man.png" alt=""> 
+                  <img src="../assets/img/man.png" alt="">
                   <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
                 </a>
                 <ul class="dropdown-menu animated fadeInLeft">
@@ -106,7 +106,7 @@
               <ul class="sub-menu">
                 <li><a href="../pages/p_bienes.php">Bienes</a></li>
                 <li><a href="../pages/p_traslados.php">Personal</a></li>
-                <li><a href="../pages/p_generarActa.php">Usuarios</a></li>     
+                <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
                 <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
               </ul>
             </li>
@@ -114,20 +114,33 @@
               <a href="javascript:;">
                 <b class="caret pull-right"></b>
                 <i class="material-icons">receipt</i>
-                <span>Procesos</span>
+                <span>Procesos Adm</span>
               </a>
               <ul class="sub-menu">
                 <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
                 <li><a href="../pages/p_traslados.php">Translados</a></li>
-                <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>     
+                <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
                 <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
               </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    <i class="material-icons">receipt</i>
+                    <span>Procesos Usuario</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
+                    <li><a href="../pages/p_traslados.php">Translados</a></li>
+                    <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+                    <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+                </ul>
             </li>
             <li class="has-sub">
               <a href="javascript:;">
                 <b class="caret pull-right"></b>
                 <i class="material-icons">pie_chart</i>
-                <span>Reportes</span> 
+                <span>Reportes</span>
               </a>
               <ul class="sub-menu">
                 <li><a href="email_inbox.html">Bienes Activos</a></li>
@@ -166,7 +179,7 @@
               <div class='bg-grey-200  m-b-10 '>
                 <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuewvoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
                 <button class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
-              </div>  
+              </div>
 
 
               <form class='form-inline' method='POST' id='panelForm'>
@@ -247,7 +260,7 @@
                  <th class='p-0 text-center  bg-grey-200'>Fecha reg</th>
                  <th class='p-0 text-center  bg-grey-200'>Mod por</th>
                </tr>
-             </thead> 
+             </thead>
              <tbody id='tb_detalle_bienes'>
              </tbody>
            </table>
@@ -595,20 +608,20 @@
             limpiarFormulario('#formulario');
 
           }
-          var tipoBien =[ 
+          var tipoBien =[
           <?php for($i=0;$i<sizeof($rs_tipobien);$i++)
           {
             ?>
-            '<?php echo $rs_tipobien[$i]["prefijo"] .' - ' .$rs_tipobien[$i]["descripcion"] ?>',  
-            <?php 
+            '<?php echo $rs_tipobien[$i]["prefijo"] .' - ' .$rs_tipobien[$i]["descripcion"] ?>',
+            <?php
           }
 
           ?>
-          ]; 
+          ];
           $( "#txt_bienDescripcion").autocomplete({
             source: tipoBien
           });
-          </script> 
+          </script>
 
         </body>
         </html>

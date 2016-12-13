@@ -107,7 +107,7 @@ require '../class/config/session_val.php';
           <a href="javascript:;">
             <b class="caret pull-right"></b>
             <i class="material-icons">receipt</i>
-            <span>Procesos</span>
+            <span>Procesos Adm</span>
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
@@ -115,6 +115,19 @@ require '../class/config/session_val.php';
             <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
           </ul>
+        </li>
+        <li class="has-sub">
+            <a href="javascript:;">
+                <b class="caret pull-right"></b>
+                <i class="material-icons">receipt</i>
+                <span>Procesos Usuario</span>
+            </a>
+            <ul class="sub-menu">
+                <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
+                <li><a href="../pages/p_traslados.php">Translados</a></li>
+                <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+                <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+            </ul>
         </li>
         <li class="has-sub">
           <a href="javascript:;">

@@ -1,7 +1,7 @@
   function get_bienes(limit,offset){
     if (window.XMLHttpRequest) {
       var http=getXMLHTTPRequest();
-    };
+    }
     var url = '../get/get_bienes.php';
         var tipobien=document.getElementById("sl_tipobien").value;
     var totalchar=tipobien.length-(tipobien.indexOf('@')+1);
@@ -11,7 +11,7 @@
     var serie=document.getElementById("txt_serie").value;
     var codigointerno=document.getElementById("txt_codinterno").value;
     var docalta=document.getElementById("txt_docalta").value;
-    var operativo=document.getElementById("sl_Operativo").value;  
+    var operativo=document.getElementById("sl_Operativo").value;
     var marca=document.getElementById("sl_Marca").value;
     var asignado=document.getElementById("sl_Asignacion").value;
     var estado=document.getElementById("sl_estado").value;
@@ -21,9 +21,9 @@
       if (http.readyState == 4) {
         if(http.status == 200) {
           var resultado = http.responseText;
-          document.getElementById("tb_detalle_bienes").innerHTML = (resultado); 
-        };
-      }; 
+          document.getElementById("tb_detalle_bienes").innerHTML = (resultado);
+        }
+      }
 
     });
   // http.onreadystatechange = useHttpResponseDistritoPac;
@@ -33,7 +33,7 @@
 function search(index){
   if (index<1) {
     index=1;
-  };
+  }
      get_bienes(20,(20*(index-1)));
  init_paginador(index);
 }
@@ -54,7 +54,7 @@ search(1);
    function init_paginador(index){
     if (window.XMLHttpRequest) {
       var http=getXMLHTTPRequest();
-    };
+    }
     var url = '../get/get_pagination.php';
     var tipobien=document.getElementById("sl_tipobien").value;
     var totalchar=tipobien.length-(tipobien.indexOf('@')+1);
@@ -64,7 +64,7 @@ search(1);
     var serie=document.getElementById("txt_serie").value;
     var codigointerno=document.getElementById("txt_codinterno").value;
     var docalta=document.getElementById("txt_docalta").value;
-    var operativo=document.getElementById("sl_Operativo").value;  
+    var operativo=document.getElementById("sl_Operativo").value;
     var marca=document.getElementById("sl_Marca").value;
     var asignado=document.getElementById("sl_Asignacion").value;
     var estado=document.getElementById("sl_estado").value;
@@ -74,9 +74,9 @@ search(1);
       if (http.readyState == 4) {
         if(http.status == 200) {
           var resultado = http.responseText;
-          document.getElementById("paginator").innerHTML = (resultado); 
-        };
-      }; 
+          document.getElementById("paginator").innerHTML = (resultado);
+        }
+      }
     });
   // http.onreadystatechange = useHttpResponseDistritoPac;
   http.send(null);

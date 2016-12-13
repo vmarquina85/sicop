@@ -1,4 +1,4 @@
-<?php 
+<?php
 class conectar
 {
 function con_sinv(){
@@ -11,5 +11,3 @@ function con_sinv(){
 }
 }
 ?>
-
-
