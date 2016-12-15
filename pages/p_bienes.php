@@ -10,7 +10,7 @@
       <!--<![endif]-->
       <head>
       	<meta charset="utf-8" />
-      	<title>Maestro Bienes</title>
+      	<title>Mantenimiento Bienes</title>
       	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 
       	<meta content="" name="description" />
@@ -100,7 +100,7 @@
             <li class="has-sub">
               <a href="javascript:;">
                 <b class="caret pull-right"></b>
-                <i class="material-icons">receipt</i>
+                <img src="../assets/img/mixer-icon.png" alt="">
                 <span>Mantenimiento</span>
               </a>
               <ul class="sub-menu">
@@ -113,11 +113,11 @@
             <li class="has-sub">
               <a href="javascript:;">
                 <b class="caret pull-right"></b>
-                <i class="material-icons">receipt</i>
-                <span>Procesos Adm</span>
+                <img src="../assets/img/lightning-icon.png" alt="">
+                <span>Procesos</span>
               </a>
               <ul class="sub-menu">
-                <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
+                <li><a href="../pages/p_asignacion.php">Asignación</a></li>
                 <li><a href="../pages/p_traslados.php">Translados</a></li>
                 <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
                 <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
@@ -126,20 +126,17 @@
             <li class="has-sub">
                 <a href="javascript:;">
                     <b class="caret pull-right"></b>
-                    <i class="material-icons">receipt</i>
-                    <span>Procesos Usuario</span>
+                    <img src="../assets/img/sign-check-icon.png" alt="">
+                    <span>Tareas</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
-                    <li><a href="../pages/p_traslados.php">Translados</a></li>
-                    <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-                    <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+                    <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
                 </ul>
             </li>
             <li class="has-sub">
               <a href="javascript:;">
                 <b class="caret pull-right"></b>
-                <i class="material-icons">pie_chart</i>
+                <img src="../assets/img/file-powerpoint-icon.png" alt="">
                 <span>Reportes</span>
               </a>
               <ul class="sub-menu">
