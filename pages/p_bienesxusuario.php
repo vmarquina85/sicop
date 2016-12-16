@@ -44,7 +44,6 @@ require '../class/config/session_val.php';
     </div>
   </div>
   <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
-
     <div id="header" class="header navbar navbar-inverse bg-navbar navbar-fixed-top">
       <!-- begin container-fluid -->
       <div class="container-fluid">
@@ -145,151 +144,55 @@ require '../class/config/session_val.php';
       </ul>
     </div>
     <div id="content" class="content">
-
       <div class="row">
-
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-warning">
-                <div class="panel-heading">
-                  <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                  </div>
-                  <h4 class="panel-title">Pendientes</h4>
-                </div>
-                <div class="panel-body">
-                  <table id='tab_pendientes' class='table table-bordered f-s-11' style='cursor: pointer;'>
-                    <thead>
-                      <tr>
-                        <th class='  bg-grey-200'>Fecha</th>
-                        <th class='  bg-grey-200'>Descripcion</th>
-                        <th class='  bg-grey-200'>Modelo</th>
-                        <th class='  bg-grey-200'>Marca</th>
-                        <th class='  bg-grey-200'>Serie</th>
-                        <th class='  bg-grey-200'>E</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="panel-footer">
-                  Total de Bienes : 4
-                  <span class="pull-right">
-                    <button class="btn btn-success btn-xs">Aceptar</button>
-                    <button class="btn btn-danger btn-xs">Rechazar</button>
-                  </span>
-                </div>
+        <div class="col-md-12">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
               </div>
+              <h4 class="panel-title">Pendientes</h4>
+            </div>
+            <div class="panel-body">
+              <!-- <div class="row">
+                <div class="container">
+                  <div class="col-md-12">
+                    <div class="text-center">
+                    <span><img src="../assets/img/inface/nopendiente.png" alt="no pendiente"></span>
+                    <span><h3>GENIAL!!</h3><h5>NO HAY BIENES PENDIENTES</h4></span>
+                    </div>
+
+                  </div>
+                </div>
+              </div> -->
+               <table id='tab_pendientes' class='table table-bordered f-s-11' style='cursor: pointer;'>
+                <!-- <thead>
+                  <tr>
+                    <th class='  bg-grey-200'>Fecha</th>
+                    <th class='  bg-grey-200'>Descripcion</th>
+                    <th class='  bg-grey-200'>Modelo</th>
+                    <th class='  bg-grey-200'>Marca</th>
+                    <th class='  bg-grey-200'>Serie</th>
+                    <th class='  bg-grey-200'>E</th>
+                  </tr>
+                </thead>
+                <tbody></tbody> -->
+              </table>
+            </div>
+            <div class="panel-footer">
+              Total de Bienes : 0
+              <span class="pull-right">
+                <button id='aceptarPendientes' class="btn btn-success btn-xs">Aceptar</button>
+                <!-- <button class="btn btn-danger btn-xs">Rechazar</button> -->
+              </span>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-warning">
-                <div class="panel-heading">
-                  <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                  </div>
-                  <h4 class="panel-title">Pendientes</h4>
-                </div>
-                <div class="panel-body">
-                  <table id='tab_pendientes' class='table table-bordered f-s-11' style='cursor: pointer;'>
-                    <thead>
-                      <tr>
-                        <th class='  bg-grey-200'>Fecha</th>
-                        <th class='  bg-grey-200'>Descripcion</th>
-                        <th class='  bg-grey-200'>Modelo</th>
-                        <th class='  bg-grey-200'>Marca</th>
-                        <th class='  bg-grey-200'>Serie</th>
-                        <th class='  bg-grey-200'>E</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                      <tr>
-                        <td class=''>14/12/2016</td>
-                        <td class=''>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                        <td class=''>M4FMM</td>
-                        <td class=''>HP</td>
-                        <td class=''>42604a54s1s24</td>
-                        <td class=''><i style='color:#FFBA37' class="fa fa-warning"></i></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="panel-footer">
-                  Total de Bienes : 4
-                  <span class="pull-right">
-                    <button class="btn btn-success btn-xs">Aceptar</button>
-                    <button class="btn btn-danger btn-xs">Rechazar</button>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
         </div>
 
-
-        <div class="col-md-6">
-          <div class="panel panel-success">
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id='panelAsignados' class="panel panel-success">
             <div class="panel-heading">
               <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="Recargar" title=""><i class="fa fa-repeat"></i></a>
@@ -299,9 +202,8 @@ require '../class/config/session_val.php';
               <h4 class="panel-title">Asignados</h4>
             </div>
             <div class="panel-body">
-              <table class='table table-bordered f-s-11'>
-
-                <tr>
+             <table id='tab_asignados' class='table table-bordered f-s-11'>
+                <!-- <tr>
                   <th class='bg-grey-200'>Fecha</th>
                   <th class='bg-grey-200'>Descripcion</th>
                   <th class='bg-grey-200'>Modelo</th>
@@ -309,42 +211,7 @@ require '../class/config/session_val.php';
                   <th class='bg-grey-200'>Serie</th>
                   <th class='bg-grey-200'>E</th>
                 </tr>
-
-                <tbody>
-                  <tr>
-
-                    <td>14/12/2016</td>
-                    <td>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                    <td>M4FMM</td>
-                    <td>HP</td>
-                    <td>42604a54s1s24</td>
-                    <td><i style='color:#2C9943' class="fa fa-check"></i></td>
-                  </tr>
-                  <tr>
-                    <td>14/12/2016</td>
-                    <td>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                    <td>M4FMM</td>
-                    <td>HP</td>
-                    <td>42604a54s1s24</td>
-                    <td><i style='color:#2C9943' class="fa fa-check"></i></td>
-                  </tr>
-                  <tr>
-                    <td>14/12/2016</td>
-                    <td>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                    <td>M4FMM</td>
-                    <td>HP</td>
-                    <td>42604a54s1s24</td>
-                    <td><i style='color:#2C9943' class="fa fa-check"></i></td>
-                  </tr>
-                  <tr>
-                    <td>14/12/2016</td>
-                    <td>UNIDAD CENTRAL DE PROCESOS CPU</td>
-                    <td>M4FMM</td>
-                    <td>HP</td>
-                    <td>42604a54s1s24</td>
-                    <td><i style='color:#2C9943' class="fa fa-check"></i></td>
-                  </tr>
-                </tbody>
+                <tbody></tbody> -->
               </table>
             </div>
             <div class="panel-footer">
@@ -353,7 +220,6 @@ require '../class/config/session_val.php';
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -381,7 +247,38 @@ require '../class/config/session_val.php';
     $('#tab_pendientes tbody').on('click','tr', function () {
       $(this).toggleClass('warning');
     });
+    $('#tab_rechazados tbody').on('click','tr', function () {
+      $(this).toggleClass('danger');
+    });
+    $(document).on('click', '[id=aceptarPendientes]', function(e) {
+        e.preventDefault();
+        var target = $(this).closest('.panel');
 
+            var target2 =  $('#panelAsignados');
+        if (!$(target).hasClass('panel-loading')) {
+            var targetBody = $(target).find('.panel-body');
+            var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
+            $(target).addClass('panel-loading');
+            $(targetBody).prepend(spinnerHtml);
+            setTimeout(function() {
+                $(target).removeClass('panel-loading');
+                $(target).find('.panel-loader').remove();
+            }, 2000);
+        }
+        if (!$(target2).hasClass('panel-loading')) {
+            var targetBody = $(target2).find('.panel-body');
+            var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
+            $(target2).addClass('panel-loading');
+            $(targetBody).prepend(spinnerHtml);
+            setTimeout(function() {
+                $(target2).removeClass('panel-loading');
+                $(target2).find('.panel-loader').remove();
+            }, 2000);
+        }
+
+
+
+    });
   });
 
   </script>
