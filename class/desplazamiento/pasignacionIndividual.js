@@ -100,11 +100,11 @@ function vertodos(){
   search(1);
 }
 function  nuevoRegistro(){
-  if (validarAccesso()){
+//  if (validarAccesso()){
     $('#mymodal').modal();
-  }else {
-    alert('Solo los usuarios con rango de Jefe,Gerente, Administrador , Director pueden realizar una Asignación');
-  }
+  // }else {
+  //   alert('Solo los usuarios con rango de Jefe,Gerente, Administrador , Director pueden realizar una Asignación');
+  // }
 }
 function  validarAccesso(){
   if (window.XMLHttpRequest) {
@@ -292,4 +292,4 @@ function grabarDatosAsignacion(){
     }
   });
   http.send(null);
-}
+};

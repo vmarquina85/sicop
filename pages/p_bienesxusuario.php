@@ -19,12 +19,14 @@ require '../class/config/session_val.php';
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
   <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
-  <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <link href="../assets/css/datatables.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
@@ -149,138 +151,138 @@ require '../class/config/session_val.php';
           <div class="panel panel-warning">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-original-title="Minimizar/Maximinzar" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
               </div>
               <h4 class="panel-title">Pendientes</h4>
             </div>
             <div class="panel-body">
-              <!-- <div class="row">
-                <div class="container">
-                  <div class="col-md-12">
-                    <div class="text-center">
-                    <span><img src="../assets/img/inface/nopendiente.png" alt="no pendiente"></span>
-                    <span><h3>GENIAL!!</h3><h5>NO HAY BIENES PENDIENTES</h4></span>
-                    </div>
+            <div class="table-responsive">
+            <button id='mark_all' class="btn btn-warning btn-xs"><i class="fa fa-check-square-o"></i> Marcar todos</button>
+          <br>
+          <br>
+              <table id='tab_pendientes' class='table table-bordered f-s-11' style='cursor: pointer;'>
+          </table>
+            </div>
 
-                  </div>
-                </div>
-              </div> -->
-               <table id='tab_pendientes' class='table table-bordered f-s-11' style='cursor: pointer;'>
-                <!-- <thead>
-                  <tr>
-                    <th class='  bg-grey-200'>Fecha</th>
-                    <th class='  bg-grey-200'>Descripcion</th>
-                    <th class='  bg-grey-200'>Modelo</th>
-                    <th class='  bg-grey-200'>Marca</th>
-                    <th class='  bg-grey-200'>Serie</th>
-                    <th class='  bg-grey-200'>E</th>
-                  </tr>
-                </thead>
-                <tbody></tbody> -->
-              </table>
-            </div>
-            <div class="panel-footer">
-              Total de Bienes : 0
-              <span class="pull-right">
-                <button id='aceptarPendientes' class="btn btn-success btn-xs">Aceptar</button>
-                <!-- <button class="btn btn-danger btn-xs">Rechazar</button> -->
-              </span>
-            </div>
-          </div>
-        </div>
+            <span class="pull-right">
+              <button id='aceptarPendientes' class="btn btn-success btn-xs">Aceptar</button>
+              <button class="btn btn-danger btn-xs">Rechazar</button>
+            </span>
+</div>
 
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div id='panelAsignados' class="panel panel-success">
-            <div class="panel-heading">
-              <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="Recargar" title=""><i class="fa fa-repeat"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Colapsar/Expandir"><i class="fa fa-minus"></i></a>
-              </div>
-              <h4 class="panel-title">Asignados</h4>
-            </div>
-            <div class="panel-body">
-             <table id='tab_asignados' class='table table-bordered f-s-11'>
-                <!-- <tr>
-                  <th class='bg-grey-200'>Fecha</th>
-                  <th class='bg-grey-200'>Descripcion</th>
-                  <th class='bg-grey-200'>Modelo</th>
-                  <th class='bg-grey-200'>Marca</th>
-                  <th class='bg-grey-200'>Serie</th>
-                  <th class='bg-grey-200'>E</th>
-                </tr>
-                <tbody></tbody> -->
-              </table>
-            </div>
-            <div class="panel-footer">
-              Total de Bienes : 4
-            </div>
-          </div>
+</div>
+</div>
+
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div id='panelAsignados' class="panel panel-success">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="Recargar" title=""><i class="fa fa-repeat"></i></a>
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Colapsar/Expandir"><i class="fa fa-minus"></i></a>
         </div>
+        <h4 class="panel-title">Asignados</h4>
       </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+        <table id='tab_asignados'  class='dataTable table table-bordered f-s-11'>
+      </table>
+      </div>
+
+    </div>
+    <div class="panel-footer">
+      Total de Bienes : 4
     </div>
   </div>
+</div>
+</div>
+</div>
+</div>
 
-  <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-  <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-  <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+<script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-  <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-  <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-  <!-- ================== END BASE JS ================== -->
-  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-  <script src="../assets/js/apps.min.js"></script>
-  <script src="../class/ajax/ajax.js"></script>
-  <!-- <script src="../class/desplazamiento/pasignacionIndividual.js"></script> -->
-  <script>
-  //globals-----------------------------------------------------
-  //------------------------------------------------------------
-  $(document).ready(function () {
-    App.init();
-    // $('#btnAgregar').tooltip();
-    // search(1);
-    $('#tab_pendientes tbody').on('click','tr', function () {
-      $(this).toggleClass('warning');
-    });
-    $('#tab_rechazados tbody').on('click','tr', function () {
-      $(this).toggleClass('danger');
-    });
-    $(document).on('click', '[id=aceptarPendientes]', function(e) {
-        e.preventDefault();
-        var target = $(this).closest('.panel');
-
-            var target2 =  $('#panelAsignados');
-        if (!$(target).hasClass('panel-loading')) {
-            var targetBody = $(target).find('.panel-body');
-            var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
-            $(target).addClass('panel-loading');
-            $(targetBody).prepend(spinnerHtml);
-            setTimeout(function() {
-                $(target).removeClass('panel-loading');
-                $(target).find('.panel-loader').remove();
-            }, 2000);
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+<script src="../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+<script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.js"></script>
+<!-- ================== END BASE JS ================== -->
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="../assets/js/apps.min.js"></script>
+<script src="../class/ajax/ajax.js"></script>
+<script src="../class/bienes/bienesxusuario.js"></script>
+<script>
+//globals-----------------------------------------------------
+//-----------------------------------------------------------
+$(document).ready(function () {
+    var array=[];
+  App.init();
+  bienesPendientes();
+    bienesAsignados();
+$('#tab_asignados').DataTable({
+  "language": {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
         }
-        if (!$(target2).hasClass('panel-loading')) {
-            var targetBody = $(target2).find('.panel-body');
-            var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
-            $(target2).addClass('panel-loading');
-            $(targetBody).prepend(spinnerHtml);
-            setTimeout(function() {
-                $(target2).removeClass('panel-loading');
-                $(target2).find('.panel-loader').remove();
-            }, 2000);
-        }
+      }
+   });
 
 
 
-    });
+  $('#tab_pendientes tbody').on('click','tr', function () {
+    $(this).toggleClass('warning');
   });
 
-  </script>
+
+  $(document).on('click', '[id=aceptarPendientes]', function(e) {
+    e.preventDefault();
+    var target = $(this).closest('.panel');
+
+    var target2 =  $('#panelAsignados');
+    if (!$(target).hasClass('panel-loading')) {
+      var targetBody = $(target).find('.panel-body');
+      var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
+      $(target).addClass('panel-loading');
+      $(targetBody).prepend(spinnerHtml);
+      setTimeout(function() {
+        $(target).removeClass('panel-loading');
+        $(target).find('.panel-loader').remove();
+      }, 2000);
+    }
+    if (!$(target2).hasClass('panel-loading')) {
+      var targetBody = $(target2).find('.panel-body');
+      var spinnerHtml = '<div class="panel-loader"><span class="spinner-small"></span></div>';
+      $(target2).addClass('panel-loading');
+      $(targetBody).prepend(spinnerHtml);
+      setTimeout(function() {
+        $(target2).removeClass('panel-loading');
+        $(target2).find('.panel-loader').remove();
+      }, 2000);
+    }
+});
+})
+
+
+</script>
 </body>
 </html>
