@@ -110,7 +110,7 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-            <li><a href="../pages/p_traslados.php">Translados</a></li>
+            <li><a href="../pages/p_traslados.php">Traslados</a></li>
             <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
           </ul>
@@ -313,10 +313,10 @@ require '../class/config/session_val.php';
                               <h5 class='resaltar'><strong>Datos de Destino</strong></h5>
                             </legend>
                             <div class="form-group m-t-25">
-                              <label class="col-md-2 control-label">Entrega:</label>
+                              <label class="col-md-2 control-label">Recibe:</label>
                               <div class="col-md-10">
                                 <select onchange='llenarPersonalDestino();' name='sl_des_Entrega' id="sl_des_Entrega" class='form-control input-sm m-r-10  m-b-5'>
-                                  <option value="*">--Seleccionar Entrega--</option>
+                                  <option value="*">--Seleccionar Recibe--</option>
                                 </select>
                               </div>
                             </div>

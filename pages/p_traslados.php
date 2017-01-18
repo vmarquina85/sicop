@@ -61,7 +61,7 @@ require '../class/config/session_val.php';
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
 
-            <strong class='text-white sombrear'>Translados</strong>
+            <strong class='text-white sombrear'>Traslados</strong>
 
           </a>
         </div>
@@ -111,7 +111,7 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-            <li><a href="../pages/p_traslados.php">Translados</a></li>
+            <li><a href="../pages/p_traslados.php">Traslados</a></li>
             <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
           </ul>
@@ -160,7 +160,7 @@ require '../class/config/session_val.php';
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
           </div>
-          <h4 class="panel-title">Registro de Translados</h4>
+          <h4 class="panel-title">Registro de Traslados</h4>
         </div>
         <div class="panel-body">
           <div class='bg-grey-200  m-b-10 '>
@@ -176,7 +176,7 @@ require '../class/config/session_val.php';
                 <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
                 <?php } ?>
               </select>
-              <select onchange='' id="sl_destino" class='form-control input-sm m-r-10  m-b-5'>
+              <select id="sl_destino" class='form-control input-sm m-r-10  m-b-5'>
                 <option value="*">--Seleccionar Destino--</option>
                 <?php for ($i = 0; $i < sizeof($rs_destino); $i++) { ?>
                   <option value="<?php echo utf8_encode($rs_destino[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_destino[$i]['descripcion']); ?></option>
@@ -238,13 +238,26 @@ require '../class/config/session_val.php';
                     <h5 class='resaltar'>Datos de Papeleta</h5>
                     <br>
                     <div class="row">
+                    <div class="col-md-3">
+                      <label for="">Tipo Papeleta:</label>
+                      <!-- <input id='txtMotivo' type="text" class='form-control input-sm' value='ASIGNACION' disabled> -->
+                      <select id='sl_tipo' class='form-control input-sm' name="">
+                        <option value="0">--Seleccionar--</option>
+                        <option value="1">INTERNO</option>
+                        <option value="2">EXTERNO</option>
+                        <option value="3">MANTENIMIENTO</option>
+                      </select>
+                    </div>
+                  </div>
+                    <br>
+                    <div class="row">
                       <div class="col-md-3">
                         <label for="">Origen:</label>
                         <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo $_SESSION['s_operativo']; ?>">
                       </div>
                       <div class="col-md-3">
                         <label for="">Destino:</label>
-                        <select onchange='obtener_personal();' id="sl_TransladoDestino" class='form-control input-sm m-r-10  m-b-5'>
+                        <select onchange='obtener_personal();validar_mov_tipo();' id="sl_TrasladoDestino" class='form-control input-sm m-r-10  m-b-5'>
                           <option value="*">--Seleccionar Destino--</option>
                           <?php for ($i = 0; $i < sizeof($rs_destino); $i++) { ?>
                             <option value="<?php echo utf8_encode($rs_destino[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_destino[$i]['descripcion']); ?></option>
@@ -259,11 +272,14 @@ require '../class/config/session_val.php';
                             </div>
                             <div class="col-md-4">
                               <label for="">Motivo:</label>
-                              <!-- <input id='txtMotivo' type="text" class='form-control input-sm' value='ASIGNACION' disabled> -->
-                              <select id='sl_motivo' class='form-control input-sm' name="">
-                                <option value="1">INTERNO</option>
-                                <option value="2">EXTERNO</option>
-                                <option value="3">MANTENIMIENTO</option>
+                                <select id='sl_motivo' class='form-control input-sm' name="">
+                                <option value="*">--Seleccionar--</option>
+                                <option value="1">MANTENIMIENTO</option>
+                                <option value="3">TRANSFERENCIA</option>
+                                <option value="4">BAJA</option>
+                                <option value="5">DONACIÓN</option>
+                                <option value="6">PRESTAMO</option>
+                                <option value="7">DEVOLUCIÓN</option>
                               </select>
                             </div>
                             <div class="col-md-4">
@@ -428,7 +444,7 @@ require '../class/config/session_val.php';
                       </div>
                       <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                        <a href="javascript:grabarTranslado();" class="btn btn-sm btn-success">Grabar</a>
+                        <a href="javascript:grabarTranslado();" class="btn btn-sm btn-success" >Grabar</a>
                       </div>
                     </div>
                   </div>

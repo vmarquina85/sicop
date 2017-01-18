@@ -100,10 +100,10 @@ function vertodos(){
   search(1);
 }
 function  nuevoRegistro(){
-//  if (validarAccesso()){
-    $('#mymodal').modal();
+  //  if (validarAccesso()){
+  $('#mymodal').modal();
   // }else {
-  //   alert('Solo los usuarios con rango de Jefe,Gerente, Administrador , Director pueden realizar una Asignación');
+  limpiarFormulario('#formulario');
   // }
 }
 function  validarAccesso(){
@@ -175,7 +175,7 @@ function obtener_detalle(){
   var resultado;
   var TipoBien=document.getElementById("sl_tipobien").value;
   var codigoPatrimonial=document.getElementById("txt_cod_1").value+"-"+document.getElementById("txt_cod_2").value;
-  var url = "../get/get_detallePapeleta.php?id_patrimonial="+codigoPatrimonial;
+  var url = "../get/get_detalleBien.php?id_patrimonial="+codigoPatrimonial;
   http.open("GET", url, false);
   // Obtener Datos
   http.addEventListener('readystatechange', function() {
@@ -207,9 +207,9 @@ function BorrarMatriz(index){
     var http=getXMLHTTPRequest();
   }
   //obtengo datos del equipo en variables
-  var url = "../get/deleteMatriz.php?index="+index;
-  http.open("GET", url, false);
-  http.send(null);
+    var url = "../get/deleteMatriz.php?index="+index;
+    http.open("GET", url, false);
+    http.send(null);
 }
 
 
@@ -226,6 +226,7 @@ function validar_detalle(resultado){
   var sta = resultado[0].est_bien;
   var fun = resultado[0].id_asignado;
   var alt = resultado[0].id_alterno;
+  var papeleta = resultado[0].papeleta;
   var id_personal =document.getElementById('sl_entrega_o').value;
   if (sta == 'B') {
     alert("Bien se encuentra de Baja.");
@@ -233,6 +234,8 @@ function validar_detalle(resultado){
     alert("Bien se encuentra Eliminado.");
   }else if (fun != id_personal){
     alert("Bien asignado a otro Usuario.");
+  }else if (papeleta=='S') {
+      alert("Bien con papeleta pendiente.");
   }else{
     indice=pad(document.getElementById('tb_detalles').rows.length,3);
     papeletaDetalle.append("<tr id='"+indice+"' style='font-size: 10px;background:#ffffff;'><td>"+codigoPatrimonial+"</td><td>"+tipo_equipo+"</td><td>"+marca+"</td><td>"+modelo+"</td><td>"+color+"</td><td>"+serie+"</td><td>"+estado+"</td><td>"+observacion+"</td><td><a href=\"javascript:DeleteDetalle('"+indice+"');\"><i class='fa fa-times'></i></td></tr>");
@@ -259,11 +262,22 @@ function DeleteDetalle(r){
   tabla.deleteRow(selectedIndex);
   BorrarMatriz(selectedIndex);
 }
+function DeleteDetalle_all(){
+var tabla =document.getElementById("tb_detalles");
+  var rows= tabla.getElementsByTagName('TR').length;
+for (var i = 1; i < rows; i++) {
+  tabla.deleteRow(1);
+  BorrarMatriz(i);
+}
+}
 
 function grabarAsignacion(){
   if (confirm("¿Está Seguro que desea realizar la asignación?")){
-    grabarDatosAsignacion();
-    alert("Asignacion registrada con Exito");
+    if (validar_asignacion()) {
+      grabarDatosAsignacion();
+      alert("Asignacion registrada con Exito");
+    }
+
   }
 }
 function grabarDatosAsignacion(){
@@ -272,6 +286,7 @@ function grabarDatosAsignacion(){
   }
   var url = '../insert/insertDataAsignacion.php';
   //parametros a ingresar
+
   //origen
   var fecha=document.getElementById("txtFecha").value;
   var destino=document.getElementById("sl_asignacionDestino").value;
@@ -293,3 +308,39 @@ function grabarDatosAsignacion(){
   });
   http.send(null);
 };
+function validar_asignacion(){
+  if (document.getElementById('sl_asignacionDestino').value=='*' || document.getElementById('sl_asignacionDestino').value==='') {
+    alert('Seleccionar Destino');
+    return false;
+  }else if (document.getElementById('sl_des_Entrega').value=='*') {
+    alert('Dato incompleto Destino - Recibe ');
+    return false;
+  }else if (document.getElementById('sl_area_d').value=='*') {
+    alert('Dato incompleto Destino - Area ');
+    return false;
+  }else if (document.getElementById('sl_oficina_d').value=='*') {
+    alert('Dato incompleto Destino - oficina ');
+    return false;
+  }else if (document.getElementById('sl_cargo_d').value=='*') {
+    alert('Dato incompleto Destino - Cargo ');
+    return false;
+  }else if (document.getElementById('sl_cargo_d').value==='') {
+    alert('Dato incompleto Destino - DNI');
+    return false;
+  }else if (document.getElementById('tb_detalles').rows.length===1) {
+    alert('Completar detalle de Bienes');
+    return false;
+  }else {
+    return true;
+  }
+}
+function limpiarFormulario(formulario){
+  $(formulario)[0].reset();
+    document.getElementById('sl_asignacionDestino').value='*';
+    document.getElementById('sl_area_d').value='*';
+    document.getElementById('sl_oficina_d').value='*';
+    document.getElementById('sl_cargo_d').value='*';
+        document.getElementById('txt_dni_d').value='';
+    DeleteDetalle_all();
+
+}

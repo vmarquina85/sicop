@@ -13,8 +13,14 @@
 .pagination {
   border-radius: 4px;
   display: inline-block;
-  margin: 0; 
+  margin: 0;
   padding-left: 0;
+}
+i.hover-blue:hover{
+  color: #237EDC;
+}
+.hover-green{
+  color: #269736;
 }
   .datepicker{z-index:1151 !important;}
   .scrolled{
@@ -38,9 +44,13 @@
   }
   @media (min-width: 768px){
     .modal-dialog {
-     margin: 30px auto; 
+     margin: 30px auto;
      width: 1024px;
    }
+   .dialog-normal{
+    margin: 30px auto;
+    width: 600px;
+  }
     }
 
   .main-bg{

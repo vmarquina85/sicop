@@ -2,7 +2,7 @@
 include('../class/bienes/bienesxusuario_cls.php');
 $classA= new Asignados;
 session_start();
-$rs_asignados=$classA->obtenerBienes($_SESSION['usr_idper']);
+$rs_asignados=$classA->obtenerPepeletas($_SESSION['usr_idper']);
 if (sizeof($rs_asignados)>0 ){
   echo  "<table id='tab_asignados' style='height:30px' class='table table-bordered f-s-11' style='cursor: pointer;'>
     <thead>

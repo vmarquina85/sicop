@@ -118,7 +118,7 @@
               </a>
               <ul class="sub-menu">
                 <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-                <li><a href="../pages/p_traslados.php">Translados</a></li>
+                <li><a href="../pages/p_traslados.php">Traslados</a></li>
                 <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
                 <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
               </ul>
