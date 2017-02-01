@@ -36,7 +36,7 @@ if (sizeof($rs_pendientes)>0 ){
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_pendientes[$i]['motivo'])."</td>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>" .utf8_encode($rs_pendientes[$i]['entrego'])."</td>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_pendientes[$i]['recibio'])."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><i style ='color:#FFBA37;' title='' class='fa fa-exclamation-triangle'></i>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><span class='label label-warning'>Pendiente</span>
           </td>
           </tr>";
 }
@@ -45,7 +45,7 @@ echo  "</table>
 </div>
 <span class='pull-right'>
   <button id='aceptarPendientes' onclick='AceptarPapeletas()' class='btn btn-success btn-xs'>Aceptar</button>
-  <button class='btn btn-danger btn-xs'>Rechazar</button>
+  <button id='rechazarPendientes' onclick='RechazarPapeletas()' class='btn btn-danger btn-xs'>Rechazar</button>
 </span>
 </div>";
 }?>

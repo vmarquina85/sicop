@@ -117,7 +117,7 @@ require '../class/config/session_val.php';
            <span>Tareas</span>
        </a>
        <ul class="sub-menu">
-        <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
+        <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
        </ul>
    </li>
    <li class="has-sub">
@@ -129,12 +129,9 @@ require '../class/config/session_val.php';
     <ul class="sub-menu">
       <li><a href="email_inbox.html">Bienes Activos</a></li>
       <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-      <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-      <li><a href="email_inbox.html">Locales de la Entidad</a></li>
       <li><a href="email_inbox.html">Areas por Local</a></li>
       <li><a href="email_inbox.html">Estadistica General</a></li>
-      <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-      <li><a href="email_inbox.html">Historial</a></li>
+      <li><a href="../pages/p_historial.php">Historial</a></li>
     </ul>
   </li>
 </li>

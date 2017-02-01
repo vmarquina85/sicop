@@ -10,47 +10,68 @@ function ObtenerSeleccion(){
       seleccion.push(i);
     }
   }
-  //2.- crear una matriz del tamaño igual a la cuenta de filas encontradas
-  var array=Array(selected);
-  //3.- obtener nro y id_patrimonial de estas filas y guardarlos en la matriz
-  for (var i = 0; i < seleccion.length; i++) {
-    array[i]=rows[seleccion[i]].getElementsByTagName("td")[2].innerHTML;
-    //4.- alert(array[i]);
+  if (selected===0) {
+    alert('No hay Papeletas Seleccionadas')
+    return 0;
+  }else{
+    var array=Array(selected);
+    //3.- obtener nro y id_patrimonial de estas filas y guardarlos en la matriz
+    for (var i = 0; i < seleccion.length; i++) {
+      array[i]=rows[seleccion[i]].getElementsByTagName("td")[2].innerHTML;
+    }
   }
-  return array;
+        return array;
 }
-
 function AceptarPapeletas(){
   if (confirm("Está seguro que desea Aceptar estas Papeletas?")) {
-
+    respuesta='A';
     var selecciones=ObtenerSeleccion();
-    for (var i = 0; i < selecciones.length; i++) {
-      ActualizarPapeletas(selecciones[i]);
+    if (selecciones===0) {
+      return;
+    }else{
+      for (var i = 0; i < selecciones.length; i++) {
+        ActualizarPapeletas(selecciones[i],respuesta);
+      }
+      alert("las papeletas fueron aceptadas");
+      loading($('#panelPendientes'));
+      bienesPendientes();
+      endLoading($('#panelPendientes'));
+      loading($('#panelAsignados'));
+      bienesAsignados();
+      endLoading($('#panelAsignados'));
+      //inicializarDatatables();
     }
-    alert("las papeletas fueron aceptadas");
-    loading($('#panelPendientes'));
-    bienesPendientes();
-    endLoading($('#panelPendientes'));
-    loading($('#panelAsignados'));
-    bienesAsignados();
-    endLoading($('#panelAsignados'));
-    inicializarDatatables();
   }
-
-  function ActualizarPapeletas(seleccion){
-    if (window.XMLHttpRequest) {
-      var http=getXMLHTTPRequest();
-    }
-    var url = '../update/pendientesUpdate.php';
-    var parametro=seleccion;
-    var modurl = url+ "?orden="+ parametro;
-    http.open("GET", modurl, false);
-    http.send(null);
-  }
-
 }
-
-
+function RechazarPapeletas(){
+  if (confirm("Está seguro que desea Rechazar estas Papeletas?")) {
+    respuesta='R';
+    var selecciones=ObtenerSeleccion();
+    if (selecciones===0) {
+      return;
+    }else {
+      for (var i = 0; i < selecciones.length; i++) {
+        ActualizarPapeletas(selecciones[i],respuesta);
+      }
+      alert("las papeletas fueron Rechazadas");
+      loading($('#panelPendientes'));
+      bienesPendientes();
+      endLoading($('#panelPendientes'));
+      papeletasRechazadas();
+    //  inicializarDatatables();
+    }
+  }
+}
+function ActualizarPapeletas(seleccion,rpta){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var url = '../update/pendientesUpdate.php';
+  var parametro=seleccion;
+  var modurl = url+ "?orden="+ parametro +"&respuesta="+rpta;
+  http.open("GET", modurl, false);
+  http.send(null);
+}
 function VerDetalles(objeto){
   fila=objeto.closest('tr');
   if (fila.className.indexOf("warning")>=0) {
@@ -101,6 +122,23 @@ function bienesPendientes(){
   });
   http.send(null);
 }
+function papeletasRechazadas(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var url = '../get/get_bienesxusuarioR.php';
+  var modurl = url;
+  http.open("GET", modurl, false);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = http.responseText;
+        document.getElementById("tab_rechazados").innerHTML = (resultado);
+      }
+    }
+  });
+  http.send(null);
+}
 function bienesAsignados(){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
@@ -137,7 +175,7 @@ function endLoading(panel){
 }
 
 function inicializarDatatables(){
-  $('#tab_asignados').DataTable({
+  $('.dt').DataTable({
     "language": {
       "sProcessing":     "Procesando...",
       "sLengthMenu":     "Mostrar _MENU_ registros",

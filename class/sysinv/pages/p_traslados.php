@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../class/parametricas/entidad_parametrica_cls.php';
 require '../class/config/preconfig_cls.php';
 require '../class/config/session_val.php';
@@ -23,7 +23,7 @@ require '../class/config/session_val.php';
  <link href="../assets/css/animate.min.css" rel="stylesheet" />
  <link href="../assets/css/style.min.css" rel="stylesheet" />
  <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
- <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />	
+ <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
  <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
  <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
  <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
@@ -60,7 +60,7 @@ require '../class/config/session_val.php';
     </button>
     <a href="p_main.php" class="navbar-brand" style='width: auto;'>
       <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-      
+
       <strong class='text-white sombrear'>Translados</strong>
     </a>
   </div>
@@ -69,7 +69,7 @@ require '../class/config/session_val.php';
   <ul class="nav navbar-nav navbar-right">
     <li class="dropdown navbar-user">
       <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
-        <img src="../assets/img/man.png" alt=""> 
+        <img src="../assets/img/man.png" alt="">
        <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
      </a>
      <ul class="dropdown-menu animated fadeInLeft">
@@ -98,15 +98,15 @@ require '../class/config/session_val.php';
       <ul class="sub-menu">
          <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
          <li><a href="../pages/p_traslados.php">Translados</a></li>
-       <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>     
-       <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+       <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>     
+       <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
      </ul>
    </li>
    <li class="has-sub">
     <a href="javascript:;">
       <b class="caret pull-right"></b>
       <i class="material-icons">pie_chart</i>
-      <span>Reportes</span> 
+      <span>Reportes</span>
     </a>
     <ul class="sub-menu">
       <li><a href="email_inbox.html">Bienes Activos</a></li>
@@ -116,7 +116,7 @@ require '../class/config/session_val.php';
       <li><a href="email_inbox.html">Areas por Local</a></li>
       <li><a href="email_inbox.html">Estadistica General</a></li>
       <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-      <li><a href="email_inbox.html">Historial</a></li>
+      <li><a href="../pages/p_historial.php">Historial</a></li>
     </ul>
   </li>
 </li>
@@ -141,7 +141,7 @@ require '../class/config/session_val.php';
     <div class="panel-body">
       <div class='bg-grey-200  m-b-10 '>
         <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuewvoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
-      </div>  
+      </div>
       <form action ='javascript:;' class='form-inline' method='POST' id='panelForm'>
         <div class="form-group  form-group-sm  m-r-10 m-b-5">
          <input type="text" class="form-control input-mw" id="txt_numero"  placeholder="Nro" />
@@ -192,7 +192,7 @@ require '../class/config/session_val.php';
          <th class='p-0 text-center  bg-grey-200'>E</th>
          <th class='p-0 text-center  bg-grey-200'>Fecha Ing.</th>
        </tr>
-     </thead> 
+     </thead>
      <tbody id='tb_pdesplazamiento'>
      </tbody>
    </table>
@@ -208,7 +208,7 @@ require '../class/config/session_val.php';
       </div>
       <div class="modal-body scrolled">
 
-     
+
        <form id='formulario'>
         <h5>Datos del Bien</h5>
 
@@ -293,7 +293,7 @@ require '../class/config/session_val.php';
        <option value="">-- Seleccione Forma --</option>
      </select>
    </div>
-   
+
  </div>
  <div class="col-md-3">
   <div class="input-group m-b-5 ">
@@ -498,7 +498,7 @@ require '../class/config/session_val.php';
          <script src="../class/ajax/ajax.js"></script>
           <script src="../class/desplazamiento/pdesplazamiento.js"></script>
            <script src="../class/login/killerSession.js"></script>
-         
+
          <!-- ================== END PAGE LEVEL JS ================== -->
          <script>
          //globals-----------------------------------------------------
@@ -511,7 +511,7 @@ require '../class/config/session_val.php';
             format: 'dd/mm/yyyy'
           })
          });
-  
-          </script> 
+
+          </script>
         </body>
         </html>

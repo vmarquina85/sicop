@@ -1,1 +1,0 @@
-<?php   header("Location: pages/p_login.php"); ?>

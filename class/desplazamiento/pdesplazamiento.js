@@ -10,7 +10,7 @@ function get_papeletas(limit,offset){
   var motivo=document.getElementById("sl_movtipo").value;
 
   var modurl = url+ "?limit="+ limit +"&offset=" + offset+"&numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado+"&motivo="+motivo;
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -33,7 +33,7 @@ function init_paginador(index){
   var estado=document.getElementById("sl_estado").value;
   var motivo=document.getElementById("sl_movtipo").value;
   var modurl = url+ "?numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado+"&motivo="+motivo+"&pn="+index+"&page=desplazamiento";
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -71,7 +71,7 @@ function llenarPersonalDestino(){
   }
   var idpersonal= document.getElementById("sl_des_Entrega").value;
   var url = "../get/datosPersonalDestino.php?idpersonal="+idpersonal;
-  http.open("GET", url, false);
+  http.open("GET", url, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -90,7 +90,7 @@ function obtener_personal(){
   var url = '../get/get_select_personal.php';
   var destino=document.getElementById("sl_TrasladoDestino").value;
   var modurl = url+ "?destino="+destino;
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -272,6 +272,7 @@ function grabarTranslado(){
       //  grabarDatosAsignacion();
       grabarDatosTranslado();
       alert("Translado registrado con Exito");
+            $('#mymodal').modal('toggle');
     }
 
   }
@@ -294,7 +295,7 @@ function grabarDatosTranslado(){
   var cargo_d=document.getElementById("sl_cargo_d").value;
   var dni_d=document.getElementById("txt_dni_d").value;
   var modurl = url+ "?fecha="+fecha+"&destino="+destino+"&recibe="+recibe_d+"&area_d="+area_d+"&oficina_d="+oficina_d+"&cargo="+cargo_d+"&dni="+dni_d+"&mov_tipo="+mov_tipo+"&motivo="+motivo;
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -325,7 +326,7 @@ function BorrarMatriz(index){
   }
   //obtengo datos del equipo en variables
   var url = "../get/deleteMatriz.php?index="+index;
-  http.open("GET", url, false);
+  http.open("GET", url, true);
   http.send(null);
 }
 function validar_mov_tipo(){

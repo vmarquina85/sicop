@@ -58,7 +58,7 @@ require '../class/config/session_val.php';
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-            <strong class='text-white sombrear'>Bienes Asignados</strong>
+            <strong class='text-white sombrear'>Recepción de Bienes</strong>
           </a>
         </div>
         <!-- end mobile sidebar expand / collapse button -->
@@ -92,7 +92,7 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <li><a href="../pages/p_traslados.php">Personal</a></li>
+            <li><a href="../pages/p_personal.php">Personal</a></li>
             <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
           </ul>
@@ -106,8 +106,8 @@ require '../class/config/session_val.php';
           <ul class="sub-menu">
             <li><a href="../pages/p_asignacion.php">Asignación</a></li>
             <li><a href="../pages/p_traslados.php">Traslados</a></li>
-            <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
           </ul>
         </li>
         <li class="has-sub">
@@ -117,7 +117,7 @@ require '../class/config/session_val.php';
             <span>Tareas</span>
           </a>
           <ul class="sub-menu">
-            <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
+            <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
           </ul>
         </li>
         <li class="has-sub">
@@ -129,12 +129,9 @@ require '../class/config/session_val.php';
           <ul class="sub-menu">
             <li><a href="email_inbox.html">Bienes Activos</a></li>
             <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-            <li><a href="email_inbox.html">Locales de la Entidad</a></li>
             <li><a href="email_inbox.html">Areas por Local</a></li>
             <li><a href="email_inbox.html">Estadistica General</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-            <li><a href="email_inbox.html">Historial</a></li>
+            <li><a href="../pages/p_historial.php">Historial</a></li>
           </ul>
         </li>
         <li class="menu-control menu-control-left">
@@ -147,10 +144,11 @@ require '../class/config/session_val.php';
     </div>
     <div id="content" class="content">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div id='panelPendientes' class="panel panel-warning">
             <div class="panel-heading">
               <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-original-title="Minimizar/Maximinzar" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
               </div>
               <h4 class="panel-title">Papeletas Pendientes</h4>
@@ -164,35 +162,49 @@ require '../class/config/session_val.php';
                 </table>
               </div>
             </div>
-
           </div>
         </div>
-
+        <div class="col-md-6">
+          <div id='panelRechazados' class="panel panel-danger">
+            <div class="panel-heading">
+              <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-original-title="Minimizar/Maximinzar" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+              </div>
+              <h4 class="panel-title">Papeletas Rechazadas</h4>
+            </div>
+            <div class="panel-body" id='tab_rechazados'>
+              <div class="table-responsive">
+                <table id='table-rechazados'  class='table table-bordered table-hover f-s-11' style='cursor: pointer;'>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div id='panelAsignados' class="panel panel-success">
             <div class="panel-heading">
               <div class="panel-heading-btn">
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="Recargar" title=""><i class="fa fa-repeat"></i></a>
+
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
-                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Colapsar/Expandir"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Minimizar/Maximinzar"><i class="fa fa-minus"></i></a>
               </div>
-              <h4 class="panel-title">Asignados</h4>
+              <h4 class="panel-title">Bienes Recibidos</h4>
             </div>
             <div class="panel-body">
               <div class="table-responsive">
-                <table id='tab_asignados'  class='dataTable table table-bordered f-s-11'>
+                <table id='tab_asignados'  class='dt dataTable table table-bordered f-s-11'>
                 </table>
               </div>
 
             </div>
-            <div class="panel-footer">
-              Total de Bienes : 4
-            </div>
           </div>
         </div>
       </div>
+
+
     </div>
     <div class="modal" id="modal_papeleta_detalle" aria-hidden="false" style="display: none;">
       <div class="dialog-normal modal-dialog ">
@@ -236,6 +248,7 @@ require '../class/config/session_val.php';
     var array=[];
     App.init();
     bienesPendientes();
+    papeletasRechazadas();
     bienesAsignados();
 inicializarDatatables();
   })

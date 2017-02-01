@@ -97,7 +97,7 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <li><a href="../pages/p_traslados.php">Personal</a></li>
+            <li><a href="../pages/p_personal.php">Personal</a></li>
             <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
           </ul>
@@ -111,8 +111,8 @@ require '../class/config/session_val.php';
           <ul class="sub-menu">
             <li><a href="../pages/p_asignacion.php">Asignación</a></li>
             <li><a href="../pages/p_traslados.php">Traslados</a></li>
-            <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
           </ul>
         </li>
         <li class="has-sub">
@@ -122,7 +122,7 @@ require '../class/config/session_val.php';
             <span>Tareas</span>
           </a>
           <ul class="sub-menu">
-            <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
+            <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
           </ul>
         </li>
         <li class="has-sub">
@@ -134,12 +134,9 @@ require '../class/config/session_val.php';
           <ul class="sub-menu">
             <li><a href="email_inbox.html">Bienes Activos</a></li>
             <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-            <li><a href="email_inbox.html">Locales de la Entidad</a></li>
             <li><a href="email_inbox.html">Areas por Local</a></li>
             <li><a href="email_inbox.html">Estadistica General</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-            <li><a href="email_inbox.html">Historial</a></li>
+            <li><a href="../pages/p_historial.php">Historial</a></li>
           </ul>
         </li>
 
@@ -185,7 +182,7 @@ require '../class/config/session_val.php';
                   <option value="*" disabled selected>Estado</option>
                   <option value="*">--Todos--</option>
                   <option value="R">Recibidos</option>
-                  <option value="I">Por Recibir</option>
+                  <option value="I">Pendiente</option>
                   <option value="A">Anulados</option>
                 </select>
                 <button onclick='search(1)' class="btn btn-info btn-xs m-b-10 m-t-10"><i class="fa fa-search"></i> Buscar</button>
@@ -194,7 +191,7 @@ require '../class/config/session_val.php';
               <ul id='paginator' class="pagination">
               </ul>
               <div class='table-responsive'>
-                <table id='data-table' class='table table-bordered f-s-11'>
+                <table id='data-table' class='table f-s-11'>
                   <thead>
                     <tr>
                       <th class='p-0 text-center  bg-grey-200'></th>
@@ -224,9 +221,7 @@ require '../class/config/session_val.php';
                 </div>
                 <div class="modal-body scrolled">
                   <form id='formulario'>
-                    <div class='text-center'>
-                    </div>
-                    <h5 class='resaltar'>Datos de Papeleta</h5>
+                        <h5 class='resaltar'>Datos de Papeleta</h5>
                     <br>
                     <div class="row">
                       <div class="col-md-3">

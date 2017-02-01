@@ -8,7 +8,7 @@ function get_papeletas(limit,offset){
   var destino=document.getElementById("sl_destino").value;
   var estado=document.getElementById("sl_estado").value;
   var modurl = url+ "?limit="+ limit +"&offset=" + offset+"&numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado;
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -25,7 +25,7 @@ function llenarPersonalDestino(){
   }
   var idpersonal= document.getElementById("sl_des_Entrega").value;
   var url = "../get/datosPersonalDestino.php?idpersonal="+idpersonal;
-  http.open("GET", url, false);
+  http.open("GET", url, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -50,7 +50,7 @@ function obtener_personal(){
   var url = '../get/get_select_personal.php';
   var destino=document.getElementById("sl_asignacionDestino").value;
   var modurl = url+ "?destino="+destino;
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -71,7 +71,7 @@ function init_paginador(index){
   var destino=document.getElementById("sl_destino").value;
   var estado=document.getElementById("sl_estado").value;
   var modurl = url+ "?numero="+ numero +"&origen="+origen+"&destino="+destino+"&estado="+estado+"&pn="+index+"&page=asignacion";
-  http.open("GET", modurl, false);
+  http.open("GET", modurl, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
       if(http.status == 200) {
@@ -130,9 +130,6 @@ function  validarAccesso(){
   http.send(null);
   return encontrado;
 }
-
-
-
 function obtenerCodigo() {
   var codigo=document.getElementById("sl_tipobien").value ;
   return codigo.substr(0,8);
@@ -276,6 +273,7 @@ function grabarAsignacion(){
     if (validar_asignacion()) {
       grabarDatosAsignacion();
       alert("Asignacion registrada con Exito");
+      $('#mymodal').modal('toggle');
     }
 
   }

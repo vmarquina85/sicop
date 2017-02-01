@@ -28,6 +28,7 @@ require '../class/config/session_val.php';
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
+  <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/plugins/pace/pace.min.js"></script>
@@ -98,7 +99,7 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <li><a href="../pages/p_traslados.php">Personal</a></li>
+            <li><a href="../pages/p_personal.php">Personal</a></li>
             <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
           </ul>
@@ -123,7 +124,7 @@ require '../class/config/session_val.php';
                 <span>Tareas</span>
             </a>
             <ul class="sub-menu">
-                <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
+                <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
             </ul>
         </li>
         <li class="has-sub">
@@ -135,12 +136,9 @@ require '../class/config/session_val.php';
           <ul class="sub-menu">
             <li><a href="email_inbox.html">Bienes Activos</a></li>
             <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-            <li><a href="email_inbox.html">Locales de la Entidad</a></li>
             <li><a href="email_inbox.html">Areas por Local</a></li>
             <li><a href="email_inbox.html">Estadistica General</a></li>
-            <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-            <li><a href="email_inbox.html">Historial</a></li>
+            <li><a href="../pages/p_historial.php">Historial</a></li>
           </ul>
         </li>
 
@@ -185,7 +183,7 @@ require '../class/config/session_val.php';
                 <select onchange='search(1)' id="sl_estado" class='form-control input-sm m-r-10  m-b-5'>
                   <option value="*">--Todos Estados--</option>
                   <option value="R">Recibidos</option>
-                  <option value="I">Por Recibir</option>
+                  <option value="I">Pendientes</option>
                   <option value="A">Anulados</option>
                 </select>
                 <div class='text-center'>
@@ -193,7 +191,7 @@ require '../class/config/session_val.php';
                     <option value="*">--Todos Tipo Movimiento--</option>
                     <option value="1">Interno</option>
                     <option value="2">Externo</option>
-                    <option value="3">Mantenimiento</option>
+                    <option value="3" disabled >Mantenimiento</option>
                   </select>
                   <button onclick='search(1)' class="btn btn-info btn-xs m-b-10 m-t-10"><i class="fa fa-search"></i> Buscar</button>
                   <button onclick='vertodos()' class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</button>
@@ -202,7 +200,7 @@ require '../class/config/session_val.php';
               <ul id='paginator' class="pagination">
               </ul>
               <div class='table-responsive'>
-                <table id='data-table' class='table table-bordered f-s-11'>
+                <table id='data-table' class='table f-s-11'>
                   <thead>
                     <tr>
                       <th class='p-0 text-center  bg-grey-200'></th>
@@ -464,11 +462,7 @@ require '../class/config/session_val.php';
             <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
             <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
             <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-            <!--[if lt IE 9]>
-            <script src="../assets/crossbrowserjs/html5shiv.js"></script>
-            <script src="../assets/crossbrowserjs/respond.min.js"></script>
-            <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-            <![endif]-->
+          <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
             <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
             <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
             <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>

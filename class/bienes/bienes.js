@@ -16,7 +16,7 @@
     var asignado=document.getElementById("sl_Asignacion").value;
     var estado=document.getElementById("sl_estado").value;
     var modurl = url+ "?limit="+ limit +"&offset=" + offset+"&tipo="+tipo+"&prefix="+prefix+"&patrimonial="+patrimonial+"&serie="+serie+"&codigointerno="+codigointerno+"&docalta="+docalta+"&operativo="+operativo+"&marca="+marca+"&asignado="+asignado+"&estado="+estado;
-    http.open("GET", modurl, false);
+    http.open("GET", modurl, true);
     http.addEventListener('readystatechange', function() {
       if (http.readyState == 4) {
         if(http.status == 200) {
@@ -69,7 +69,7 @@ search(1);
     var asignado=document.getElementById("sl_Asignacion").value;
     var estado=document.getElementById("sl_estado").value;
     var modurl = url+ "?tipo="+tipo+"&prefix="+prefix+"&patrimonial="+patrimonial+"&serie="+serie+"&codigointerno="+codigointerno+"&docalta="+docalta+"&operativo="+operativo+"&marca="+marca+"&asignado="+asignado+"&estado="+estado+"&pn="+index+"&page=bienes";
-    http.open("GET", modurl, false);
+    http.open("GET", modurl, true);
     http.addEventListener('readystatechange', function() {
       if (http.readyState == 4) {
         if(http.status == 200) {
@@ -85,7 +85,12 @@ search(1);
         function limpiarFormulario(formulario){
             $(formulario)[0].reset();
           }
-          function  nuewvoRegistro(){
+          function  nuevoRegistro(){
             $('#mymodal').modal();
             limpiarFormulario('#formulario');
           }
+function iniciarSelect(){
+  $(".default-select2").select2({
+      placeholder: "Seleccionar Tipo de Bien"
+  })
+}

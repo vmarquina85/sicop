@@ -24,7 +24,7 @@ if (sizeof($rs_asignados)>0 ){
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_asignados[$i]['modelo'])."</td>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>" .utf8_encode($rs_asignados[$i]['marca'])."</td>
           <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_asignados[$i]['serie'])."</td>
-          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><i style ='color:#2C9943;' title='' class='fa fa-check'></i>
+          <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><span class='label label-success'>Recibido</span>
           </td>
           </tr>";
 }

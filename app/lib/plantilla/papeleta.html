@@ -1,0 +1,144 @@
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Mantenimiento Personal</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="../../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../../../assets/css/style.min.css" rel="stylesheet" />
+  <link href="../../../assets/css/sysinv.css" rel="stylesheet" />
+  <!-- ================== END BASE CSS STYLE ================== -->
+</head>
+<body>
+  <div class="container">
+    <!-- <div class="well"> -->
+      <h5 class='resaltar'>PAPELETA DE ASIGNACIÓN</h5>
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="">Origen:</label>
+          <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo 'origen' ?>">
+        </div>
+        <div class="col-md-3">
+          <label for="">Destino:</label>
+          <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo 'destino' ?>">
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="">Fecha:</label>
+              <input id='txtFecha' type="text" disabled class='form-control input-sm' disabled value="<?php echo 'fecha' ; ?>">
+            </div>
+            <div class="col-md-4">
+              <label for="">Motivo:</label>
+              <input id='txtMotivo' type="text" class='form-control input-sm' value="<?php echo 'motivo'; ?>" disabled>
+            </div>
+            <div class="col-md-4">
+              <label for="">Nro Orden:</label>
+              <input id='txtOrden' type="text" disabled class='form-control input-sm resaltar' value="<?php echo 'orden'; ?>">
+            </div></div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-md-6">
+            <legend>
+              <h5 class='resaltar'><strong>Datos de Origen</strong></h5>
+            </legend>
+            <div class="form-group m-t-25">
+              <label class="col-md-2 control-label">Entrega:</label>
+              <div class="col-md-10">
+
+                <input type="text" id="txt_entrega_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">Area:</label>
+              <div class="col-md-10">
+                <input type="text" id="txt_area_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">Oficina:</label>
+              <div class="col-md-10">
+                <input type="text" id="txt_oficina_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">Cargo:</label>
+              <div class="col-md-10">
+                <input type="text" id="txt_cargo_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">D.N.I.:</label>
+              <div class="col-md-10">
+                <input type="text" id="txt_dni_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['s_dni']; ?>">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <legend>
+              <h5 class='resaltar'><strong>Datos de Destino</strong></h5>
+            </legend>
+            <div class="form-group m-t-25">
+              <label class="col-md-2 control-label">Recibe:</label>
+              <div class="col-md-10">
+                <input type="text" id="txt_recibe_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+              </div>
+            </div>
+            <div id='datosDestino'>
+              <div class="form-group">
+                <label class="col-md-2 control-label">Area:</label>
+                <div class="col-md-10">
+                  <input type="text" id="txt_area_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 control-label">Oficina:</label>
+                <div class="col-md-10">
+                  <input type="text" id="txt_oficina_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 control-label">Cargo:</label>
+                <div class="col-md-10">
+                  <input type="text" id="txt_cargo_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 control-label">D.N.I.:</label>
+                <div class="col-md-10">
+                  <input type="text" id='txt_dni_d' class='form-control input-sm m-b-5' disabled value="<?php echo $_SESSION['s_dni']; ?>">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          </div>
+          <table id='tb_detalles' class='table table-bordered f-s-11'>
+            <thead  style='background-color: rgba(100,100,100,0.1);'>
+              <tr>
+                <th class='p-0 text-center  bg-grey-200'>ID Patrimonial</th>
+                <th class='p-0 text-center  bg-grey-200'>Descripcion</th>
+                <th class='p-0 text-center  bg-grey-200'>Marca</th>
+                <th class='p-0 text-center  bg-grey-200'>Modelo</th>
+                <th class='p-0 text-center  bg-grey-200'>Color</th>
+                <th class='p-0 text-center  bg-grey-200'>Serie</th>
+                <th class='p-0 text-center  bg-grey-200'>Estado</th>
+                <th class='p-0 text-center  bg-grey-200'>Observacion</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+      </div>
+
+    </body>
+    </html>

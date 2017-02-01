@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../class/parametricas/entidad_parametrica_cls.php';
 require '../class/config/session_val.php';
 
@@ -26,7 +26,7 @@ require '../class/config/session_val.php';
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
-  <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" /> 
+  <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
   <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
@@ -64,7 +64,7 @@ require '../class/config/session_val.php';
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-      <a href="p_main.php" class="navbar-brand" style='width: auto;'>        
+      <a href="p_main.php" class="navbar-brand" style='width: auto;'>
         <strong class='text-white sombrear'>Pagina Principal</strong>
      <!--   <img src="../assets/img/logo.png" alt=""> -->
       </a>
@@ -75,7 +75,7 @@ require '../class/config/session_val.php';
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown navbar-user ">
         <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
-          <img src="../assets/img/man.png" alt=""> 
+          <img src="../assets/img/man.png" alt="">
          <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
 
        </a>
@@ -106,15 +106,15 @@ require '../class/config/session_val.php';
       <ul class="sub-menu">
          <li><a href="../pages/p_asignacion.php">Asignar Bienes</a></li>
          <li><a href="../pages/p_traslados.php">Traslados</a></li>
-       <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>     
-       <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li>
+       <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+       <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
      </ul>
    </li>
    <li class="has-sub">
     <a href="javascript:;">
       <b class="caret pull-right"></b>
       <i class="material-icons">pie_chart</i>
-      <span>Reportes</span> 
+      <span>Reportes</span>
     </a>
     <ul class="sub-menu">
       <li><a href="email_inbox.html">Bienes Activos</a></li>
@@ -124,7 +124,7 @@ require '../class/config/session_val.php';
       <li><a href="email_inbox.html">Areas por Local</a></li>
       <li><a href="email_inbox.html">Estadistica General</a></li>
       <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-      <li><a href="email_inbox.html">Historial</a></li>
+      <li><a href="../pages/p_historial.php">Historial</a></li>
     </ul>
   </li>
 </li>
@@ -138,7 +138,7 @@ require '../class/config/session_val.php';
 </div>
 
 <div id="content" class="content">
-  
+
  <div class="panel panel-success">
    <div class="panel-heading">
      <h4 class="panel-title">Acceso Directo</h4>
@@ -163,7 +163,7 @@ require '../class/config/session_val.php';
         </div>
       </div>
     </div>
-  
+
     <div class="col-md-3">
       <div class='panel'>
         <div class='panel-body' style='padding: 8px;'>
@@ -171,7 +171,7 @@ require '../class/config/session_val.php';
             <div class='col-md-4 text-center'>
               <img src="../assets/img/transfer.png" alt="">
             </div>
-  
+
             <div class='col-md-8'>
               <h5 class='panel-title m-t-5'>Traslados</h5>
              <p>Realice 3 tipos: Externo, Interno y por Mantenimiento</p>
@@ -179,12 +179,12 @@ require '../class/config/session_val.php';
                 <a href='../pages/p_traslados.php' class="btn btn-success btn-xs pull-right">Ingresar</a>
               </span>
             </div>
-  
+
           </div>
         </div>
       </div>
     </div>
-  
+
     <div class="col-md-3">
       <div class='panel'>
         <div class='panel-body' style='padding: 8px;'>
@@ -203,7 +203,7 @@ require '../class/config/session_val.php';
         </div>
       </div>
     </div>
-  
+
     <div class="col-md-3">
       <div class='panel'>
         <div class='panel-body' style='padding: 8px;'>
@@ -222,7 +222,7 @@ require '../class/config/session_val.php';
         </div>
       </div>
     </div>
-  
+
   </div>
    </div>
  </div>
@@ -289,7 +289,7 @@ require '../class/config/session_val.php';
             limpiarFormulario('#formulario');
 
           }
-          </script> 
+          </script>
 
         </body>
         </html>

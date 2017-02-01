@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -10,7 +9,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,7 +22,7 @@
 	<link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<link href="../assets/css/sysinv.css" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
-	
+
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="../assets/plugins/pace/pace.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
@@ -39,7 +38,7 @@
 		</div>
 	</div>
 	<!-- end #page-loader -->
-	
+
 	<div class="login-cover">
 		<div class="login-cover-image"><img src="../assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
 		<div class="login-cover-bg"></div>
@@ -55,11 +54,11 @@
 					<strong class='text-white sombrear'>SICOP</strong>
 					<small>Sistema de Control Patrimonial</small>
 				</div>
-				
+
 			</div>
 			<!-- end brand -->
 			<div class="login-content">
-				
+
 					<div id='alert' hidden></div>
 					<form action="javascript:;" method='POST'>
 					<div class="form-group m-b-20">
@@ -74,7 +73,7 @@
                    	<button type="submit" name='btn-login' onClick='javascript:Ingresar();' class="btn btn-success btn-block btn-lg">Ingresar</button>
                    </div>
 					</form>
-             
+
            </div>
        </div>
 
@@ -106,7 +105,7 @@
 		<script src="../assets/js/login-v2.demo.min.js"></script>
 		<script src="../assets/js/apps.min.js"></script>
 		<script src="../class/login/login.js"></script>
-		
+
 
 
 		<!-- ================== END PAGE LEVEL JS ================== -->

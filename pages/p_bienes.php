@@ -27,6 +27,7 @@
       	<link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
         <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
         <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
         <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
         <link href="../assets/css/sysinv.css" rel="stylesheet" />
@@ -105,7 +106,7 @@
               </a>
               <ul class="sub-menu">
                 <li><a href="../pages/p_bienes.php">Bienes</a></li>
-                <li><a href="../pages/p_traslados.php">Personal</a></li>
+                <li><a href="../pages/p_personal.php">Personal</a></li>
                 <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
                 <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
               </ul>
@@ -130,7 +131,7 @@
                     <span>Tareas</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="../pages/p_bienesxusuario.php">Bienes Asignados</a></li>
+                    <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
                 </ul>
             </li>
             <li class="has-sub">
@@ -142,12 +143,9 @@
               <ul class="sub-menu">
                 <li><a href="email_inbox.html">Bienes Activos</a></li>
                 <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-                <li><a href="email_inbox.html">Bienes Activos por Usuario</a></li>
-                <li><a href="email_inbox.html">Locales de la Entidad</a></li>
                 <li><a href="email_inbox.html">Areas por Local</a></li>
                 <li><a href="email_inbox.html">Estadistica General</a></li>
-                <li><a href="email_inbox.html">Bienes Activos por Local</a></li>
-                <li><a href="email_inbox.html">Historial</a></li>
+                <li><a href="../pages/p_historial.php">Historial</a></li>
               </ul>
             </li>
 
@@ -174,14 +172,13 @@
             <div class="panel-body">
 
               <div class='bg-grey-200  m-b-10 '>
-                <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuewvoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
+                <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
                 <button class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
               </div>
 
 
               <form class='form-inline' method='POST' id='panelForm'>
-               <select onchange="search(1)" id="sl_tipobien" data-click="panel-refresh" class='form-control input-sm m-r-10 m-b-5'>
-                <option value="*" disabled selected>Tipo Bien</option>
+               <select onchange="search(1)" id="sl_tipobien" data-click="panel-refresh" class='default-select2 form-control input-sm m-r-10 m-b-5'>
                 <option value="*">TODOS</option>
                 <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
                 <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
@@ -572,6 +569,7 @@
          <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
          <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
          <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+         <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
 
          <!-- ================== END BASE JS ================== -->
 
@@ -589,6 +587,7 @@
           $(document).ready(function() {
            App.init();
            search(1);
+           iniciarSelect();
 
            $(".datepicker-default").datepicker({
             todayHighlight: !0,
