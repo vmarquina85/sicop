@@ -1,144 +1,262 @@
-
-<html lang="es">
+<!doctype html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Mantenimiento Personal</title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-  <meta content="" name="description" />
-  <meta content="" name="author" />
-  <!-- ================== BEGIN BASE CSS STYLE ================== -->
-  <link href="../../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../../../assets/css/style.min.css" rel="stylesheet" />
-  <link href="../../../assets/css/sysinv.css" rel="stylesheet" />
-  <!-- ================== END BASE CSS STYLE ================== -->
+  <meta charset="utf-8">
+  <title>A simple, clean, and responsive HTML invoice template</title>
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <div class="container">
-    <!-- <div class="well"> -->
-      <h5 class='resaltar'>PAPELETA DE ASIGNACIÓN</h5>
-      <br>
-      <div class="row">
-        <div class="col-md-3">
-          <label for="">Origen:</label>
-          <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo 'origen' ?>">
-        </div>
-        <div class="col-md-3">
-          <label for="">Destino:</label>
-          <input id='txt_origin' type="text" disabled class='form-control input-sm' value="<?php echo 'destino' ?>">
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-4">
-              <label for="">Fecha:</label>
-              <input id='txtFecha' type="text" disabled class='form-control input-sm' disabled value="<?php echo 'fecha' ; ?>">
-            </div>
-            <div class="col-md-4">
-              <label for="">Motivo:</label>
-              <input id='txtMotivo' type="text" class='form-control input-sm' value="<?php echo 'motivo'; ?>" disabled>
-            </div>
-            <div class="col-md-4">
-              <label for="">Nro Orden:</label>
-              <input id='txtOrden' type="text" disabled class='form-control input-sm resaltar' value="<?php echo 'orden'; ?>">
-            </div></div>
-          </div>
-        </div>
-        <br>
-
-        <div class="row">
-          <div class="col-md-6">
-            <legend>
-              <h5 class='resaltar'><strong>Datos de Origen</strong></h5>
-            </legend>
-            <div class="form-group m-t-25">
-              <label class="col-md-2 control-label">Entrega:</label>
-              <div class="col-md-10">
-
-                <input type="text" id="txt_entrega_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-2 control-label">Area:</label>
-              <div class="col-md-10">
-                <input type="text" id="txt_area_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-2 control-label">Oficina:</label>
-              <div class="col-md-10">
-                <input type="text" id="txt_oficina_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-2 control-label">Cargo:</label>
-              <div class="col-md-10">
-                <input type="text" id="txt_cargo_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-2 control-label">D.N.I.:</label>
-              <div class="col-md-10">
-                <input type="text" id="txt_dni_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['s_dni']; ?>">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <legend>
-              <h5 class='resaltar'><strong>Datos de Destino</strong></h5>
-            </legend>
-            <div class="form-group m-t-25">
-              <label class="col-md-2 control-label">Recibe:</label>
-              <div class="col-md-10">
-                <input type="text" id="txt_recibe_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-              </div>
-            </div>
-            <div id='datosDestino'>
-              <div class="form-group">
-                <label class="col-md-2 control-label">Area:</label>
-                <div class="col-md-10">
-                  <input type="text" id="txt_area_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-md-2 control-label">Oficina:</label>
-                <div class="col-md-10">
-                  <input type="text" id="txt_oficina_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-md-2 control-label">Cargo:</label>
-                <div class="col-md-10">
-                  <input type="text" id="txt_cargo_d" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-md-2 control-label">D.N.I.:</label>
-                <div class="col-md-10">
-                  <input type="text" id='txt_dni_d' class='form-control input-sm m-b-5' disabled value="<?php echo $_SESSION['s_dni']; ?>">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          </div>
-          <table id='tb_detalles' class='table table-bordered f-s-11'>
-            <thead  style='background-color: rgba(100,100,100,0.1);'>
-              <tr>
-                <th class='p-0 text-center  bg-grey-200'>ID Patrimonial</th>
-                <th class='p-0 text-center  bg-grey-200'>Descripcion</th>
-                <th class='p-0 text-center  bg-grey-200'>Marca</th>
-                <th class='p-0 text-center  bg-grey-200'>Modelo</th>
-                <th class='p-0 text-center  bg-grey-200'>Color</th>
-                <th class='p-0 text-center  bg-grey-200'>Serie</th>
-                <th class='p-0 text-center  bg-grey-200'>Estado</th>
-                <th class='p-0 text-center  bg-grey-200'>Observacion</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+<body style='font-family: PT Sans;padding: 30px;'>
+      <div >
+        <img  style='height: 40px;' src="../../../assets/img/logo.png" alt="">
       </div>
+      <div class="text-center title">
+        <h3>Papeleta de Asignación Nro [ORDEN]</h3>
+      </div>
+              <label for="">LOCAL:</label>
+            <span>[UNIDAD DE SISTEMAS Y PROCESOS]</span>
+            <div class='pull-right text-center'>FECHA
+              <table class="table table-bordered table-condensed">
+                <tr>
+                  <td>06</td>
+                  <td>02</td>
+                  <td>2017</td>
+                </tr>
+              </table>
+            </div>
 
-    </body>
-    </html>
+            <br>
+            <h4>Datos del Usuario</h4>
+            <label for="">NOMBRE:</label>
+            <span>[VICTOR ALEJANDRO MARQUINA CARDENAS]</span>
+            <br>
+            <label for="">DNI:</label>
+            <span>[42940246]</span>
+            <br>
+            <label for="">CARGO:</label>
+            <span>[ESPECIALISTA EN BASE DE DATOS]</span>
+            <br>
+            <label for="">AREA:</label>
+            <span>[DESARROLLO]</span>
+            <br>
+            <br>
+  <table class="table table-bordered table condensed">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Descripcion</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Color</th>
+        <th>Serie/Dimensión</th>
+        <th>Estado</th>
+        <th>Observación</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  <td>7</td>
+  <td>8</td>
+</tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

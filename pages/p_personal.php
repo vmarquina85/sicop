@@ -79,8 +79,8 @@ require '../class/config/session_val.php';
             <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
           </a>
           <ul class="dropdown-menu animated fadeInLeft">
-            <li class="arrow"></li>
-            <li><a href="javascript:;">Cambiar Contraseña</a></li>
+            <!-- <li class="arrow"></li> -->
+            <!-- <li><a href="javascript:;">Cambiar Contraseña</a></li> -->
             <li class="divider"></li>
             <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
           </ul>
@@ -95,7 +95,7 @@ require '../class/config/session_val.php';
   <div id="top-menu" class="top-menu">
     <!-- begin top-menu nav -->
     <ul class="nav">
-      <li class="has-sub">
+      <!-- <li class="has-sub">
         <a href="javascript:;">
           <b class="caret pull-right"></b>
           <img src="../assets/img/mixer-icon.png" alt="">
@@ -107,7 +107,7 @@ require '../class/config/session_val.php';
           <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
           <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
         </ul>
-      </li>
+      </li> -->
       <li class="has-sub">
         <a href="javascript:;">
           <b class="caret pull-right"></b>
@@ -138,10 +138,10 @@ require '../class/config/session_val.php';
           <span>Reportes</span>
         </a>
         <ul class="sub-menu">
-          <li><a href="email_inbox.html">Bienes Activos</a></li>
+          <!-- <li><a href="email_inbox.html">Bienes Activos</a></li>
           <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
           <li><a href="email_inbox.html">Areas por Local</a></li>
-          <li><a href="email_inbox.html">Estadistica General</a></li>
+          <li><a href="email_inbox.html">Estadistica General</a></li> -->
           <li><a href="../pages/p_historial.php">Historial</a></li>
         </ul>
       </li>

@@ -44,6 +44,14 @@ class parametricas extends conectar
 		}
 		return $this->t;
 	}
+	function bienPapeleta($idp){
+		$sql="select CASE WHEN (select  count(*) from det_mov where det_equipo in (select id_alterno from equipos where id_patrimonial='".$idp."') limit 1 offset 0)>0 then 'S' ELSE 'N' END as papeleta";
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
 	function Get_operativo(){
 		$sql="select descripcion,id_dep from dependencias order by 1" ;
 		$res=pg_query(parent::con_sinv(),$sql);

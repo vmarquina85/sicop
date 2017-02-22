@@ -75,8 +75,8 @@ require '../class/config/session_val.php';
               <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
-              <li class="arrow"></li>
-              <li><a href="javascript:;">Cambiar Contraseña</a></li>
+              <!-- <li class="arrow"></li> -->
+              <!-- <li><a href="javascript:;">Cambiar Contraseña</a></li> -->
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -91,7 +91,7 @@ require '../class/config/session_val.php';
     <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
       <ul class="nav">
-        <li class="has-sub">
+        <!-- <li class="has-sub">
           <a href="javascript:;">
             <b class="caret pull-right"></b>
             <img src="../assets/img/mixer-icon.png" alt="">
@@ -103,7 +103,7 @@ require '../class/config/session_val.php';
             <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
             <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="has-sub">
           <a href="javascript:;">
             <b class="caret pull-right"></b>
@@ -134,10 +134,10 @@ require '../class/config/session_val.php';
             <span> Reportes</span>
           </a>
           <ul class="sub-menu">
-            <li><a href="email_inbox.html">Bienes Activos</a></li>
+            <!-- <li><a href="email_inbox.html">Bienes Activos</a></li>
             <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
             <li><a href="email_inbox.html">Areas por Local</a></li>
-            <li><a href="email_inbox.html">Estadistica General</a></li>
+            <li><a href="email_inbox.html">Estadistica General</a></li> -->
             <li><a href="../pages/p_historial.php">Historial</a></li>
           </ul>
         </li>
@@ -191,7 +191,7 @@ require '../class/config/session_val.php';
                     <option value="*">--Todos Tipo Movimiento--</option>
                     <option value="1">Interno</option>
                     <option value="2">Externo</option>
-                    <option value="3" disabled >Mantenimiento</option>
+                    <option value="3">Mantenimiento</option>
                   </select>
                   <button onclick='search(1)' class="btn btn-info btn-xs m-b-10 m-t-10"><i class="fa fa-search"></i> Buscar</button>
                   <button onclick='vertodos()' class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</button>
@@ -243,7 +243,7 @@ require '../class/config/session_val.php';
                         <option value="0">--Seleccionar--</option>
                         <option value="1">INTERNO</option>
                         <option value="2">EXTERNO</option>
-                        <option value="3">MANTENIMIENTO</option>
+                        <option value="3" disabled>MANTENIMIENTO</option>
                       </select>
                     </div>
                   </div>
