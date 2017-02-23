@@ -37,10 +37,10 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
       <?php
       if ($rs_bienes[$i]["est_bien"]=='A'){
         echo  "<td class='p-3 f-s-11 text-center m-r-10 m-l-10' onclick='AlertBaja(this)' style='cursor:pointer;'><a>
-                <img title='Dar de Baja' src='../assets/img/arrow_down.png'>
+                <img title='Dar de Baja' src='../assets/img/Baja.png'>
               </a></td>";
       }else{
-        echo  "<td class='p-3 f-s-11 text-center m-r-10 m-l-10' onclick='AltaBien()' style='cursor:pointer;'><a>
+        echo  "<td class='p-3 f-s-11 text-center m-r-10 m-l-10' onclick='AltaBien(this)' style='cursor:pointer;'><a>
                 <img title='Dar de Alta' src='../assets/img/arrow_up.png'>
               </a></td>";
       };?>

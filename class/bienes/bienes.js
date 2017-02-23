@@ -149,3 +149,49 @@ function AlertBaja(objeto){
     $("#alertform2")[0].reset();
   $('#alert2').modal();
 }
+function BajaBien(objeto){
+  if (confirm("Está seguro que desea dar de BAJA a este bien?")) {
+    // resultado=obtener_detalle(objeto);
+    // if (resultado[0].papeleta!='S'){
+      fila=objeto.closest('tr');
+      var id_patrimonial=fila.getElementsByTagName('td')[4].innerHTML;
+      var causal=document.getElementById('sl_causalBaja').value;
+      var fechabaja=document.getElementById('txt_fechaBaja').value;
+      var resbaja=document.getElementById('txt_resBaja').value;
+      var docbaja=document.getElementById('txt_docBaja').value;
+      if (window.XMLHttpRequest) {
+        var http=getXMLHTTPRequest();
+      }
+      var url = '../update/bienesUpdateBaja.php';
+      var modurl = url+ "?id_patrimonial="+ id_patrimonial+"&fecha_resol="+fechabaja+"&causal="+causal+"&resol_baja="+resbaja+"&doc_sbn="+docbaja;
+      http.open("GET", modurl, false);
+      http.send(null);
+      alert('El bien ha sido dado de Baja');
+      get_bienes(20,0);
+      init_paginador(1);
+    // }else{
+    //   alert('No se puede dar de Baja el registro, existen papeletas relacionadas a este');
+    // }
+  }
+}
+function AltaBien(objeto){
+  if (confirm("¿Dar de Alta a este Bien?")) {
+    // resultado=obtener_detalle(objeto);
+    // if (resultado[0].papeleta!='S'){
+      fila=objeto.closest('tr');
+      var id_patrimonial=fila.getElementsByTagName('td')[4].innerHTML;
+      if (window.XMLHttpRequest) {
+        var http=getXMLHTTPRequest();
+      }
+      var url = '../update/bienesUpdateALta.php';
+      var modurl = url+ "?id_patrimonial="+ id_patrimonial;
+      http.open("GET", modurl, false);
+      http.send(null);
+      alert('El bien ha sido dado de ALta');
+      get_bienes(20,0);
+      init_paginador(1);
+    // }else{
+    //   alert('No se puede dar de Baja el registro, existen papeletas relacionadas a este');
+    // }
+  }
+}

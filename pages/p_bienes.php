@@ -182,7 +182,6 @@ require '../class/config/session_val.php';
           <option value="*">TODOS</option>
           <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
             <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
-
             <?php  }?>
 
           </select>
@@ -231,7 +230,7 @@ require '../class/config/session_val.php';
             <ul id='paginator' class="pagination">
             </ul>
             <div class='table-responsive'>
-              <table id='data-table' class='table table-bordered f-s-11'>
+              <table id='data-table' class='table table-bordered table-hover f-s-11'>
                 <thead>
                   <tr>
                     <th colspan="4" class='p-0 text-center  bg-grey-200'>Acciones</th>
@@ -575,19 +574,19 @@ require '../class/config/session_val.php';
                   <div class="form-group">
                     <label class="col-md-3 control-label">Resolución de Baja</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control" placeholder="Ej:O/C 392-2005">
+                      <input id='txt_resBaja' type="text" class="form-control" placeholder="Ej:RES. 137-2016-GAF-SISOL/MML">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Fecha Resol:</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control datepicker-default" placeholder="Haz click para seleccionar la fecha">
+                      <input id='txt_fechaBaja' type="text" class="form-control datepicker-default" placeholder="Haz click para seleccionar la fecha">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">Causal Baja</label>
                     <div class="col-md-9">
-                    <select name="" id="" class='form-control'>
+                    <select id='sl_causalBaja' name="" id="" class='form-control'>
                       <option value="">--Seleccione Causal--</option>
                       <option value="5">DESTRUCCION O SINIESTRO</option>
                       <option value="1">EXCEDENCIA</option>
@@ -603,7 +602,7 @@ require '../class/config/session_val.php';
                   <div class="form-group">
                     <label class="col-md-3 control-label">Doc. SBN N:</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control">
+                      <input id='txt_docBaja' type="text" class="form-control" placeholder='Ej:O/C 392-2005'>
                     </div>
                   </div>
                 </form>
@@ -611,7 +610,7 @@ require '../class/config/session_val.php';
               </div>
               <div class="modal-footer">
                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                <a href="javascript:eliminarBien(fila);" class="btn btn-sm btn-danger">Dar de Baja</a>
+                <a href="javascript:BajaBien(fila);" class="btn btn-sm btn-danger">Dar de Baja</a>
               </div>
 
             </div>

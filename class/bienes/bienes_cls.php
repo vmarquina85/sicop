@@ -149,13 +149,13 @@ class bien extends conectar
 			pg_query(parent::con_sinv(),$sql);
 
 		}
-		function bajaBien($id_patrimonial){
-			$sql="update equipos set est_bien='B' where id_patrimonial='".$id_patrimonial."'";
+		function bajaBien($id_patrimonial,$fecha,$causal,$resolucion,$doc_baja,$usrreg){
+			$sql="update equipos set est_bien='B', fecha_baja='" . $fecha . "', causal_baja='" . $causal . "', resol_baja='" . $resolucion . "',doc_baja='" . $doc_baja. "',fec_modifica=now(),usr_modifica='" . $usrreg . "' where id_patrimonial='" . $id_patrimonial . "'";
 			pg_query(parent::con_sinv(),$sql);
 
 		}
-		function altaBien($id_patrimonial){
-			$sql="update equipos set est_bien='A' where id_patrimonial='".$id_patrimonial."'";
+		function altaBien($id_patrimonial,$usrreg){
+			$sql="update equipos set est_bien='A', causal_baja='', resol_baja='', fecha_baja=null,usr_modifica='" . $usrreg . "', fec_modifica=now() where id_patrimonial='" .$id_patrimonial. "'";
 			$res=pg_query(parent::con_sinv(),$sql);
 		}
 }
