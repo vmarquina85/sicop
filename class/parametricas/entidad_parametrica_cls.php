@@ -18,6 +18,14 @@ class parametricas extends conectar
 		return $this->t;
 
 	}
+	function Get_cuentaContable($tipo_cta,$rtipocta){
+		$sql="select cuenta,denomina from cuentac where tip_uso_cta='" .$tipo_cta. "' and tipo_cta='" .$rtipocta. "'" ;
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+	}
 
 	function Get_tipo_bien(){
 		$sql="select distinct b.descripcion,b.id_tipo,b.prefijo from equipos a inner join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5' order by 1" ;

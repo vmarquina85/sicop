@@ -76,6 +76,18 @@ class bien extends conectar
 		}
 		return $this->t;
 	}
+function get_grupoClase($prefix){
+$sql="select t.prefijo,G.descripcion as grupo,c.descripcion as clase from tablatipo t
+left join grupos G on g.id_grupo= substring(t.prefijo,1,2)
+left join clases c on c.id_clase=substring(t.prefijo,3,2)
+where id_tabla='5' and t.prefijo='".$prefix."'";
+
+	$res=pg_query(parent::con_sinv(),$sql);
+	while($reg=pg_fetch_assoc($res)){
+		$this->t[]=$reg;
+	}
+	return $this->t;
+}
 
 	function Get_pages($tipo,$prefix,$patrimonial,$serie,$codigointerno,$DocumentoAlta,$Operativo,$Marca,$Asignado,$Estado){
 		$sql="Select count(A.*) as cuenta from (Select p.descripcion as dependencia, a.id_areact, a.id_depact, a.id_ofiact, a.id_alterno, a.id_patrimonial, a.serie, a.modelo,
