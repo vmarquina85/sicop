@@ -102,8 +102,21 @@ require '../class/config/session_val.php';
     <!-- begin #top-menu -->
     <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
-      <ul class="nav">
 
+      <ul class="nav">
+        <li class="has-sub">
+          <a href="javascript:;">
+            <b class="caret pull-right"></b>
+            <img src="../assets/img/mixer-icon.png" alt="">
+            <span>Mantenimiento</span>
+          </a>
+          <ul class="sub-menu">
+            <li><a href="../pages/p_bienes.php">Bienes</a></li>
+            <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
+            <!-- <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
+            <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
+          </ul>
+        </li>
   <li class="has-sub">
     <a href="javascript:;">
       <b class="caret pull-right"></b>
@@ -350,6 +363,9 @@ require '../class/config/session_val.php';
                 						<span class="input-group-addon input-sm">Forma Adq.</span>
                 						<select name="" id="" class='form-control input-sm'>
                 							<option value="">-- Seleccione Forma --</option>
+                              <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
+                                <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
+                                <?php  }?>
                 						</select>
                 					</div>
 
@@ -403,8 +419,11 @@ require '../class/config/session_val.php';
                 					<div class="input-group m-b-5 ">
                 						<span class="input-group-addon input-sm">Estado del Bien</span>
                 						<select name="" id="" class='form-control input-sm'>
-                							<option value="">-- Seleccione Forma --</option>
-                						</select>
+                							<option value="">-- Seleccione Estado --</option>
+                              <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
+                                <option value="<?php echo $rs_estado[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                                <?php  }?>
+                            </select>
                 					</div>
                 				</div>
                 				<div class="col-md-6">
@@ -674,13 +693,6 @@ require '../class/config/session_val.php';
       })
 
     });
-    // function limpiarFormulario(formulario){
-    //   $(formulario)[0].reset();
-    // }
-
-    // function  nuewvoRegistro(){
-    //   $('#mymodal').modal();
-    //   limpiarFormulario('#formulario');
     var tipoBien =[
       <?php for($i=0;$i<sizeof($rs_tipobien);$i++)
       {

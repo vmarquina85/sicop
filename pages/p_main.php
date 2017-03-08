@@ -97,7 +97,7 @@ require '../class/config/session_val.php';
 <div id="top-menu" class="top-menu">
   <!-- begin top-menu nav -->
   <ul class="nav">
-    <!-- <li class="has-sub">
+    <li class="has-sub">
       <a href="javascript:;">
         <b class="caret pull-right"></b>
         <img src="../assets/img/mixer-icon.png" alt="">
@@ -105,11 +105,11 @@ require '../class/config/session_val.php';
       </a>
       <ul class="sub-menu">
         <li><a href="../pages/p_bienes.php">Bienes</a></li>
-        <li><a href="../pages/p_personal.php">Personal</a></li>
+        <!-- <li><a href="../pages/p_personal.php">Personal</a></li>
         <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
-        <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li>
+        <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
       </ul>
-    </li> -->
+    </li>
     <li class="has-sub">
       <a href="javascript:;">
         <b class="caret pull-right"></b>

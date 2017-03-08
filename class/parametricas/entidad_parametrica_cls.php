@@ -114,5 +114,20 @@ class parametricas extends conectar
 								}
 								return $this->t;
 	}
+	function get_tablatipo($caso){
+		$sql="select a.id_tipo, a.descripcion from tablatipo a inner join
+		(select id_tipo from tablatipo where descripcion like '".$caso."' and id_tabla='0')b
+		on a.id_tabla=b.id_tipo order by 2" ;
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$this->t[]=$reg;
+		}
+		return $this->t;
+
+	}
+
+
+
+
 }
 ?>
