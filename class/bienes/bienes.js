@@ -83,7 +83,7 @@ function init_paginador(index){
 }
 
 function limpiarFormulario(formulario){
-//  $(formulario)[0].reset();
+$(formulario)[0].reset();
 }
 function  nuevoRegistro(){
   $('#mymodal').modal();
@@ -245,9 +245,45 @@ function ObtenerCuentas(){
          if (http.readyState == 4) {
            if(http.status == 200) {
              var res = http.responseText;
-          document.getElementById('cuenta').innerHTML=res;
+          document.getElementById('sl_CuentaContable').innerHTML=res;
            }
          }
        });
          http.send(null);
    }
+   function ValidaSoloDec() {
+     if ((event.keyCode >= 48) && (event.keyCode <= 57)) {
+       event.returnValue = true;
+     }else if(event.keyCode==46){
+       event.returnValue = true;
+     }else{
+       event.returnValue = false;
+     }
+   }
+   function ValidaSoloNumeros() {
+     if ((event.keyCode < 48) || (event.keyCode > 57)) {
+       event.returnValue = false;
+     }
+   }
+   function llenarPersonalDestino(){
+     if (window.XMLHttpRequest) {
+       var http=getXMLHTTPRequest();
+     }
+     var idpersonal= document.getElementById("sl_usuarioAsignado").value;
+     var url = "../get/datosPersonalAsignado.php?idpersonal="+idpersonal;
+     http.open("GET", url, true);
+     http.addEventListener('readystatechange', function() {
+       if (http.readyState == 4) {
+         if(http.status == 200) {
+           var resultado = http.responseText;
+           document.getElementById("datosDestino").innerHTML = (resultado);
+         }
+       }
+     });
+     http.send(null);
+   }
+function crearBien(){
+  var denominacion=document.getElementById('txt_bienDescripcion').value.substr(10);
+
+
+}

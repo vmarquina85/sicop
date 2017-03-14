@@ -70,8 +70,12 @@ class parametricas extends conectar
 	}
 
 	function get_personal_nombre($local){
-		$sql="select distinct p.id_personal,p.ape_paterno || ' ' || p.ape_materno || ', ' || p.nombres as completo from personal p
-		inner join localxfun l on p.id_personal=l.id_personal where l.id_dep='".$local."' order by 2";
+		$sql="select distinct cast(p.id_personal as int),p.ape_paterno || ' ' || p.ape_materno || ', ' || p.nombres as completo from personal p
+		inner join localxfun l on p.id_personal=l.id_personal where p.id_personal NOT IN ('1127')";
+		if ($local!='') {
+			$sql=$sql. " and l.id_dep='".$local."'";
+		}
+		$sql=$sql. "	order by 2";
 		$res=pg_query(parent::con_sinv(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
