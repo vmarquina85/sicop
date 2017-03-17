@@ -13,16 +13,11 @@ $Operativo=$_REQUEST["operativo"];
 $Marca=$_REQUEST["marca"];
 $Asignado=$_REQUEST["asignado"];
 $Estado=$_REQUEST["estado"];
-
 $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$codigointerno,$DocumentoAlta,$Operativo,$Marca,$Asignado,$Estado);
 ?>
-
 <tbody id='tb_detalle_bienes'>
-
   <?php for ($i=0; $i <sizeof($rs_bienes) ; $i++) {?>
     <tr>
-
-
       <td class='p-3 f-s-11 text-center m-r-10 m-l-10'>
         <a href="javascript:;">
         <img title='Editar' src="../assets/img/page_edit.png" alt="">

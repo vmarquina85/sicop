@@ -40,7 +40,7 @@ class bien extends conectar
 
 		}
 		if($patrimonial!=''){
-			$sql=$sql." and a.id_patrimonial like '".$patrimonial."%'";
+			$sql=$sql." and a.id_patrimonial like '%".$patrimonial."%'";
 
 		}
 		if ($serie!='') {
@@ -77,7 +77,7 @@ class bien extends conectar
 		return $this->t;
 	}
 function get_grupoClase($prefix){
-$sql="select t.prefijo,G.descripcion as grupo,c.descripcion as clase from tablatipo t
+$sql="select t.prefijo,t.id_tipo,G.descripcion as grupo,c.descripcion as clase from tablatipo t
 left join grupos G on g.id_grupo= substring(t.prefijo,1,2)
 left join clases c on c.id_clase=substring(t.prefijo,3,2)
 where id_tabla='5' and t.prefijo='".$prefix."'";
