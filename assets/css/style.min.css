@@ -2015,6 +2015,17 @@ to {
     padding: 12px 15px;
     border-bottom-color: #E0E0E0;
 }
+.header-warning{
+      background-color: #ffb900;
+}
+.header-danger{
+      background-color: #F44336;
+}
+.header-success{
+      background-color: #26A69A;
+}
+
+
 .modal-header .close {
     margin-top: 2px;
 }

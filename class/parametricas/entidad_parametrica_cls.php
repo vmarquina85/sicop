@@ -36,16 +36,29 @@ class parametricas extends conectar
 		return $this->t;
 	}
 	function Get_detalleBien($idp){
-		$sql="Select a.id_alterno, a.id_patrimonial, a.serie, a.modelo, a.observacion, a.id_estado, a.id_asignado, a.est_bien,
-		b.descripcion as tipo_equipo,a.id_alterno, d.descripcion as marca, e.descripcion as color, f.descripcion as estado,
+		// $sql="Select a.id_alterno, a.id_patrimonial, a.serie, a.modelo, a.observacion, a.id_estado, a.id_asignado, a.est_bien,
+		// b.descripcion as tipo_equipo, d.descripcion as marca, e.descripcion as color, f.descripcion as estado,
+		// CASE WHEN (select count(*) from det_mov d inner join cab_mov c on d.det_orden=c.mov_orden
+		// where d.det_equipo in (select id_alterno from equipos where id_patrimonial='".$idp."') and c.mov_status='I')>0 then 'S' ELSE 'N' END as papeleta
+		// from equipos a
+		// left join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5'
+		// left join tablatipo d on a.id_marca=d.id_tipo and d.id_tabla='6'
+		// left join tablatipo e on a.id_color=e.id_tipo and e.id_tabla='7'
+		// left join tablatipo f on a.id_estado=f.id_tipo and f.id_tabla='9'
+		// where trim(a.id_patrimonial)='".$idp."'";
+		$sql="Select a.id_alterno, a.id_patrimonial,substring(a.id_patrimonial,1,8) as prefix,substring(a.id_patrimonial,10,4) as correl,a.tipo_cta,a.cuenta,k.tipo_cta as radio,a.forma_adq,a.fecha_adq,a.id_interno,a.doc_alta,a.valor_tasa,a.valor_lib, a.serie, a.modelo, a.observacion, a.id_estado, a.id_asignado, a.est_bien,
+		b.descripcion as tipo_equipo,a.id_marca, d.descripcion as marca,a.id_color, e.descripcion as color,a.tipo_bien,a.dimension,a.placa,a.nro_motor,a.nro_chasis,a.observacion, f.descripcion as estado,
 		CASE WHEN (select count(*) from det_mov d inner join cab_mov c on d.det_orden=c.mov_orden
 		where d.det_equipo in (select id_alterno from equipos where id_patrimonial='".$idp."') and c.mov_status='I')>0 then 'S' ELSE 'N' END as papeleta
 		from equipos a
+		left join cuentac k on a.cuenta=k.cuenta
 		left join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5'
 		left join tablatipo d on a.id_marca=d.id_tipo and d.id_tabla='6'
 		left join tablatipo e on a.id_color=e.id_tipo and e.id_tabla='7'
 		left join tablatipo f on a.id_estado=f.id_tipo and f.id_tabla='9'
 		where trim(a.id_patrimonial)='".$idp."'";
+
+
 		$res=pg_query(parent::con_sinv(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;

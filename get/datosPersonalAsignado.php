@@ -5,7 +5,7 @@ $idpersonal=$_REQUEST["idpersonal"];
 $rs_personal=$perso->get_personal_datos($idpersonal);
 ?>
 
-<div id='datosDestino'>
+
   <div class="input-group m-b-5 ">
     <span class="input-group-addon input-sm">Local</span>
     <select name="" id="sl_localAsignado" class='form-control input-sm' disabled>
@@ -27,4 +27,3 @@ $rs_personal=$perso->get_personal_datos($idpersonal);
       <option value="">-- Seleccione Area --</option>
     </select>
   </div>
-</div>
