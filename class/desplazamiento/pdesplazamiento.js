@@ -244,10 +244,10 @@ function validar_translado(){
   }else if (document.getElementById('sl_tipo').value==='*') {
     alert('Dato incompleto - Motivo');
     return false;
-  }else if ($("#sl_TrasladoDestino option:selected").text()==document.getElementById('txt_origin').value && document.getElementById('sl_tipo')!=1) {
+  }else if ($("#sl_TrasladoDestino option:selected").text()==document.getElementById('txt_origin').value && document.getElementById('sl_tipo').value!=1) {
     alert('Origen y Destino denotan un tipo de papeleta "INTERNO", revisar');
     return false;
-  }else if ($("#sl_TrasladoDestino option:selected").text()!=document.getElementById('txt_origin').value && document.getElementById('sl_tipo')==1) {
+  }else if ($("#sl_TrasladoDestino option:selected").text()!=document.getElementById('txt_origin').value && document.getElementById('sl_tipo').value==1) {
     alert('Origen y Destino NO denotan un tipo de papeleta "INTERNO", revisar');
     return false;
   }else {
@@ -337,4 +337,11 @@ function validar_mov_tipo(){
   }else{
     document.getElementById('sl_tipo').value=2;
   }
+}
+function imprimir(objeto){
+  var fila=objeto.closest("tr");
+  var id_papeleta=fila.getElementsByTagName('td')[3].innerHTML;
+  var prefijo=fila.getElementsByTagName('td')[2].innerHTML;
+  var mov_tipo=fila.getElementsByTagName('td')[1].innerHTML;
+window.open("../print/print_traslado.php?id_papeleta="+id_papeleta+"&prefijo="+prefijo+"&mov_tipo="+mov_tipo);
 }

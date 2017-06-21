@@ -6,9 +6,7 @@ $rs_pendientes=$classP->obtenerPepeletas($_SESSION['usr_idper']);
 if (sizeof($rs_pendientes)>0 ){
   echo  "<div class='panel-body' id='tab_pendientes'>
   <div class='table-responsive'>
-  <button id='mark_all' class='btn btn-warning btn-xs'><i class='fa fa-check-square-o'></i> Marcar todos</button>
-  <br>
-  <br>
+
   <table id='table-pendientes'  class='table table-bordered table-hover f-s-11'>
     <thead>
       <tr>

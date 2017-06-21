@@ -11,11 +11,13 @@
 	<meta content="" name="author" />
 
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	  <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/package.png">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
 	<link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
 	<link href="../assets/css/animate.min.css" rel="stylesheet" />
 	<link href="../assets/css/style.min.css" rel="stylesheet" />
 	<link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
@@ -50,7 +52,8 @@
 			<!-- begin brand -->
 			<div class="login-header">
 				<div class="brand">
-					<span class='logo'></span>
+					<!-- <span class='logo'></span> -->
+					<i class="ion-cube text-teal-300"></i>
 					<strong class='text-white sombrear'>SICOP</strong>
 					<small>Sistema de Control Patrimonial</small>
 				</div>

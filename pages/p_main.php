@@ -18,6 +18,7 @@ require '../class/config/session_val.php';
   <meta content="" name="author" />
 
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/package.png">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -30,6 +31,7 @@ require '../class/config/session_val.php';
   <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
+    <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
 
@@ -75,13 +77,18 @@ require '../class/config/session_val.php';
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown navbar-user ">
         <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
-          <img src="../assets/img/man.png" alt="">
-         <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
+          <?php if ($_SESSION['sicop_sexo']=='1') {
+echo '<img src="../assets/img/man.png" alt="">';
+} else{
+echo '<img src="../assets/img/girl.png" alt="">';
+}
+?>
+         <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION['sicop_usr_name'])) ?></span>
 
        </a>
        <ul class="dropdown-menu animated fadeInLeft">
-         <!-- <li class="arrow"></li> -->
-         <!-- <li><a href="javascript:;">Cambiar Contraseña</a></li> -->
+         <li class="arrow"></li>
+         <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
          <li class="divider"></li>
          <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
        </ul>
@@ -105,9 +112,9 @@ require '../class/config/session_val.php';
       </a>
       <ul class="sub-menu">
         <li><a href="../pages/p_bienes.php">Bienes</a></li>
-        <!-- <li><a href="../pages/p_personal.php">Personal</a></li>
-        <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
-        <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
+        <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
+        <li><a href="../pages/p_usuarios.php">Usuarios</a></li>
+        <!-- <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
       </ul>
     </li>
     <li class="has-sub">
@@ -119,8 +126,8 @@ require '../class/config/session_val.php';
       <ul class="sub-menu">
         <li><a href="../pages/p_asignacion.php">Asignación</a></li>
         <li><a href="../pages/p_traslados.php">Traslados</a></li>
-        <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-        <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
+            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
+            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
       </ul>
     </li>
     <li class="has-sub">
@@ -274,7 +281,8 @@ require '../class/config/session_val.php';
           <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
           <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
           <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-
+          <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+        <script src="../class/config/config.js"></script>
           <!-- ================== END BASE JS ================== -->
 
           <!-- ================== BEGIN PAGE LEVEL JS ================== -->

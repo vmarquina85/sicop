@@ -44,19 +44,19 @@ class bien extends conectar
 
 		}
 		if ($serie!='') {
-			$sql=$sql." and a.serie='".$serie."'";
+			$sql=$sql." and a.serie like '%".$serie."%'";
 		}
 		if ($codigointerno!='') {
-			$sql=$sql." and a.id_interno='".$codigointerno."'";
+			$sql=$sql." and a.id_interno like '%".$codigointerno."%'";
 		}
 		if ($DocumentoAlta!='') {
-			$sql=$sql." and a.doc_alta='".$DocumentoAlta."'";
+			$sql=$sql." and a.doc_alta like '%".$DocumentoAlta."%'";
 		}
 		if ($Operativo!='*') {
-			$sql=$sql." and  a.id_depact='".$Operativo."'";
+			$sql=$sql." and  a.id_depact like '%".$Operativo."%'";
 		}
 		if ($Marca!='*') {
-			$sql=$sql." and a.id_marca='".$Marca."'";
+			$sql=$sql." and a.id_marca like '%".$Marca."%'";
 		}
 		if ($Asignado!='*') {
 			if ($Asignado=='A') {
@@ -164,7 +164,6 @@ where id_tabla='5' and t.prefijo='".$prefix."'";
 		function bajaBien($id_patrimonial,$fecha,$causal,$resolucion,$doc_baja,$usrreg){
 			$sql="update equipos set est_bien='B', fecha_baja='" . $fecha . "', causal_baja='" . $causal . "', resol_baja='" . $resolucion . "',doc_baja='" . $doc_baja. "',fec_modifica=now(),usr_modifica='" . $usrreg . "' where id_patrimonial='" . $id_patrimonial . "'";
 			pg_query(parent::con_sinv(),$sql);
-
 		}
 		function altaBien($id_patrimonial,$usrreg){
 			$sql="update equipos set est_bien='A', causal_baja='', resol_baja='', fecha_baja=null,usr_modifica='" . $usrreg . "', fec_modifica=now() where id_patrimonial='" .$id_patrimonial. "'";

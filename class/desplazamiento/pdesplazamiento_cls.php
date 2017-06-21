@@ -11,8 +11,8 @@ class desplazamiento extends conectar
 
 	function Get_desplazamiento($limit, $offset,$nro,$origen,$destino,$estado,$mov_tipo){
 		$sql="Select e.descripcion as source,g.descripcion as target,a.mov_tar,a.mov_areatra,a.mov_ofitra,
-		a.mov_status,a.mov_src,substring(a.mov_orden,2,7)as numero,to_char(a.mov_fecha,'dd/mm/yyyy') as mov_fecha,b.descripcion as motivo,
-		a.mov_motivo,a.mov_personal,a.mov_transpo,to_char(a.mov_fecing,'dd/mm/yy HH24:MI') as mov_fecing,
+		a.mov_status,a.mov_src,substring(a.mov_orden,1,1)as prefijo,substring(a.mov_orden,2,7)as numero,to_char(a.mov_fecha,'dd/mm/yyyy') as mov_fecha,b.descripcion as motivo,
+		a.mov_motivo,a.mov_tipo,a.mov_personal,a.mov_transpo,to_char(a.mov_fecing,'dd/mm/yy HH24:MI') as mov_fecing,
 		(c.ape_paterno || ' ' || c.ape_materno || ', ' || c.nombres) as entrego,c.dni as dni_entrega,
 		(d.ape_paterno || ' ' || d.ape_materno || ', ' || d.nombres) as recibio,d.dni as dni_recibe,
 		aso.descripcion as area_src, at.descripcion as area_tar, os.descripcion as oficina_src, ot.descripcion as oficina_tar,
@@ -50,7 +50,7 @@ class desplazamiento extends conectar
 		if ($_SESSION["usr_niv"] <> 'A'){
 		$sql.= " and (mov_transpo='" . $_SESSION['usr_idper'] . "' or mov_personal='" .  $_SESSION['usr_idper'] . "') ";
 		}
-		$sql=$sql." order by cast(substring(mov_orden,2,7) as smallint) desc  limit ".$limit. " offset ".$offset ;
+		$sql=$sql." order by a.mov_fecha desc  limit ".$limit. " offset ".$offset ;
 		$res=pg_query(parent::con_sinv(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;

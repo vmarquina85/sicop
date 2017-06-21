@@ -20,7 +20,7 @@ class personal extends conectar
 								left join oficinas f on a.id_dep=f.id_dep and a.id_area=f.id_area and a.id_oficina=f.id_oficina
 								left join ubigeo u on a.id_distrito=u.ubigeo
 								left join tablatipo d on a.id_cargo=d.id_tipo and d.id_tabla='10'
-								where a.id_personal<>''";
+								where a.id_personal<>'' order by 1";
 								$res=pg_query(parent::con_sinv(),$sql);
 								while($reg=pg_fetch_assoc($res)){
 									$this->t[]=$reg;

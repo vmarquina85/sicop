@@ -15,6 +15,7 @@ require '../class/config/session_val.php';
   <meta content="" name="description" />
   <meta content="" name="author" />
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/package.png">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -27,12 +28,21 @@ require '../class/config/session_val.php';
   <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
+  <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
+  <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/plugins/pace/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
-
+<style>
+.navbar-brand{
+width: auto;
+}
+.navbar-brand>img {
+display: inline;
+}
+</style>
 </head>
 <body>
   <!-- begin #page-loader -->
@@ -53,28 +63,31 @@ require '../class/config/session_val.php';
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-click="top-menu-toggled">
-          <i class="material-icons">menu</i>
+          <button type="button" class="navbar-toggle " data-click="top-menu-toggled">
+            <i class="material-icons">menu</i>
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
-            <!-- <i class="material-icons">arrow_back</i> -->
-            <!--  <span class="navbar-logo"></span> -->
-            <strong class='text-white sombrear'>Asignación</strong>
+              <!-- <img src="../assets/img/package.png" alt=""> -->
+            <strong class='text-white sombrear'> Asignación</strong>
           </a>
         </div>
-        <!-- end mobile sidebar expand / collapse button -->
-        <!-- begin header navigation right -->
+          <!-- begin mobile sidebar expand / collapse button -->
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle text-white sombrear" data-toggle="dropdown">
 
-              <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION["usr_name"])) ?></span>
-              <img src="../assets/img/man.png" alt="">
+              <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION['sicop_usr_name'])) ?></span>
+              <?php if ($_SESSION['sicop_sexo']=='1') {
+echo '<img src="../assets/img/man.png" alt="">';
+} else{
+echo '<img src="../assets/img/girl.png" alt="">';
+}
+?>
 
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
-              <!-- <li class="arrow"></li> -->
-              <!-- <li><a href="javascript:;">Cambiar Contraseña</a></li> -->
+              <li class="arrow"></li>
+              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -97,9 +110,9 @@ require '../class/config/session_val.php';
           </a>
           <ul class="sub-menu">
             <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <!-- <li><a href="../pages/p_personal.php">Personal</a></li>
-            <li><a href="../pages/p_generarActa.php">Usuarios</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
+            <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
+            <li><a href="../pages/p_usuarios.php">Usuarios</a></li>
+            <!-- <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
           </ul>
         </li>
         <li class="has-sub">
@@ -221,7 +234,7 @@ require '../class/config/session_val.php';
                 </div>
                 <div class="modal-body scrolled">
                   <form id='formulario'>
-                        <h5 class='resaltar'>Datos de Papeleta</h5>
+                    <h5 class='resaltar'>Datos de Papeleta</h5>
                     <br>
                     <div class="row">
                       <div class="col-md-3">
@@ -264,9 +277,9 @@ require '../class/config/session_val.php';
                               <label class="col-md-2 control-label">Entrega:</label>
                               <div class="col-md-10">
                                 <select name="" id="sl_entrega_o" class="form-control input-sm  m-b-5" disabled>
-                                  <option value="<?php echo $_SESSION['usr_idper'] ?>"><?php echo $_SESSION['usr_name'] ?></option>
+                                  <option value="<?php echo $_SESSION['usr_idper'] ?>"><?php echo $_SESSION['sicop_usr_name'] ?></option>
                                 </select>
-                                <!--   <input type="text" id="txt_entrega_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['usr_name'] ?>"> -->
+                                <!--   <input type="text" id="txt_entrega_o" class="form-control input-sm  m-b-5" disabled value="<?php echo $_SESSION['sicop_usr_name'] ?>"> -->
                               </div>
                             </div>
                             <div class="form-group">
@@ -358,9 +371,9 @@ require '../class/config/session_val.php';
                         <br>
                         <div class="row">
                           <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group p-t-20">
                               <label class="control-label">Tipo de Bien:</label>
-                              <select id="sl_tipobien" class='form-control input-sm m-r-10 m-b-5' onChange='setCodigo();'>
+                              <select id="sl_tipobien" class='default-select2   form-control input-sm m-r-10 m-b-5' style='width:233px;' onChange='setCodigo();'>
                                 <option value="*">--Seleccionar Tipo--</option>
                                 <?php for ($i = 0; $i < sizeof($rs_tipobien); $i++) { ?>
                                   <option value="<?php echo $rs_tipobien[$i]['prefijo'] . '@' . $rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
@@ -436,6 +449,9 @@ require '../class/config/session_val.php';
             <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
             <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
             <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+            <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+            <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+            <script src="../class/config/config.js"></script>
             <!-- ================== END BASE JS ================== -->
             <!-- ================== BEGIN PAGE LEVEL JS ================== -->
             <script src="../assets/js/apps.min.js"></script>
@@ -456,9 +472,9 @@ require '../class/config/session_val.php';
                 todayHighlight: !0,
                 format: 'dd/mm/yyyy'
               })
-
-
             });
+            iniciarSelect();
+
 
             </script>
           </body>

@@ -2,7 +2,6 @@
 $bien=new bien;
 $tam=$_REQUEST["limit"];
 $inicio=$_REQUEST["offset"];
-
 $tipo=$_REQUEST["tipo"];
 $prefix=$_REQUEST["prefix"];
 $patrimonial=$_REQUEST["patrimonial"];
@@ -43,7 +42,6 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
         <img title='Eliminar' src="../assets/img/cancel.png" alt="">
       </a></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["id_patrimonial"]); ?></td>
-
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["tipo_equipo"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["marca"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["fecha_adq"]); ?></td>

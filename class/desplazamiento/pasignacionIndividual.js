@@ -342,3 +342,25 @@ function limpiarFormulario(formulario){
     DeleteDetalle_all();
 
 }
+function iniciarSelect(){
+  $(".default-select2").select2({
+    placeholder: "Seleccionar Tipo de Bien"
+  })
+}
+function imprimir(objeto){
+  var fila=objeto.closest("tr");
+  var id_papeleta=fila.getElementsByTagName('td')[1].innerHTML;
+window.open("../print/print_asignacion.php?id_papeleta="+id_papeleta);
+}
+function ValidarInput(id,mensaje){
+  if (document.getElementById("'"+id+"'").value==''){
+    alert("'"+mensaje+"'");
+    var div=document.getElementById("'"+id+"'").closest('div');
+    $(div).toggleClass('has-error');
+    document.getElementById("'"+id+"'").focus();
+    return false;
+  }else{
+    var div=document.getElementById("'"+id+"'").closest('div');
+    $(div).removeClass('has-error');
+  }
+}

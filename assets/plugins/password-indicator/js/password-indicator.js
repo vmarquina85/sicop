@@ -2,10 +2,10 @@ $.fn.passwordStrength = function( options ){
 	return this.each(function(){
 		var that = this;that.opts = {};
 		that.opts = $.extend({}, $.fn.passwordStrength.defaults, options);
-		
+
 		that.div = $(that.opts.targetDiv);
 		that.defaultClass = that.div.attr('class');
-		
+
 		that.percents = (that.opts.classes.length) ? 100 / that.opts.classes.length : 100;
 
 		 v = $(this)
@@ -15,17 +15,17 @@ $.fn.passwordStrength = function( options ){
 			var s = getPasswordStrength (this.value);
 			var p = this.percents;
 			var t = Math.floor( s / p );
-			
+
 			if( 100 <= s )
 				t = this.opts.classes.length - 1;
-				
+
 			this.div
 				.removeAttr('class')
 				.addClass( this.defaultClass )
 				.addClass( this.opts.classes[ t ] );
-				
+
 		})
-		.after('<a href="#">Generate Password</a>')
+		.after('Nivel de Seguridad')
 		.next()
 		.click(function(){
 			$(this).prev().val( randomPassword() ).trigger('keyup');
@@ -69,7 +69,7 @@ $.fn.passwordStrength = function( options ){
 	}
 
 };
-	
+
 $.fn.passwordStrength.defaults = {
 	classes : Array('is10','is20','is30','is40','is50','is60','is70','is80','is90','is100'),
 	targetDiv : '#passwordStrengthDiv',

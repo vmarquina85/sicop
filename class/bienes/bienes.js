@@ -29,7 +29,17 @@ function get_bienes(limit,offset){
   // http.onreadystatechange = useHttpResponseDistritoPac;
   http.send(null);
 }
-
+function exportar_excel(){
+  var id_local=document.getElementById('sl_Operativo').value;
+  var id_marc=document.getElementById('sl_Marca').value;
+  var id_hard=document.getElementById('sl_tipobien').value;
+  var asignado=document.getElementById('sl_Asignacion').value;
+  var est_bien=document.getElementById('sl_estado').value;
+  var oc=document.getElementById('txt_docalta').value;
+  var serie=document.getElementById('txt_serie').value;
+    var id_interno=document.getElementById('txt_codinterno').value;
+window.open("../class/exportar/exportar_bienes.php?id_local="+id_local+"&id_marc="+id_marc+"&id_hard="+id_hard+"&asignado="+asignado+"&est_bien="+est_bien+"&oc="+oc+"&serie="+serie+"&id_interno="+id_interno+"");
+}
 function search(index){
   if (index<1) {
     index=1;
