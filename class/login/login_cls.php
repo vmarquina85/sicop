@@ -49,7 +49,7 @@ if (pg_num_rows($result) > 0) {
     session_name($ale);
     $_SESSION['sicop_usr_name'] = $usr_name;
     $_SESSION['usr_login'] = $usr_login;
-    $_SESSION['usr_id'] = $usr_id;
+    $_SESSION['sicop_usr_id'] = $usr_id;
     $_SESSION['usr_niv'] = $usr_niv;
     $_SESSION['s_entidad'] = pg_fetch_result($r, 0, 'entidad');
     $_SESSION['s_dependencia'] = pg_fetch_result($r, 0, 'dependencia');

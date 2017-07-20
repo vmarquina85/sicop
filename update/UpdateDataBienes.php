@@ -2,7 +2,7 @@
 session_start();
 $con = new conectar;
 $cn=$con->con_sinv();
-$usrreg = $_SESSION['usr_id'];
+$usrreg = $_SESSION['sicop_usr_id'];
 $fecha = $_REQUEST['fecha_adq'];
 $mesdesde = substr($fecha, 3, 2);
 $diadesde = substr($fecha, 0, 2);

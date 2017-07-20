@@ -29,7 +29,7 @@ $generado = 'M' . pg_fetch_result($rs, 0, 'maximo');
 $retu = pg_fetch_result($rs, 0, 'maximo');
 $cad1 = "Insert into cab_mov(mov_fecha,mov_tipo,mov_orden,mov_usring,mov_fecing,mov_motivo,mov_transpo,
 mov_personal,mov_areaper,mov_src,mov_areatra,mov_carper,mov_cartra,
-mov_tar,mov_ofitra,mov_ofiper,mov_status) values('" . $fecha . "','". $mov_tipo ."','" . $generado . "','" . rtrim($_SESSION['usr_id']) . "',now(),'".$motivo."','" . rtrim($_GET['recibe']) . "','" . rtrim($_SESSION['usr_idper']) . "','" . rtrim($_SESSION['id_area']) . "','" . rtrim($_SESSION['id_dep']) . "','" . rtrim($_GET['area_d']) . "','" . rtrim($_SESSION['id_cargo']) . "','" . rtrim($_GET['cargo']) . "','" . rtrim($_GET['destino']) . "','" . rtrim($_GET['oficina_d']) . "','" . rtrim( $_SESSION['id_oficina']) . "','I')";
+mov_tar,mov_ofitra,mov_ofiper,mov_status) values('" . $fecha . "','". $mov_tipo ."','" . $generado . "','" . rtrim($_SESSION['sicop_usr_id']) . "',now(),'".$motivo."','" . rtrim($_GET['recibe']) . "','" . rtrim($_SESSION['usr_idper']) . "','" . rtrim($_SESSION['id_area']) . "','" . rtrim($_SESSION['id_dep']) . "','" . rtrim($_GET['area_d']) . "','" . rtrim($_SESSION['id_cargo']) . "','" . rtrim($_GET['cargo']) . "','" . rtrim($_GET['destino']) . "','" . rtrim($_GET['oficina_d']) . "','" . rtrim( $_SESSION['id_oficina']) . "','I')";
 pg_query($cn, $cad1);
 //Graba detalle
 $ni = count($matriz);

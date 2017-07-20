@@ -78,7 +78,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a href="javascript:getPasswordModal(1);">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -246,6 +246,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.js"></script>
   <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
 <script src="../class/config/config.js"></script>
+<script src="../class/menu/menu.js"></script>
   <!-- ================== END BASE JS ================== -->
   <!-- ================== BEGIN PAGE LEVEL JS ================== -->
   <script src="../assets/js/apps.min.js"></script>
@@ -253,7 +254,9 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../class/bienes/bienesxusuario.js"></script>
   <script>
   $(document).ready(function () {
+    construirMenu();
     var fila;
+      var selectedIdUser;
     var array=[];
     App.init();
 

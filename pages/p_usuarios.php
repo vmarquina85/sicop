@@ -1,6 +1,6 @@
 <?php
 require '../class/parametricas/entidad_parametrica_cls.php';
-// require '../class/config/preconfig_cls.php';
+require '../class/config/preconfig_usuarios_cls.php';
 require '../class/config/session_val.php';
 ?>
 <!DOCTYPE html>
@@ -50,6 +50,14 @@ require '../class/config/session_val.php';
   .txt-red{
     color:red;
   }
+  .pointer{
+    cursor: pointer;
+  }
+  .table-responsive{
+    min-height: auto;
+    overflow-x: auto;
+  }
+
   </style>
 </head>
 <body>
@@ -98,7 +106,7 @@ require '../class/config/session_val.php';
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a href="javascript:getPasswordModal(1);">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -112,230 +120,158 @@ require '../class/config/session_val.php';
     <!-- begin #top-menu -->
     <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
-
-      <ul class="nav">
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/mixer-icon.png" alt="">
-            <span>Mantenimiento</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
-            <li><a href="../pages/p_usuarios.php">Usuarios</a></li>
-            <!-- <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/lightning-icon.png" alt="">
-            <span>Procesos</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-            <li><a href="../pages/p_traslados.php">Traslados</a></li>
-            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/sign-check-icon.png" alt="">
-            <span>Tareas</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/file-powerpoint-icon.png" alt="">
-            <span>Reportes</span>
-          </a>
-          <ul class="sub-menu">
-            <!-- <li><a href="email_inbox.html">Bienes Activos</a></li>
-            <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-            <li><a href="email_inbox.html">Areas por Local</a></li>
-            <li><a href="email_inbox.html">Estadistica General</a></li> -->
-            <li><a href="../pages/p_historial.php">Historial</a></li>
-          </ul>
-        </li>
-
-        <li class="menu-control menu-control-left">
-          <a href="#" data-click="prev-menu"><i class="material-icons">arrow_back</i></a>
-        </li>
-        <li class="menu-control menu-control-right">
-          <a href="#" data-click="next-menu"><i class="material-icons">arrow_forward</i></a>
-        </li>
+      <ul  id='nav_menu' class="nav">
       </ul>
     </div>
 
     <div id="content" class="content">
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <div class="panel panel-sm panel-success">
-      <div class="panel-heading">
-        <div class="panel-heading-btn">
-          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-        </div>
-        <h4 class="panel-title">Usuarios</h4>
-      </div>
-
-      <div class="panel-body">
-
-        <div class='bg-grey-200  m-b-10 '>
-          <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
-
-        </div>
-
-
-        <form class='form-inline' method='POST' id='panelForm'>
-          <div class="form-group  form-group-md  m-r-10">
-            <input type="text" class="form-control" id="inputParametro"  placeholder="Buscar Usuarios" />
+      <div class="panel panel-sm panel-success">
+        <div class="panel-heading">
+          <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
           </div>
-          <div onclick='search(1)' class="btn btn-info btn-sm m-b-10 m-t-10 submit"><i class="fa fa-search"></i> Buscar</div>
-          <div onclick='vertodos()' class="btn btn-default btn-sm m-b-10 m-t-10 "><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</div>
-        </form>
-        <ul id='paginator' class="pagination">
-        </ul>
-        <div class='table-responsive'>
-          <table id='data-table' class='table table-bordered table-hover f-s-11'>
-            <thead>
-              <tr>
-                <th class='p-0 text-center  bg-grey-200'></th>
-                <th class='p-0 text-center  bg-grey-200'>ID</th>
-                <th class='p-0 text-center  bg-grey-200'>LOGIN</th>
-                <th class='p-0 text-center  bg-grey-200'>NOMBRE</th>
-                <th class='p-0 text-center  bg-grey-200'>NIVEL</th>
-                <th class='p-0 text-center  bg-grey-200'>ID FUNCIONARIO</th>
-                <th class='p-0 text-center  bg-grey-200'>ESTADO</th>
-              </tr>
-            </thead>
-            <tbody id='tb_detalle_usuarios'>
-            </tbody>
-          </table>
+          <h4 class="panel-title">Usuarios</h4>
+        </div>
+        <div class="panel-body">
+          <div class='bg-grey-200  m-b-10 '>
+            <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
+          </div>
+          <form action"#"  id='panelForm'>
+            <div class="input-group m-b-5">
+              <input id="inputParametro" placeholder="Buscar" type="text" class="form-control">
+              <span  onclick='search(1)' class="input-group-addon pointer"><i class="fa fa-search"></i></span>
+            </div>
+          </form>
+          <div class='table-responsive'>
+            <table id='data-table' class='table table-bordered table-hover f-s-11'>
+              <thead>
+                <tr>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'></th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>ID-USUARIO</th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>LOGIN</th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>NOMBRE</th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>NIVEL</th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>ID-PERSONAL</th>
+                  <th class='p-5 f-s-12 text-center  bg-grey-200'>ESTADO</th>
+                </tr>
+              </thead>
+              <tbody id='tb_detalle_usuarios'>
+              </tbody>
+            </table>
+            <ul id='paginator' class="pagination">
+            </ul>
+            <br>
+            <br>
+            <br>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="col-md-2"></div>
-</div>
 
-      <div id='mymodal' class="modal fade"  aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+      <!-- ACT00 :nivel y permisos -->
+      <div id='modal_permisos' class="modal fade"  aria-hidden="true" style="display: none;">
+        <div class="dialog-normal modal-dialog">
           <div class="modal-content">
             <div class="modal-header header-success">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Nuevo Usuario</h4>
+              <h4 class="modal-title text-white">Nivel y Permisos</h4>
             </div>
             <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:crearUsuario();" class="btn btn-sm btn-success">Crear</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id='modal_editar' class="modal fade"  aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header header-warning">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Editar Usuario</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:UpdateUsuario();" class="btn btn-sm btn-warning" disabled>Actualizar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id='modal_eliminar' class="modal fade" aria-hidden="true" style="display: none;">
-        <div class="dialog-normal modal-dialog">
-          <div class="modal-content ">
-            <div class="modal-header header-danger">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Eliminar Usuario</h4>
-            </div>
-            <div class="modal-body">
-              <form id='alertform'>
-                <div class="alert alert-danger m-b-0">
-                  <p><i class="fa fa-info-circle"></i> Esta Seguro?.</p>
+              <div class="panel panel-sm panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><img src="../assets/img/perfil.png" alt="icon_perfil" class='pull-left'>&nbsp;&nbsp;Nivel de Usuario</h4>
                 </div>
-              </form>
+                <div class="panel-body">
+                  <form id='frm_editar_permisos'>
+                    <select id='edit_sl_perfil' class="form-control input-sm m-b-10" name="">
+                      <option value="">--SELECCIONAR NIVEL--</option>
+                      <?php
+                      for ($i=0; $i < sizeof($rs_perfil) ; $i++) {
+                        echo "<option value='".$rs_perfil[$i]['id_tipo']."'>".$rs_perfil[$i]['descripcion']."</option>";
+                      }
+                      ?>
+                    </select>
+                  </form>
+                </div>
+              </div>
+              <div class="panel panel-sm panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><img src="../assets/img/permisos.png" alt="icon_permiso" class='pull-left'>&nbsp;&nbsp;Permisos</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table  class='table table-bordered table-hover' id="tab_permisos">
+                      <thead>
+                        <tr>
+                          <th class='text-center bg-grey-200 hide' >Codigo Menú</th>
+                          <th class='text-center bg-grey-200'>Menu</th>
+                          <th class='text-center bg-grey-200 hide' >Codigo Submenu</th>
+                          <th class='text-center bg-grey-200'>Submenú</th>
+                          <th class='text-center bg-grey-200'>Activado <input type='checkbox' id='cb_selectTodoPermisos' class='pointer pull-right'></th>
+                        </tr>
+                      </thead>
+                      <tbody id='permisos_detalle'>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:eliminarBien(fila);" class="btn btn-sm btn-danger">Elminar</a>
+              <a href="javascript:actualizarUsuarioPermisos();" class="btn btn-sm btn-success">Guardar</a>
             </div>
           </div>
         </div>
       </div>
+      <!-- nivel y permisos fin -->
+
 
     </div>
-    <!-- end #content -->
-
-    <!-- begin theme-panel -->
-
-    <!-- end theme-panel -->
-
-    <!-- begin scroll to top btn -->
-    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-    <!-- end scroll to top btn -->
   </div>
-  <!-- end page container -->
 
-  <!-- ================== BEGIN BASE JS ================== -->
-  <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-  <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-  <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <!--[if lt IE 9]>
-  <script src="../assets/crossbrowserjs/html5shiv.js"></script>
-  <script src="../assets/crossbrowserjs/respond.min.js"></script>
-  <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-  <![endif]-->
-  <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-  <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-  <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
-  <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+  <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+  <!-- end scroll to top btn -->
+</div>
+<!-- end page container -->
 
-  <!-- ================== END BASE JS ================== -->
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+<script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+<script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+<script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+<script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
 
-  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-  <script src="../assets/js/apps.min.js"></script>
-  <script src="../class/ajax/ajax.js"></script>
-  <script src="../class/usuarios/usuarios.js"></script>
-  <script src="../class/config/config.js"></script>
-  <script src="../class/login/killerSession.js"></script>
-  <!-- ================== END PAGE LEVEL JS ================== -->
+<!-- ================== END BASE JS ================== -->
 
-  <script>
-  //globals-----------------------------------------------------
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="../assets/js/apps.min.js"></script>
+<script src="../class/ajax/ajax.js"></script>
+<script src="../class/usuarios/usuarios.js"></script>
+<script src="../class/config/config.js"></script>
+<script src="../class/menu/menu.js"></script>
+<script src="../class/login/killerSession.js"></script>
+<!-- ================== END PAGE LEVEL JS ================== -->
 
-  //------------------------------------------------------------
-  $(document).ready(function() {
-    var fila;
-    var datos;
-    var id_tip;
-    App.init();
-    search(1);
+<script>
+//globals-----------------------------------------------------
 
-  });
-  </script>
+//------------------------------------------------------------
+$(document).ready(function() {
+  var fila;
+  var datos;
+  var id_tip;
+  var selectedIdUser;
+  construirMenu();
+  App.init();
+  search(1);
+
+});
+</script>
 </body>
 </html>

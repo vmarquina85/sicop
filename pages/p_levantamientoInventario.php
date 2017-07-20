@@ -82,7 +82,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a href="javascript:getPasswordModal(1);">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -268,7 +268,9 @@ echo '<img src="../assets/img/girl.png" alt="">';
     //globals-----------------------------------------------------
     //------------------------------------------------------------
     $(document).ready(function () {
+  var selectedIdUser;
       App.init();
+
       startTimeAndDate();
       renderSwitcher();
       $(".datepicker-default").datepicker({

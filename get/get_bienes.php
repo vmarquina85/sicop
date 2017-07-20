@@ -16,7 +16,9 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
 ?>
 <tbody id='tb_detalle_bienes'>
   <?php for ($i=0; $i <sizeof($rs_bienes) ; $i++) {?>
-    <tr>
+    <tr <?php if ($rs_bienes[$i]["est_bien"]=='B') {
+       echo "class='danger'";
+    } ?>>
       <td  onclick='editarBien(this)' class='p-3 f-s-11 text-center m-r-10 m-l-10'>
         <a href="javascript:;">
         <img title='Editar' src="../assets/img/page_edit.png" alt="">
@@ -54,9 +56,9 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo $rs_bienes[$i]["personal"]; ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php
       if ($rs_bienes[$i]["est_bien"]=='A'){
-        echo  "<img src='../assets/img/checked.png' alt='Activo'>";
+        echo  "<span class='label label-success'>Activo</span>";
       }else{
-        echo "<img src='../assets/img/unchecked.png' alt='Baja'>";
+        echo "<span class='label label-danger'>Baja</span>";
       };?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["id_interno"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["usr_login"]); ?></td>

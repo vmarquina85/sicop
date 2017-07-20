@@ -87,7 +87,7 @@ require '../class/config/session_val.php';
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
-              <li><a href="javascript:getPasswordModal();">Cambiar Contraseña</a></li>
+              <li><a href="javascript:getPasswordModal(1);">Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="../class/login/logout_cls.php">Cerrar Sesión</a></li>
             </ul>
@@ -376,6 +376,7 @@ require '../class/config/session_val.php';
 
     //------------------------------------------------------------
     $(document).ready(function() {
+        var selectedIdUser;
       App.init();
       personalSelect();
       inicializarDatatables();
