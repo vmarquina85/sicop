@@ -432,9 +432,9 @@ require '../class/config/session_val.php';
             <!-- ================== END PAGE LEVEL JS ================== -->
             <script>
             //globals-----------------------------------------------------
+            var selectedIdUser;
             //------------------------------------------------------------
             $(document).ready(function () {
-                var selectedIdUser;
               construirMenu();
               App.init();
               search(1);

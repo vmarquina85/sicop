@@ -953,6 +953,7 @@ require '../class/config/session_val.php';
 
                             <script>
                             //globals-----------------------------------------------------
+                            var selectedIdUser;
 
                             //------------------------------------------------------------
                             $(document).ready(function() {
@@ -960,7 +961,6 @@ require '../class/config/session_val.php';
                               var fila;
                               var datos;
                               var id_tip;
-                                var selectedIdUser;
                               App.init();
                               search(1);
                               iniciarSelect();

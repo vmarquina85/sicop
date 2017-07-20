@@ -266,9 +266,9 @@ echo '<img src="../assets/img/girl.png" alt="">';
     <!-- ================== END PAGE LEVEL JS ================== -->
     <script>
     //globals-----------------------------------------------------
+    var selectedIdUser;
     //------------------------------------------------------------
     $(document).ready(function () {
-  var selectedIdUser;
       App.init();
 
       startTimeAndDate();

@@ -250,10 +250,10 @@ echo '<img src="../assets/img/girl.png" alt="">';
 
           <script>
          //globals-----------------------------------------------------
-
+  var selectedIdUser='';
           //------------------------------------------------------------
           $(document).ready(function() {
-              var selectedIdUser;
+
             construirMenu();
            App.init();
 

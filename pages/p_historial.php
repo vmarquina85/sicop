@@ -197,8 +197,8 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../class/historial/p_historial.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
   <script>
-  $(document).ready(function() {
   var selectedIdUser;
+  $(document).ready(function() {
     construirMenu();
     App.init();
     iniciarSelect();

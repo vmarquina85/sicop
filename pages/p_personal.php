@@ -373,10 +373,10 @@ require '../class/config/session_val.php';
 
     <script>
     //globals-----------------------------------------------------
+    var selectedIdUser;
 
     //------------------------------------------------------------
     $(document).ready(function() {
-        var selectedIdUser;
       App.init();
       personalSelect();
       inicializarDatatables();

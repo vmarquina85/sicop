@@ -260,13 +260,13 @@ require '../class/config/session_val.php';
 
 <script>
 //globals-----------------------------------------------------
+var selectedIdUser;
 
 //------------------------------------------------------------
 $(document).ready(function() {
   var fila;
   var datos;
   var id_tip;
-  var selectedIdUser;
   construirMenu();
   App.init();
   search(1);
