@@ -18,8 +18,6 @@ if ($rs_usuarios[$i]["usr_est"]==1) {
 }else{
     echo  "<li><a href='javascript:activarUsuario(fila);'><img src='../assets/img/sign-check-icon.png' /> Activar</a></li>";
 }
-
-
     echo "<li><a href='javascript:getPasswordModal(2,fila);'><img  src='../assets/img/keyring-icon.png'/> Cambiar Contraseña</a></li></ul></div></td>
 <td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["usr_id"])."</td>
 <td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["usr_login"])."</td>

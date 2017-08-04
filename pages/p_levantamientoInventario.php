@@ -96,59 +96,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
     <!-- begin #top-menu -->
     <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
-      <ul class="nav">
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/mixer-icon.png" alt="">
-            <span>Mantenimiento</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
-            <li><a href="../pages/p_usuarios.php">Usuarios</a></li>
-            <!-- <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/lightning-icon.png" alt="Procesos">
-            <span>Procesos</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-            <li><a href="../pages/p_traslados.php">Traslados</a></li>
-            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/sign-check-icon.png" alt="">
-            <span>Tareas</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/file-powerpoint-icon.png" alt="">
-            <span>Reportes</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_historial.php">Historial</a></li>
-          </ul>
-        </li>
-        <li class="menu-control menu-control-left">
-          <a href="#" data-click="prev-menu"><i class="material-icons">arrow_back</i></a>
-        </li>
-        <li class="menu-control menu-control-right">
-          <a href="#" data-click="next-menu"><i class="material-icons">arrow_forward</i></a>
-        </li>
+      <ul  id='nav_menu' class="nav">
       </ul>
     </div>
 
@@ -255,6 +203,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
     <script src="../assets/plugins/Highcharts/js/exporting.js"></script>
     <script src="../assets/plugins/Highcharts/js/dark-unica.js"></script>
     <script src="../class/config/config.js"></script>
+    <script src="../class/menu/menu.js"></script>
     <!-- ================== END BASE JS ================== -->
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="../assets/js/apps.min.js"></script>
@@ -267,6 +216,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
     <script>
     //globals-----------------------------------------------------
     var selectedIdUser;
+    construirMenu();
     //------------------------------------------------------------
     $(document).ready(function () {
       App.init();

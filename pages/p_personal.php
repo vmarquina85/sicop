@@ -101,64 +101,7 @@ require '../class/config/session_val.php';
     <!-- begin #top-menu -->
     <div id="top-menu" class="top-menu">
       <!-- begin top-menu nav -->
-      <ul class="nav">
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/mixer-icon.png" alt="">
-            <span>Mantenimiento</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienes.php">Bienes</a></li>
-            <!-- <li><a href="../pages/p_personal.php">Personal</a></li> -->
-            <li><a href="../pages/p_usuarios.php">Usuarios</a></li>
-            <!-- <li><a href="../pages/p_levantamientoInventario.php">Empresas</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/lightning-icon.png" alt="">
-            <span>Procesos</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_asignacion.php">Asignación</a></li>
-            <li><a href="../pages/p_traslados.php">Traslados</a></li>
-            <!-- <li><a href="../pages/p_generarActa.php">Acta de Devolución</a></li>
-            <li><a href="../pages/p_levantamientoInventario.php">Levantamiento de Inventario</a></li> -->
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/sign-check-icon.png" alt="">
-            <span>Tareas</span>
-          </a>
-          <ul class="sub-menu">
-            <li><a href="../pages/p_bienesxusuario.php">Recepción de Bienes</a></li>
-          </ul>
-        </li>
-        <li class="has-sub">
-          <a href="javascript:;">
-            <b class="caret pull-right"></b>
-            <img src="../assets/img/file-powerpoint-icon.png" alt="">
-            <span>Reportes</span>
-          </a>
-          <ul class="sub-menu">
-            <!-- <li><a href="email_inbox.html">Bienes Activos</a></li>
-            <li><a href="email_inbox.html">Bienes Dados de Baja</a></li>
-            <li><a href="email_inbox.html">Areas por Local</a></li>
-            <li><a href="email_inbox.html">Estadistica General</a></li> -->
-            <li><a href="../pages/p_historial.php">Historial</a></li>
-          </ul>
-        </li>
-
-        <li class="menu-control menu-control-left">
-          <a href="#" data-click="prev-menu"><i class="material-icons">arrow_back</i></a>
-        </li>
-        <li class="menu-control menu-control-right">
-          <a href="#" data-click="next-menu"><i class="material-icons">arrow_forward</i></a>
-        </li>
+      <ul  id='nav_menu' class="nav">
       </ul>
     </div>
 
@@ -211,177 +154,178 @@ require '../class/config/session_val.php';
             </div>
 
             <div class="modal-body">
-                      <ul class="nav nav-tabs">
-                      <li class='active'><a href="#tabPersona" data-toggle="tab">Datos de Personal</a></li>
-                      <li><a href="#tabCentro" data-toggle="tab">Centro de Labores</a></li>
-                    </ul>
-                <div class="tab-content">
-                  <div class="tab-pane fade active in" id='tabPersona' >
-                    <form id='formulario'>
-                      <!-- fila 1 -->
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Nombre</span>
-                        <input id='inputNombre' type="text" class="form-control input-sm" >
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Apellido Paterno</span>
-                        <input id='inputApePat' type="text" class="form-control input-sm" >
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Apellido Materno</span>
-                        <input id='inputApeMat' type="text" class="form-control input-sm" >
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="input-group m-b-5 ">
-                            <span class="input-group-addon input-sm">DNI</span>
-                            <input id='inputDni' type="text" class="form-control input-sm" >
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="input-group m-b-5 ">
-                            <span class="input-group-addon input-sm">RUC</span>
-                            <input id='inputRuc' type="text" class="form-control input-sm" >
-                          </div>
+              <ul class="nav nav-tabs">
+                <li class='active'><a href="#tabPersona" data-toggle="tab">Datos de Personal</a></li>
+                <li><a href="#tabCentro" data-toggle="tab">Centro de Labores</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade active in" id='tabPersona' >
+                  <form id='formulario'>
+                    <!-- fila 1 -->
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Nombre</span>
+                      <input id='inputNombre' type="text" class="form-control input-sm" >
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Apellido Paterno</span>
+                      <input id='inputApePat' type="text" class="form-control input-sm" >
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Apellido Materno</span>
+                      <input id='inputApeMat' type="text" class="form-control input-sm" >
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">DNI</span>
+                          <input id='inputDni' type="text" class="form-control input-sm" >
                         </div>
                       </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Fecha Nac</span>
-                        <input id='inputFecNac' type="text" class="form-control input-sm" >
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">RUC</span>
+                          <input id='inputRuc' type="text" class="form-control input-sm" >
+                        </div>
                       </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm ">Sexo</span>
-                        <div class="radio">
-                          <label>
-                            <input name="radioSexo" type="radio" value="M"/>
-                            Masculino
-                          </label>
-                          <label>
-                            <input name="radioSexo" type="radio" value="F"/>
-                            Femenino
-                          </label>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Fecha Nac</span>
+                      <input id='inputFecNac' type="text" class="form-control input-sm" >
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm ">Sexo</span>
+                      <div class="radio">
+                        <label>
+                          <input name="radioSexo" type="radio" value="M"/>
+                          Masculino
+                        </label>
+                        <label>
+                          <input name="radioSexo" type="radio" value="F"/>
+                          Femenino
+                        </label>
 
+                      </div>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Dirección</span>
+                      <input id='inputDireccion' type="text" class="form-control input-sm" >
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Departamento</span>
+                      <select id="selectDepartamento"  class='form-control input-sm'></select>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Provincia</span>
+                      <select id="selectProvincia"  class='form-control input-sm'></select>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Distrito</span>
+                      <select id="selectDistrito"  class='form-control input-sm'></select>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Telefono</span>
+                          <input id='selectTelefono' type="text" class="form-control input-sm" >
                         </div>
                       </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Dirección</span>
-                        <input id='inputDireccion' type="text" class="form-control input-sm" >
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Departamento</span>
-                        <select id="selectDepartamento"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Provincia</span>
-                        <select id="selectProvincia"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Distrito</span>
-                        <select id="selectDistrito"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="input-group m-b-5 ">
-                            <span class="input-group-addon input-sm">Telefono</span>
-                            <input id='selectTelefono' type="text" class="form-control input-sm" >
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="input-group m-b-5 ">
-                            <span class="input-group-addon input-sm">Celular</span>
-                            <input id='selectCelular' type="text" class="form-control input-sm" >
-                          </div>
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Celular</span>
+                          <input id='selectCelular' type="text" class="form-control input-sm" >
                         </div>
                       </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Estado Civil</span>
-                        <select id="selectEstadoCivil"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Grado Inst</span>
-                        <select id="selectGrado"  class='form-control input-sm'></select>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Estado Civil</span>
+                      <select id="selectEstadoCivil"  class='form-control input-sm'></select>
+                    </div>
+                    <div class="input-group m-b-5 ">
+                      <span class="input-group-addon input-sm">Grado Inst</span>
+                      <select id="selectGrado"  class='form-control input-sm'></select>
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Profesion</span>
                       <select id="selectProfesion"  class='form-control input-sm'></select>
                     </div>
                   </form>
+                </div>
+                <div class="tab-pane fade" id='tabCentro' >
+                  <div class="input-group m-b-5 ">
+                    <span class="input-group-addon input-sm">Lugar Actual</span>
+                    <select id="selectLugarActual"  class='form-control input-sm'></select>
                   </div>
-                    <div class="tab-pane fade" id='tabCentro' >
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Lugar Actual</span>
-                        <select id="selectLugarActual"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Area</span>
-                        <select id="selectArea"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Oficina</span>
-                        <select id="selectOficina"  class='form-control input-sm'></select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Cargo</span>
-                        <select id="selectCargo"  class='form-control input-sm'></select>
-                      </div>
-                    </div>
+                  <div class="input-group m-b-5 ">
+                    <span class="input-group-addon input-sm">Area</span>
+                    <select id="selectArea"  class='form-control input-sm'></select>
+                  </div>
+                  <div class="input-group m-b-5 ">
+                    <span class="input-group-addon input-sm">Oficina</span>
+                    <select id="selectOficina"  class='form-control input-sm'></select>
+                  </div>
+                  <div class="input-group m-b-5 ">
+                    <span class="input-group-addon input-sm">Cargo</span>
+                    <select id="selectCargo"  class='form-control input-sm'></select>
+                  </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                <a href="javascript:;" class="btn btn-sm btn-success">Crear</a>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+              <a href="javascript:;" class="btn btn-sm btn-success">Crear</a>
             </div>
           </div>
         </div>
-
       </div>
-      <!-- end #content -->
 
-      <!-- begin theme-panel -->
-
-      <!-- end theme-panel -->
-
-      <!-- begin scroll to top btn -->
-      <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-      <!-- end scroll to top btn -->
     </div>
-    <!-- end page container -->
+    <!-- end #content -->
 
-    <!-- ================== BEGIN BASE JS ================== -->
-    <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-    <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-    <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- begin theme-panel -->
 
-    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-    <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
-    <script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.js"></script>
-    <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
-    <script src="../class/config/config.js"></script>
+    <!-- end theme-panel -->
 
-    <!-- ================== END BASE JS ================== -->
+    <!-- begin scroll to top btn -->
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+    <!-- end scroll to top btn -->
+  </div>
+  <!-- end page container -->
 
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="../assets/js/apps.min.js"></script>
-    <script src="../class/ajax/ajax.js"></script>
-    <script src="../class/personal/p_personal.js"></script>
-    <script src="../class/login/killerSession.js"></script>
-    <!-- ================== END PAGE LEVEL JS ================== -->
+  <!-- ================== BEGIN BASE JS ================== -->
+  <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+  <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-    <script>
-    //globals-----------------------------------------------------
-    var selectedIdUser;
+  <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+  <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+  <script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.js"></script>
+  <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+  <script src="../class/config/config.js"></script>
+  <script src="../class/menu/menu.js"></script>
 
-    //------------------------------------------------------------
-    $(document).ready(function() {
-      App.init();
-      personalSelect();
-      inicializarDatatables();
-    });
-    </script>
+  <!-- ================== END BASE JS ================== -->
 
-  </body>
-  </html>
+  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+  <script src="../assets/js/apps.min.js"></script>
+  <script src="../class/ajax/ajax.js"></script>
+  <script src="../class/personal/p_personal.js"></script>
+  <script src="../class/login/killerSession.js"></script>
+  <!-- ================== END PAGE LEVEL JS ================== -->
+
+  <script>
+  //globals-----------------------------------------------------
+  var selectedIdUser;
+construirMenu();
+  //------------------------------------------------------------
+  $(document).ready(function() {
+    App.init();
+    personalSelect();
+    inicializarDatatables();
+  });
+  </script>
+
+</body>
+</html>

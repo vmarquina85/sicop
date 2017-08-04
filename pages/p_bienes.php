@@ -954,10 +954,10 @@ require '../class/config/session_val.php';
                             <script>
                             //globals-----------------------------------------------------
                             var selectedIdUser;
+                            construirMenu();
 
                             //------------------------------------------------------------
                             $(document).ready(function() {
-                              construirMenu();
                               var fila;
                               var datos;
                               var id_tip;

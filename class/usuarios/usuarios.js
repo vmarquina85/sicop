@@ -17,7 +17,35 @@ $('#cb_selectTodoPermisos').click(function(){
   }
 })
 
-
+function NuevoUsuario(){
+  var elemento=document.getElementById('mb_nu_usuario');
+  if (validarVaciosIN(elemento) && validarPasw(elemento)) {
+    // obtener datos
+    var parametros = {
+      "funcionario" : document.getElementById("inpt_nu_func").value,
+      "login" : document.getElementById("inpt_nu_usr_login").value,
+      "nivel":document.getElementById('inpt_nu_nivel').value,
+      "passwrd":document.getElementById('inpt_nu_psw').value
+    };
+    $.ajax({
+      data:  parametros,
+      url:   '../insert/insertUsuario.php',
+      type:  'post',
+      async: true, //tomar en cuenta xD
+      success:  function (response) {
+        if (response=='0') {
+          alert("El Login ingresado ya existe!. Registre uno distinto");
+        }else{
+          alert("Usuario Registrado con Exito");
+          search(1);
+        }
+      }
+    })
+  }
+}
+// function autocompletarLogin(){
+//   document.
+// }
 function actualizarUsuarioPermisos(){
   //1.- borara los permisos actuales del usuario
   BorrarPermisosActuales(selectedIdUser.trim());
@@ -38,7 +66,7 @@ function actualizarUsuarioPermisos(){
     }
   }
   alert("Permisos y Nivel Modificados con Exito");
-    construirMenu();
+  construirMenu();
 }
 function obtenerPermiso(id_usr){
   if (window.XMLHttpRequest) {
@@ -75,6 +103,12 @@ function obtenerPerfil(id_usr){
   });
   // http.onreadystatechange = useHttpResponseDistritoPac;
   http.send(null);
+}
+function nuevoRegistro(){
+  var elemento=document.getElementById('mb_nu_usuario');
+  LimpiarbyDIV(elemento);
+  showModal('modal_nuevo_usuario');
+
 }
 function showModal(id_modal){
   $("#"+id_modal+"").modal();

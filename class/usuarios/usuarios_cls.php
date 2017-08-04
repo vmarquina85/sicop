@@ -77,7 +77,29 @@ class usuarios extends conectar
 		$_SESSION["usr_niv"]=$nivel;
 	}
 
+	function insertarUsuarioNuevo($funcionario,$login,$nivel,$passwrd){
+		$sqllogin="select usr_login from usuarios where usr_login='".strtoupper($login)."'";
+		$rs1=pg_query(parent::con_sinv(),$sqllogin);
+		$numbers=pg_num_rows($rs1);
+		if ($numbers!=0) {
+			return "0";
+		}else{
+			session_start();
+			$sqlCode="select max(cast(usr_id as integer))+1 as maximo from usuarios";
+			$rs=pg_query(parent::con_sinv(),$sqlCode);
+			$codigo=pg_fetch_result($rs, 0, 'maximo');
+			$sql="insert into usuarios(
+				usr_login, usr_name, usr_id, usr_pwd, usr_dep, usr_est, usr_niv,
+				usr_idper, usr_flag, mod_id_usr, fecha_mod)
+				values('".strtoupper($login)."', null, '".trim($codigo)."', '".$passwrd."', null, '1', '".$nivel."',
+				'".$funcionario."', null, '".$_SESSION["sicop_usr_id"]."', current_date)";
+				pg_query(parent::con_sinv(),$sql);
+				return "1";
+			}
+		}
 
 
-}
-?>
+
+
+	}
+	?>

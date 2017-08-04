@@ -198,8 +198,8 @@ echo '<img src="../assets/img/girl.png" alt="">';
     <!-- ================== END PAGE LEVEL JS ================== -->
   <script>
   var selectedIdUser;
+  construirMenu();
   $(document).ready(function() {
-    construirMenu();
     App.init();
     iniciarSelect();
   });

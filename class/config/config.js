@@ -11,7 +11,7 @@ function getPasswordModal(type,tr){
     }
 
   }else if(type=='2'){
-       selectedIdUser=tr.getElementsByTagName('td')[1].innerHTML;
+    selectedIdUser=tr.getElementsByTagName('td')[1].innerHTML;
     var control=document.getElementById('UserPass');
     if (control==undefined) {
       $("body").append("<div id='UserPass' class='modal fade' aria-hidden='true' style='display: none;'><div class='dialog-normal modal-dialog'><div class='modal-content '><div class='modal-header header-success'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button><h4 class='modal-title text-white'>Cambio de Contraseña</h4></div><div class='modal-body'><form id='formPassU' class='form-horizontal'><div class='form-group'><label class='control-label col-md-4'>Nueva Contraseña</label><div class='col-md-8'><input type='password' name='password' id='new_contrasenaU' class='form-control m-b-5'><div id='passwordStrengthDiv' class='is0 m-t-5 is10'></div></div></div><div class='form-group'><label class='control-label col-md-4'>Repetir Contraseña</label><div class='col-md-8'><input type='password' name='password' id='repetir_contrasenaU' class='form-control m-b-5'><div id='passwordStrengthDiv2' class='is0 m-t-5 is10'></div></div></div></form></div><div class='modal-footer'><a href='javascript:;' class='btn btn-sm btn-white' data-dismiss='modal'>Cancelar</a><a href='javascript:cambiarPass(selectedIdUser,2);' class='btn btn-sm btn-success'>Aceptar</a></div></div></div></div>");
@@ -25,6 +25,57 @@ function getPasswordModal(type,tr){
   }
 
 }
+function validarVaciosIN(elemento){
+  //elemento -> este es el div del cual se quiere recorrer
+  // EI.- VERIFICAR VACIOS-----------------------
+  var Children=elemento.children;
+  for (var i=0; i<Children.length; i++) {
+    if (Children[i].classList.contains('has-error')) {
+      Children[i].classList.remove('has-error');
+    }
+    if (Children[i].children[1].value=="") {
+      alert("Llene el Campo - "+ Children[i].children[0].innerHTML);
+      Children[i].className += " has-error";
+      Children[i].children[1].focus();
+      return false;
+    }
+  }
+  return true;
+}
+function LimpiarbyDIV(elemento){
+  var Children=elemento.children;
+  for (var i = 0; i < Children.length; i++) {
+    if (Children[i].classList.contains('has-error')) {
+      Children[i].classList.remove('has-error');
+    }
+Children[i].children[1].value="";
+  }
+}
+function validarPasw(elemento){
+  //elemento -> este es el div del cual se quiere recorrer
+  // EI.- VERIFICAR passwords-----------------------
+  var Children=elemento.children;
+  var contieneClass=false;
+  for (var i=0; i<Children.length; i++) {
+    if (Children[i].children[1].classList.contains('password')) {
+      contieneClass=true;
+      var psw1 =Children[i].children[1].value;
+      var psw2 =Children[i+1].children[1].value;
+      if (psw1!=psw2) {
+        alert("Las contraseñas no coinciden Revisar.")
+        Children[i].children[1].focus();
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
+  if (contieneClass==false) {
+    alert("no se han encontrado campos contraseña (class='password')");
+    return false;
+  }
+}
+
 function iniciarPasswordMeter(){
   $("#new_contrasena").passwordStrength(), $("#repetir_contrasena").passwordStrength({
     targetDiv: "#passwordStrengthDiv2"

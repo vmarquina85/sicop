@@ -254,8 +254,8 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../class/bienes/bienesxusuario.js"></script>
   <script>
   var selectedIdUser;
+  construirMenu();
   $(document).ready(function () {
-    construirMenu();
     var fila;
     var array=[];
     App.init();

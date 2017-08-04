@@ -39,24 +39,24 @@ require '../class/config/session_val.php';
   <script src="../assets/plugins/pace/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
   <style>
-  .ui-front {
-    z-index: 1150;
-  }
-  .bordered{
-    border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-    border-left: solid 1px rgba(0, 0, 0, 0.2);
-    border-right: solid 1px rgba(0, 0, 0, 0.2);
-  }
-  .txt-red{
-    color:red;
-  }
-  .pointer{
-    cursor: pointer;
-  }
-  .table-responsive{
-    min-height: auto;
-    overflow-x: auto;
-  }
+    .ui-front {
+      z-index: 1150;
+    }
+    .bordered{
+      border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+      border-left: solid 1px rgba(0, 0, 0, 0.2);
+      border-right: solid 1px rgba(0, 0, 0, 0.2);
+    }
+    .txt-red{
+      color:red;
+    }
+    .pointer{
+      cursor: pointer;
+    }
+    .table-responsive{
+      min-height: auto;
+      overflow-x: auto;
+    }
 
   </style>
 </head>
@@ -71,7 +71,6 @@ require '../class/config/session_val.php';
     </div>
   </div>
   <!-- end #page-loader -->
-
   <!-- begin #page-container -->
   <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
     <!-- begin #header -->
@@ -87,7 +86,6 @@ require '../class/config/session_val.php';
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-
             <strong class='text-white sombrear'>Mantenimiento Usuarios</strong>
           </a>
         </div>
@@ -123,7 +121,6 @@ require '../class/config/session_val.php';
       <ul  id='nav_menu' class="nav">
       </ul>
     </div>
-
     <div id="content" class="content">
       <div class="panel panel-sm panel-success">
         <div class="panel-heading">
@@ -167,71 +164,120 @@ require '../class/config/session_val.php';
           </div>
         </div>
       </div>
-
-      <!-- ACT00 :nivel y permisos -->
-      <div id='modal_permisos' class="modal fade"  aria-hidden="true" style="display: none;">
+      <!-- ACT01 : NUEVO REGISTRO -->
+      <div id="modal_nuevo_usuario" class="modal fade">
         <div class="dialog-normal modal-dialog">
           <div class="modal-content">
             <div class="modal-header header-success">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Nivel y Permisos</h4>
+              <h4 class="modal-title text-white">Nuevo Usuario</h4>
             </div>
-            <div class="modal-body">
-              <div class="panel panel-sm panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><img src="../assets/img/perfil.png" alt="icon_perfil" class='pull-left'>&nbsp;&nbsp;Nivel de Usuario</h4>
-                </div>
-                <div class="panel-body">
-                  <form id='frm_editar_permisos'>
-                    <select id='edit_sl_perfil' class="form-control input-sm m-b-10" name="">
-                      <option value="">--SELECCIONAR NIVEL--</option>
-                      <?php
-                      for ($i=0; $i < sizeof($rs_perfil) ; $i++) {
-                        echo "<option value='".$rs_perfil[$i]['id_tipo']."'>".$rs_perfil[$i]['descripcion']."</option>";
-                      }
-                      ?>
-                    </select>
-                  </form>
-                </div>
-              </div>
-              <div class="panel panel-sm panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><img src="../assets/img/permisos.png" alt="icon_permiso" class='pull-left'>&nbsp;&nbsp;Permisos</h4>
-                </div>
-                <div class="panel-body">
-                  <div class="table-responsive">
-                    <table  class='table table-bordered table-hover' id="tab_permisos">
-                      <thead>
-                        <tr>
-                          <th class='text-center bg-grey-200 hide' >Codigo Menú</th>
-                          <th class='text-center bg-grey-200'>Menu</th>
-                          <th class='text-center bg-grey-200 hide' >Codigo Submenu</th>
-                          <th class='text-center bg-grey-200'>Submenú</th>
-                          <th class='text-center bg-grey-200'>Activado <input type='checkbox' id='cb_selectTodoPermisos' class='pointer pull-right'></th>
-                        </tr>
-                      </thead>
-                      <tbody id='permisos_detalle'>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+            <div  name='elemento' id='mb_nu_usuario' class="modal-body">
+              <div class="input-group m-b-5">
+                <span class="input-group-addon input-sm">Funcionario</span>
+                <select class='default-select2 select form-control input-sm' id="inpt_nu_func">
+                 <option value="">--Seleccionar--</option>
+                 <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
+                 <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
+                 <?php  }?>
+               </select>
+             </div>
+             <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Login</span>
+              <input class='form-control input-sm'  id='inpt_nu_usr_login' type="text">
             </div>
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:actualizarUsuarioPermisos();" class="btn btn-sm btn-success">Guardar</a>
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Nivel</span>
+              <select name="" class="form-control input-sm" id='inpt_nu_nivel' >
+                       <option value="">--Seleccionar--</option>
+                    <?php
+                    for ($i=0; $i < sizeof($rs_perfil) ; $i++) {
+                      echo "<option value='".$rs_perfil[$i]['id_tipo']."'>".$rs_perfil[$i]['descripcion']."</option>";
+                    }
+                    ?>
+              </select>
             </div>
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Contraseña</span>
+              <input class='form-control password input-sm' id='inpt_nu_psw' type="password">
+            </div>
+            <div class="input-group m-b-5">
+              <span class="input-group-addon input-sm">Repetir Contraseña</span>
+              <input class='form-control password input-sm' id='inpt_nu_psw2' type="password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+            <a href="javascript:NuevoUsuario();" class="btn btn-sm btn-success">Guardar</a>
           </div>
         </div>
       </div>
-      <!-- nivel y permisos fin -->
-
-
     </div>
-  </div>
+    <!-- ACT01: NUEVO REGISTRO FIN  -->
+    <!-- ACT00 :nivel y permisos -->
+    <div id='modal_permisos' class="modal fade"  aria-hidden="true" style="display: none;">
+      <div class="dialog-normal modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header header-success">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title text-white">Nivel y Permisos</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-sm panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title"><img src="../assets/img/perfil.png" alt="icon_perfil" class='pull-left'>&nbsp;&nbsp;Nivel de Usuario</h4>
+              </div>
+              <div class="panel-body">
+                <form id='frm_editar_permisos'>
+                  <select id='edit_sl_perfil' class="form-control input-sm m-b-10" name="">
+                    <option value="">--SELECCIONAR NIVEL--</option>
+                    <?php
+                    for ($i=0; $i < sizeof($rs_perfil) ; $i++) {
+                      echo "<option value='".$rs_perfil[$i]['id_tipo']."'>".$rs_perfil[$i]['descripcion']."</option>";
+                    }
+                    ?>
+                  </select>
+                </form>
+              </div>
+            </div>
+            <div class="panel panel-sm panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title"><img src="../assets/img/permisos.png" alt="icon_permiso" class='pull-left'>&nbsp;&nbsp;Permisos</h4>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table  class='table table-bordered table-hover' id="tab_permisos">
+                    <thead>
+                      <tr>
+                        <th class='text-center bg-grey-200 hide' >Codigo Menú</th>
+                        <th class='text-center bg-grey-200'>Menu</th>
+                        <th class='text-center bg-grey-200 hide' >Codigo Submenu</th>
+                        <th class='text-center bg-grey-200'>Submenú</th>
+                        <th class='text-center bg-grey-200'>Activado <input type='checkbox' id='cb_selectTodoPermisos' class='pointer pull-right'></th>
+                      </tr>
+                    </thead>
+                    <tbody id='permisos_detalle'>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+            <a href="javascript:actualizarUsuarioPermisos();" class="btn btn-sm btn-success">Guardar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- nivel y permisos fin -->
 
-  <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-  <!-- end scroll to top btn -->
+
+  </div>
+</div>
+
+<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+<!-- end scroll to top btn -->
 </div>
 <!-- end page container -->
 
@@ -261,13 +307,13 @@ require '../class/config/session_val.php';
 <script>
 //globals-----------------------------------------------------
 var selectedIdUser;
+construirMenu();
 
 //------------------------------------------------------------
 $(document).ready(function() {
   var fila;
   var datos;
   var id_tip;
-  construirMenu();
   App.init();
   search(1);
 

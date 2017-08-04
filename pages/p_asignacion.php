@@ -406,10 +406,9 @@ echo '<img src="../assets/img/girl.png" alt="">';
             <script>
             //globals-----------------------------------------------------
             var selectedIdUser;
+            construirMenu();
             //------------------------------------------------------------
             $(document).ready(function () {
-              construirMenu();
-
               App.init();
               $('#btnAgregar').tooltip();
               search(1);

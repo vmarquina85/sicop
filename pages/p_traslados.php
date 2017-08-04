@@ -433,9 +433,9 @@ require '../class/config/session_val.php';
             <script>
             //globals-----------------------------------------------------
             var selectedIdUser;
+            construirMenu();
             //------------------------------------------------------------
             $(document).ready(function () {
-              construirMenu();
               App.init();
               search(1);
               $(".datepicker-default").datepicker({

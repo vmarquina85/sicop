@@ -1,10 +1,10 @@
 <?php
 include ('../class/menu/menu_cls.php');
 $menu= new menu();
-
 session_start();
 $usrreg=$_SESSION['sicop_usr_id'];
 $rs_menu=$menu->get_menu($usrreg);
+echo "<ul class='nav'>";
 for ($m=0; $m <  sizeof($rs_menu); $m++) {
   echo"<li class='has-sub'>
       <a href='javascript:;'>
@@ -18,7 +18,8 @@ for ($m=0; $m <  sizeof($rs_menu); $m++) {
           for ($s=0; $s < sizeof($rs_submenu) ; $s++) {
   echo "<li><a href='".$rs_submenu[$s]['submenu_link']."'>".$rs_submenu[$s]['submenu_name']."</a></li>";
       }
-  echo "</ul></li>";
+  echo "</ul>
+  </li>";
 }
 echo "<li class='menu-control menu-control-left'>
     <a href='#' data-click='prev-menu'><i class='material-icons'>arrow_back</i></a>

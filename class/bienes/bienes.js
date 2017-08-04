@@ -239,18 +239,7 @@ function LlenarDatosBien(id_descripcion,id_prefix,id_grupo,id_clase){
   document.getElementById(id_clase).value=datos[0].clase;
   id_tip=datos[0].id_tipo;
 }
-// function ObtenerCuentas(idtipo_cuenta,idradio){
-//   if (window.XMLHttpRequest) {
-//     var http=getXMLHTTPRequest();
-//   }
-//   var tipo_cta=document.getElementById('sl_tipoCuenta').value;
-//   var rtipocta;
-//   var radiobutton=document.getElementsByName('rtipocta');
-//   for(var i=0;i<radiobutton.length;i++)
-//   {
-//     if(radiobutton[i].checked)
-//     rtipocta=radiobutton[i].value;
-//   }
+
 function ObtenerCuentas(idtipo_cuenta,idradio,idcuentaCont){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
