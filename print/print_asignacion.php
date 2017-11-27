@@ -177,7 +177,7 @@ $rs_detalles=$class2->obtenerDet('A'.$idpapeleta);
               <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_detalles[$i]['color'])."</td>
               <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_detalles[$i]['serie'])."</td>
               <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_detalles[$i]['det_est'])."</td>
-              <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".utf8_encode($rs_detalles[$i]['observacion'])."</td>
+              <td class='p-3 f-s-11 text-center m-r-10 m-l-10'> ".$rs_detalles[$i]['observacion']."</td>
             </td></tr>";
           } ?>
 

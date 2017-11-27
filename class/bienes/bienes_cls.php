@@ -69,7 +69,7 @@ class bien extends conectar
 		if ($Estado!='*') {
 			$sql=$sql." and a.est_bien='".$Estado."'";
 		}
-		$sql=$sql." order by b.descripcion,a.id_patrimonial limit ".$limit. " offset ".$offset ;
+		$sql=$sql." order by a.id_patrimonial desc,a.id_patrimonial limit ".$limit. " offset ".$offset ;
 		$res=pg_query(parent::con_sinv(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
@@ -158,6 +158,11 @@ where id_tabla='5' and t.prefijo='".$prefix."'";
 			}
 		function eliminarBien($id_patrimonial,$causal){
 			$sql="update equipos set est_bien='E',causal_elim='".$causal."' where id_patrimonial='".$id_patrimonial."'";
+			pg_query(parent::con_sinv(),$sql);
+
+		}
+		function depreciarBienes(){
+			$sql="select * from depreciar_all()";
 			pg_query(parent::con_sinv(),$sql);
 
 		}

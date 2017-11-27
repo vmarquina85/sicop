@@ -133,6 +133,7 @@ require '../class/config/session_val.php';
           <div class='bg-grey-200  m-b-10 '>
             <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
             <button class="btn btn-default btn-xs m-b-10 m-t-10 " onclick="exportar_excel()"><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
+            <button class="btn btn-default btn-xs m-b-10 m-t-10 m-r-10 pull-right" onclick="procesoDepreciacion()"><img src="../assets/img/dollar.png" alt="Depreciar Bienes"> Depreciar Bienes</button>
           </div>
 
 
@@ -159,8 +160,8 @@ require '../class/config/session_val.php';
               <select onchange='search(1)' id="sl_Operativo" class=' default-select2 form-control input-sm m-r-10  m-b-5'>
                 <option value="*" disabled selected>Operativo</option>
                 <option value="*">TODOS</option>
-                <?php for ($i=0; $i < sizeof($rs_operativo) ; $i++) {  ?>
-                  <option value="<?php echo utf8_encode($rs_operativo[$i]['id_dep']);?>"><?php echo utf8_encode($rs_operativo[$i]['descripcion']); ?></option>
+                <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
                   <?php  }?>
                 </select>
                 <select onchange='search(1)' id="sl_Marca" class='default-select2 select form-control input-sm m-r-10  m-b-5'>
@@ -227,7 +228,7 @@ require '../class/config/session_val.php';
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#datosbien" data-toggle="tab" aria-expanded="false"><img src="../assets/img/bienes.png" alt=""> Datos del Bien</a></li>
                       <li class=""><a href="#datosUsuarios" data-toggle="tab" aria-expanded="false"><img src="../assets/img/usuario.png" alt=""> Usuario Asignado</a></li>
-                      <li class=""><a href="#detallesTecnico" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Tecnicos</a></li>
+                      <li class=""><a href="#detallesTecnico" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Técnicos</a></li>
                     </ul>
                     <div class="tab-content">
                       <div class="tab-pane fade active in" id="datosbien">
@@ -402,21 +403,31 @@ require '../class/config/session_val.php';
                                 <div id='datosDestino'>
                                   <div class="input-group m-b-5 ">
                                     <span class="input-group-addon input-sm">Local</span>
-                                    <select name="" id="sl_localAsignado" class='form-control input-sm'>
+                                    <select name="" id="sl_localAsignado" class='form-control input-sm' disabled>
                                       <option value="">-- Seleccione local --</option>
                                     </select>
                                   </div>
                                   <div class="input-group m-b-5 ">
                                     <span class="input-group-addon input-sm">Area</span>
-                                    <select name="" id="sl_areaAsignado" class='form-control input-sm'>
+                                    <select name="" id="sl_areaAsignado" class='form-control input-sm' disabled>
                                       <option value="">-- Seleccione Area --</option>
                                     </select>
                                   </div>
                                   <div class="input-group m-b-5 ">
                                     <span class="input-group-addon input-sm">Oficina</span>
-                                    <select name="" id="sl_oficinaAsignado" class='form-control input-sm'>
+                                    <select name="" id="sl_oficinaAsignado" class='form-control input-sm' disabled>
                                       <option value="">-- Seleccione Oficina --</option>
                                     </select>
+                                  </div>
+                                  <div class="input-group m-b-5 ">
+                                    <span class="input-group-addon input-sm">Cargo</span>
+                                    <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                                      <option value="">-- Seleccione Cargo --</option>
+                                    </select>
+                                  </div>
+                                  <div class="input-group m-b-5 ">
+                                    <span class="input-group-addon input-sm">DNI</span>
+                                    <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
                                   </div>
                                 </div>
                               </form>
@@ -454,7 +465,7 @@ require '../class/config/session_val.php';
                                     <div class="col-md-12">
                                       <div class="input-group m-b-5 ">
                                         <span class="input-group-addon input-sm">Dimensión</span>
-                                        <input id='txt_dimension' type="text" class='form-control input-sm' >
+                                        <input id='txt_dimension' type="text" maxlength="15" class='form-control input-sm' >
                                       </div>
                                     </div>
                                   </div>
@@ -724,6 +735,16 @@ require '../class/config/session_val.php';
                                               <select name="" id="sl_oficinaAsignado" class='form-control input-sm'>
                                                 <option value="">-- Seleccione Oficina --</option>
                                               </select>
+                                            </div>
+                                            <div class="input-group m-b-5 ">
+                                              <span class="input-group-addon input-sm">Cargo</span>
+                                              <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                                                <option value="">-- Seleccione Cargo --</option>
+                                              </select>
+                                            </div>
+                                            <div class="input-group m-b-5 ">
+                                              <span class="input-group-addon input-sm">DNI</span>
+                                              <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
                                             </div>
                                           </div>
                                         </form>

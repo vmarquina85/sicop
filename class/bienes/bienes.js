@@ -420,7 +420,7 @@ function crearBien(){
   }
 
   if (document.getElementById('sl_colorBien').value==''){
-    alert('Seleccione un Color')
+    alert('Seleccione un Color');
     var div=document.getElementById('sl_colorBien').closest('div');
     $(div).toggleClass('has-error');
     document.getElementById('sl_colorBien').focus();
@@ -479,7 +479,7 @@ function crearBien(){
   var observacion=document.getElementById('ta_observacionBien').value;
   var idpersonal= document.getElementById("sl_usuarioAsignado").value;
   var url = "../insert/insertDataBienes.php?id_pat="+prefix+"&id_tip="+id_tip+"&id_mar="+marca+"&id_personal="+usuario+"&serie="+serie
-  +"id_col="+color+"&modelo="+modelo+"&id_est="+estadoBien+"&observa="+observacion+
+  +"&id_col="+color+"&modelo="+modelo+"&id_est="+estadoBien+"&observa="+observacion+
   "&id_local="+local+"&id_area="+area+"&id_oficina="+oficina+"&tipo_cta="+tipo_cta+
   "&cuenta="+cuentaContable+"&forma_adq="+formaAdq+"&valor_libros="+valorLib+
   "&motor="+motor+"&chasis="+chasis+"&fecha_adq="+fechaAdq+"&placa="+placa+
@@ -489,9 +489,13 @@ function crearBien(){
     if (http.readyState == 4) {
       if(http.status == 200) {
         var resultado = http.responseText.trim();
-        alert('Bien Registrado con Exito codigo Patrimonial > '+ prefix +'-'+resultado)
+
+        alert('Bien Registrado con Exito \n <strong>codigo Patrimonial : '+ prefix +'-'+resultado+'</strong>')
         document.getElementById("txt_correlativo").value = (resultado);
         $('#mymodal').modal('toggle');
+        var rs=get_datos_bien(prefix +'-'+resultado);
+        actualizarMatriz(rs);
+        registrarAsignacion();
       }
     }
   });
@@ -550,6 +554,60 @@ function editarBien(objeto){
   });
   http.send(null);
 }
+function registrarAsignacion(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var url = '../insert/insertDataAsignacion.php';
+  //parametros a ingresar
+  var today = new Date();
+  //origen
+  var fecha=today.getDate() + "/" + checkTime(today.getMonth() + 1) + "/" + today.getFullYear();
+  var destino=document.getElementById("sl_localAsignado").value;
+  //destino
+  var recibe_d=document.getElementById("sl_usuarioAsignado").value;
+  var area_d=document.getElementById("sl_areaAsignado").value;
+  var oficina_d=document.getElementById("sl_oficinaAsignado").value;
+  var cargo_d=document.getElementById("sl_cargoAsignado").value;
+  var dni_d=document.getElementById("inputDniRegistro").value;
+  var modurl = url+ "?fecha="+fecha+"&destino="+destino+"&recibe="+recibe_d+"&area_d="+area_d+"&oficina_d="+oficina_d+"&cargo="+cargo_d+"&dni="+dni_d;
+  http.open("GET", modurl, false);
+  http.send(null);
+};
+function actualizarMatriz(r){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  //obtengo datos del equipo en variables
+  var id_estado=r[0].id_estado;
+  var id_alterno=r[0].id_alterno;
+  var det_obs='Asignado por creación de bien';
+  var url = "../get/actualizarMatriz.php?id_estado="+id_estado+"&id_alterno="+id_alterno+"&Obs="+det_obs;
+  http.open("GET", url, false);
+  http.send(null);
+}
+function get_datos_bien(id_patrimonial){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  var resultado;
+  var codigoPatrimonial=id_patrimonial;
+  var url = "../get/get_detalleBien.php?id_patrimonial="+codigoPatrimonial;
+  http.open("GET", url, false);
+  // Obtener Datos
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var res = JSON.parse(http.responseText);
+        resultado= res;
+      }
+    }
+  });
+
+  http.send(null);
+  return resultado;
+}
+
 function UpdateBien(){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
@@ -709,4 +767,17 @@ var id_patrimonial=document.getElementById('txt_prefixUpdt').value+'-'+document.
     }
   });
   http.send(null);
+}
+function procesoDepreciacion(){
+  $.ajax({
+      url:   '../class/bienes/bienes_depreciacion.php',
+    type:  'post',
+    success:  function (response) {
+      if (response.trim()=='yes') {
+
+      }else{
+        document.getElementById("alert").innerHTML=response;
+      };
+    }
+  });
 }
