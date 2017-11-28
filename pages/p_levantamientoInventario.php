@@ -15,7 +15,7 @@ require '../class/config/session_val.php';
   <meta content="" name="description" />
   <meta content="" name="author" />
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
-    <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/package.png">
+  <link rel="shortcut icon" sizes="16x16" type="image/png" href="../assets/img/favicon/package.png">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
@@ -74,11 +74,11 @@ require '../class/config/session_val.php';
               <span class="hidden-xs">Hola, <?php echo ucwords(strtolower($_SESSION['sicop_usr_name'])) ?></span>
 
               <?php if ($_SESSION['sicop_sexo']=='1') {
-echo '<img src="../assets/img/man.png" alt="">';
-} else{
-echo '<img src="../assets/img/girl.png" alt="">';
-}
-?>
+                echo '<img src="../assets/img/man.png" alt="">';
+              } else{
+                echo '<img src="../assets/img/girl.png" alt="">';
+              }
+              ?>
             </a>
             <ul class="dropdown-menu animated fadeInLeft">
               <li class="arrow"></li>
@@ -101,271 +101,234 @@ echo '<img src="../assets/img/girl.png" alt="">';
     </div>
 
     <div id="content" class="content">
-      <div class="col-sm-8">
-        <div class="input-group m-b-5 ">
-          <span class="input-group-addon input-sm" >SELECCIONE LOCAL</span>
-          <select  id="sl_origen" class='form-control input-sm m-r-10  '>
-            <option value="*">--Seleccionar--</option>
-            <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
-              <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
-              <?php } ?>
-            </select>
-          </div>
-          <button onclick='showProgressBar()' class="btn btn-block btn-lg btn-default m-b-5">Iniciar</button>
-        </div>
-        <div class="col-sm-2">
-          <div class="widget widget-stats bg-blue-grey">
-            <div class="stats-icon"><i class="fa fa-calendar"></i></div>
-            <div class="stats-info">
-              <h4>HOY ES:</h4>
-              <h5 class='text-white' style='font-weight: 300;' id="date"></h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <div class="widget widget-stats bg-blue-grey">
-            <div class="stats-icon"><i class="fa fa-clock-o"></i></div>
-            <div class="stats-info">
-              <h4>HORA ACTUAL</h4>
-              <h5 class='text-white' style='font-weight: 300;' id="time"></h5>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="panel bg-indigo-700 text-white">
-              <div class="panel-heading">
-                <h4 class="panel-title">Bienes del Local</h4>
 
-              </div>
-              <div class="panel-body bg-indigo text-white">
-<div id="graph" style="min-width: 100px; height: 250px; max-width: 2500px; margin: 0 ">
-</div>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="panel bg-green-600 text-white">
-              <div class="panel-heading">
-                <h4 class="panel-title">Bienes Inventariados</h4>
-
-              </div>
-              <div class="panel-body bg-green text-white">
-
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="panel bg-red-700 text-white">
-              <div class="panel-heading">
-                <h4 class="panel-title">Bienes no encontrados</h4>
-
-              </div>
-              <div class="panel-body bg-red text-white">
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
+      <div class="input-group m-b-5 ">
+        <span class="input-group-addon input-sm" >SELECCIONE LOCAL</span>
+        <select  id="sl_local"  onchange="f_getBienes()" class='form-control input-sm m-r-10  '>
+          <option value="*">--Seleccionar--</option>
+          <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
+            <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
+          <?php } ?>
+        </select>
       </div>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+          </div>
+          <h4 class="panel-title">Bienes del Local</h4>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table-bordered table hover">
+              <thead>
+                <tr>
+                  <th>id_Patrimonio</th>
+                  <th>Tipo de Bien</th>
+                  <th>Marca</th>
+                  <th>Asignado</th>
+                  <th>Check</th>
+                </tr>
+              </thead>
+              <tbody id='tb_detalle_bienes'></tbody>
+            </table>
+          </div>
 
-
-      <!-- end #content -->
-      <!-- begin theme-panel -->
-      <!-- end theme-panel -->
-      <!-- begin scroll to top btn -->
-      <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-      <!-- end scroll to top btn -->
+        </div>
+      </div>
+      <!-- <button onclick='showProgressBar()' class="btn btn-block btn-lg btn-default m-b-5">Iniciar</button> -->
     </div>
-    <!-- end page container -->
-    <!-- ================== BEGIN BASE JS ================== -->
-    <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-    <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-    <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="../assets/crossbrowserjs/html5shiv.js"></script>
-    <script src="../assets/crossbrowserjs/respond.min.js"></script>
-    <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-    <![endif]-->
-    <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-    <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
-    <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
-    <script src="../assets/plugins/switchery/switchery.min.js"></script>
-    <script src="../assets/plugins/Highcharts/js/highcharts.js"></script>
-    <script src="../assets/plugins/Highcharts/js/exporting.js"></script>
-    <script src="../assets/plugins/Highcharts/js/dark-unica.js"></script>
-    <script src="../class/config/config.js"></script>
-    <script src="../class/menu/menu.js"></script>
-    <!-- ================== END BASE JS ================== -->
-    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-    <script src="../assets/js/apps.min.js"></script>
-    <script src="../class/ajax/ajax.js"></script>
-    <!-- <script src="../class/desplazamiento/pasignacionIndividual.js"></script> -->
 
-    <!--   <script src="../class/login/killerSession.js"></script>-->
 
-    <!-- ================== END PAGE LEVEL JS ================== -->
-    <script>
-    //globals-----------------------------------------------------
-    var selectedIdUser;
-    construirMenu();
-    //------------------------------------------------------------
-    $(document).ready(function () {
-      App.init();
+    <!-- end #content -->
+    <!-- begin theme-panel -->
+    <!-- end theme-panel -->
+    <!-- begin scroll to top btn -->
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+    <!-- end scroll to top btn -->
+  </div>
+  <!-- end page container -->
+  <!-- ================== BEGIN BASE JS ================== -->
+  <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+  <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+  <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+  <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+  <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+  <script src="../assets/plugins/switchery/switchery.min.js"></script>
+  <script src="../assets/plugins/Highcharts/js/highcharts.js"></script>
+  <script src="../assets/plugins/Highcharts/js/exporting.js"></script>
+  <script src="../assets/plugins/Highcharts/js/dark-unica.js"></script>
+  <script src="../class/config/config.js"></script>
+    <script src="../class/Inventario/Inventario.js"></script>
+  <script src="../class/menu/menu.js"></script>
+  <!-- ================== END BASE JS ================== -->
+  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+  <script src="../assets/js/apps.min.js"></script>
+  <script src="../class/ajax/ajax.js"></script>
+  <!-- <script src="../class/desplazamiento/pasignacionIndividual.js"></script> -->
 
-      startTimeAndDate();
-      renderSwitcher();
-      $(".datepicker-default").datepicker({
-        todayHighlight: !0,
-        format: 'dd/mm/yyyy'
-      })
-    });
-    function showProgressBar(){
-      for (var i = 0; i < 101; i++) {
-        $(".progress-bar").css('width', (i+'%'));
-        document.getElementById('pb_listInv').innerHTML=(i+'%');
-      }
-      $('.progress').fadeOut();
+  <!--   <script src="../class/login/killerSession.js"></script>-->
+
+  <!-- ================== END PAGE LEVEL JS ================== -->
+  <script>
+  //globals-----------------------------------------------------
+  var selectedIdUser;
+  construirMenu();
+  //------------------------------------------------------------
+  $(document).ready(function () {
+    App.init();
+
+    // startTimeAndDate();
+    // renderSwitcher();
+    $(".datepicker-default").datepicker({
+      todayHighlight: !0,
+      format: 'dd/mm/yyyy'
+    })
+  });
+  function showProgressBar(){
+    for (var i = 0; i < 101; i++) {
+      $(".progress-bar").css('width', (i+'%'));
+      document.getElementById('pb_listInv').innerHTML=(i+'%');
     }
-    var green = "#00acac",
-    red = "#ff5b57",
-    blue = "#348fe2",
-    purple = "#727cb6",
-    orange = "#f59c1a",
-    black = "#2d353c";
-    var renderSwitcher = function() {
-      if ($("[data-render=switchery]").length !== 0) {
-        $("[data-render=switchery]").each(function() {
-          var e = green;
-          if ($(this).attr("data-theme")) {
-            switch ($(this).attr("data-theme")) {
-              case "red":
-              e = red;
-              break;
-              case "blue":
-              e = blue;
-              break;
-              case "purple":
-              e = purple;
-              break;
-              case "orange":
-              e = orange;
-              break;
-              case "black":
-              e = black;
-              break
-            }
+    $('.progress').fadeOut();
+  }
+  var green = "#00acac",
+  red = "#ff5b57",
+  blue = "#348fe2",
+  purple = "#727cb6",
+  orange = "#f59c1a",
+  black = "#2d353c";
+  var renderSwitcher = function() {
+    if ($("[data-render=switchery]").length !== 0) {
+      $("[data-render=switchery]").each(function() {
+        var e = green;
+        if ($(this).attr("data-theme")) {
+          switch ($(this).attr("data-theme")) {
+            case "red":
+            e = red;
+            break;
+            case "blue":
+            e = blue;
+            break;
+            case "purple":
+            e = purple;
+            break;
+            case "orange":
+            e = orange;
+            break;
+            case "black":
+            e = black;
+            break
           }
-          var t = {};
-          t.color = e;
-          t.secondaryColor = $(this).attr("data-secondary-color") ? $(this).attr("data-secondary-color") : "#dfdfdf";
-          t.className = $(this).attr("data-classname") ? $(this).attr("data-classname") : "switchery";
-          t.disabled = $(this).attr("data-disabled") ? true : false;
-          t.disabledOpacity = $(this).attr("data-disabled-opacity") ? $(this).attr("data-disabled-opacity") : .5;
-          t.speed = $(this).attr("data-speed") ? $(this).attr("data-speed") : "0.5s";
-          var n = new Switchery(this, t)
-        })
+        }
+        var t = {};
+        t.color = e;
+        t.secondaryColor = $(this).attr("data-secondary-color") ? $(this).attr("data-secondary-color") : "#dfdfdf";
+        t.className = $(this).attr("data-classname") ? $(this).attr("data-classname") : "switchery";
+        t.disabled = $(this).attr("data-disabled") ? true : false;
+        t.disabledOpacity = $(this).attr("data-disabled-opacity") ? $(this).attr("data-disabled-opacity") : .5;
+        t.speed = $(this).attr("data-speed") ? $(this).attr("data-speed") : "0.5s";
+        var n = new Switchery(this, t)
+      })
+    }
+  };
+
+  // Build the chart
+  //  Highcharts.chart('graph', {
+  //      chart: {
+  //          plotBackgroundColor: null,
+  //          plotBorderWidth: null,
+  //          plotShadow: false,
+  //          type: 'pie'
+  //      },
+  //      title: {
+  //          text: 'Grafica'
+  //      },
+  //      tooltip: {
+  //          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  //      },
+  //      plotOptions: {
+  //          pie: {
+  //              allowPointSelect: true,
+  //              cursor: 'pointer',
+  //              dataLabels: {
+  //                  enabled: false
+  //              },
+  //              showInLegend: true
+  //          }
+  //      },
+  //      series: [{
+  //          name: 'Brands',
+  //          colorByPoint: true,
+  //          data: [{
+  //              name: 'otros',
+  //              y: 30
+  //          },  {
+  //              name: 'Inventariados',
+  //              y: 60
+  //          }]
+  //      }]
+  //  });
+  $('#graph').highcharts({
+
+    chart: {
+
+      renderTo: 'detalle_ingresos',
+      type: 'column'
+    },
+
+    colors:["#99DC79"],
+    title: {
+      text: 'GRÁFICO'
+    },
+    subtitle: {
+      // text: 'Fecha : '+ f.getDate() + "/" + pad(f.getMonth()+1,2) + "/" + f.getFullYear()
+      text: 'INGRESOS POR ESPECIALIDAD'
+    },
+    xAxis: {
+      type: 'category',
+      labels: {
+
+        enabled: true
       }
-    };
-
-    // Build the chart
-    //  Highcharts.chart('graph', {
-    //      chart: {
-    //          plotBackgroundColor: null,
-    //          plotBorderWidth: null,
-    //          plotShadow: false,
-    //          type: 'pie'
-    //      },
-    //      title: {
-    //          text: 'Grafica'
-    //      },
-    //      tooltip: {
-    //          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    //      },
-    //      plotOptions: {
-    //          pie: {
-    //              allowPointSelect: true,
-    //              cursor: 'pointer',
-    //              dataLabels: {
-    //                  enabled: false
-    //              },
-    //              showInLegend: true
-    //          }
-    //      },
-    //      series: [{
-    //          name: 'Brands',
-    //          colorByPoint: true,
-    //          data: [{
-    //              name: 'otros',
-    //              y: 30
-    //          },  {
-    //              name: 'Inventariados',
-    //              y: 60
-    //          }]
-    //      }]
-    //  });
-    $('#graph').highcharts({
-
-    	chart: {
-
-    		renderTo: 'detalle_ingresos',
-    		type: 'column'
-    	},
-
-    	colors:["#99DC79"],
-    	title: {
-    		text: 'GRÁFICO'
-    	},
-    	subtitle: {
-    		// text: 'Fecha : '+ f.getDate() + "/" + pad(f.getMonth()+1,2) + "/" + f.getFullYear()
-    		text: 'INGRESOS POR ESPECIALIDAD'
-    	},
-    	xAxis: {
-    		type: 'category',
-    		labels: {
-
-    			enabled: true
-    		}
-    	},
-    	legend: {
-    		layout: 'vertical',
-    		align: 'right',
-    		verticalAlign: 'top',
-    		x: -70,
-    		y: 100,
-    		floating: true,
-    		borderWidth: 1,
-    		backgroundColor: '',
-    		shadow: true
-    	},
-    	yAxis: {
-    		min: 0,
-    		title: {
-    			text: 'Ingresos (Soles)'
-    		}
-    	},
-    	tooltip: {
-    		pointFormat: 'Ventas: S/. <b>{point.y:.2f} </b>'
-    	},
-    	credits: {
-    		enabled: false
-    	},
-    	exporting: {
-    		enabled: false
-    	},
-    	series: [{
-    		name: 'Ingresos',
-    		data: [ ]
-    	}]
-    });
-    </script>
-  </body>
-  </html>
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -70,
+      y: 100,
+      floating: true,
+      borderWidth: 1,
+      backgroundColor: '',
+      shadow: true
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Ingresos (Soles)'
+      }
+    },
+    tooltip: {
+      pointFormat: 'Ventas: S/. <b>{point.y:.2f} </b>'
+    },
+    credits: {
+      enabled: false
+    },
+    exporting: {
+      enabled: false
+    },
+    series: [{
+      name: 'Ingresos',
+      data: [ ]
+    }]
+  });
+  </script>
+</body>
+</html>

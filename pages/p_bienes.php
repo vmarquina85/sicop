@@ -50,6 +50,10 @@ require '../class/config/session_val.php';
   .txt-red{
     color:red;
   }
+  .progress-status img{
+    width: 24px;
+    height:24px;
+  }
   </style>
 </head>
 <body>
@@ -133,6 +137,7 @@ require '../class/config/session_val.php';
           <div class='bg-grey-200  m-b-10 '>
             <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
             <button class="btn btn-default btn-xs m-b-10 m-t-10 " onclick="exportar_excel()"><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
+<div class="progress-status hide pull-right"><img src="../assets/img/Rolling.gif" class=' m-t-10 m-r-10'></div>
             <button class="btn btn-default btn-xs m-b-10 m-t-10 m-r-10 pull-right" onclick="procesoDepreciacion()"><img src="../assets/img/dollar.png" alt="Depreciar Bienes"> Depreciar Bienes</button>
           </div>
 
@@ -160,8 +165,8 @@ require '../class/config/session_val.php';
               <select onchange='search(1)' id="sl_Operativo" class=' default-select2 form-control input-sm m-r-10  m-b-5'>
                 <option value="*" disabled selected>Operativo</option>
                 <option value="*">TODOS</option>
-                <?php for ($i=0; $i < sizeof($rs_esp) ; $i++) {  ?>
-                  <option value="<?php echo utf8_encode($rs_esp[$i]['n_esp']);?>"><?php echo utf8_encode($rs_esp[$i]['n_esp']); ?></option>
+                <?php for ($i=0; $i < sizeof($rs_operativo) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_operativo[$i]['id_dep']);?>"><?php echo utf8_encode($rs_operativo[$i]['descripcion']); ?></option>
                   <?php  }?>
                 </select>
                 <select onchange='search(1)' id="sl_Marca" class='default-select2 select form-control input-sm m-r-10  m-b-5'>

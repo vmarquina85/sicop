@@ -37,8 +37,8 @@ function exportar_excel(){
   var est_bien=document.getElementById('sl_estado').value;
   var oc=document.getElementById('txt_docalta').value;
   var serie=document.getElementById('txt_serie').value;
-    var id_interno=document.getElementById('txt_codinterno').value;
-window.open("../class/exportar/exportar_bienes.php?id_local="+id_local+"&id_marc="+id_marc+"&id_hard="+id_hard+"&asignado="+asignado+"&est_bien="+est_bien+"&oc="+oc+"&serie="+serie+"&id_interno="+id_interno+"");
+  var id_interno=document.getElementById('txt_codinterno').value;
+  window.open("../class/exportar/exportar_bienes.php?id_local="+id_local+"&id_marc="+id_marc+"&id_hard="+id_hard+"&asignado="+asignado+"&est_bien="+est_bien+"&oc="+oc+"&serie="+serie+"&id_interno="+id_interno+"");
 }
 function search(index){
   if (index<1) {
@@ -285,11 +285,11 @@ function llenarPersonalDestino(valor){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
   }
-if (valor===1) {
-  var idpersonal= document.getElementById("sl_usuarioAsignado").value;
-}else if (valor===2) {
-  var idpersonal= document.getElementById("sl_usuarioAsignadoUpdt").value;
-}
+  if (valor===1) {
+    var idpersonal= document.getElementById("sl_usuarioAsignado").value;
+  }else if (valor===2) {
+    var idpersonal= document.getElementById("sl_usuarioAsignadoUpdt").value;
+  }
 
   var url = "../get/datosPersonalAsignado.php?idpersonal="+idpersonal;
   http.open("GET", url, true);
@@ -298,9 +298,9 @@ if (valor===1) {
       if(http.status == 200) {
         var resultado = http.responseText;
         if (valor===1) {
-document.getElementById("datosDestino").innerHTML = (resultado);
+          document.getElementById("datosDestino").innerHTML = (resultado);
         }else if (valor===2) {
-document.getElementById("datosDestinoUpdt").innerHTML = (resultado);
+          document.getElementById("datosDestinoUpdt").innerHTML = (resultado);
         }
 
       }
@@ -709,7 +709,7 @@ function UpdateBien(){
   }
 
 
-var id_patrimonial=document.getElementById('txt_prefixUpdt').value+'-'+document.getElementById('txt_correlativoUpdt').value;
+  var id_patrimonial=document.getElementById('txt_prefixUpdt').value+'-'+document.getElementById('txt_correlativoUpdt').value;
   var tipo_cta=document.getElementById('sl_tipoCuentaUpdt').value;
   var rtipocta;
   var radiobutton=document.getElementsByName('rtipoctaUpdt');
@@ -769,15 +769,18 @@ var id_patrimonial=document.getElementById('txt_prefixUpdt').value+'-'+document.
   http.send(null);
 }
 function procesoDepreciacion(){
-  $.ajax({
-      url:   '../class/bienes/bienes_depreciacion.php',
-    type:  'post',
-    success:  function (response) {
-      if (response.trim()=='yes') {
+  if (confirm("Se realizará la depreciación, ¿Desea continuar?")){
+    $('.progress-status').removeClass("hide");
+    $.ajax({
+      url:   '../update/bienes_depreciacion.php',
+      type:  'post',
+      async:true,
+      success:  function (response) {
+        $('.progress-status').addClass("hide");
+        alert('Depreciación Terminada')
+        search(1);
+      }
+    });
+  }
 
-      }else{
-        document.getElementById("alert").innerHTML=response;
-      };
-    }
-  });
 }
