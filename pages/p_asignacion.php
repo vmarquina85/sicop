@@ -68,7 +68,7 @@ display: inline;
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
               <!-- <img src="../assets/img/package.png" alt=""> -->
-            <strong class='text-white sombrear'> Asignación</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
           </a>
         </div>
           <!-- begin mobile sidebar expand / collapse button -->
@@ -405,7 +405,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
             <!-- ================== END PAGE LEVEL JS ================== -->
             <script>
             //globals-----------------------------------------------------
-            var selectedIdUser;
+            var selectedIdUser='';
             construirMenu();
             //------------------------------------------------------------
             $(document).ready(function () {

@@ -66,6 +66,7 @@ function actualizarUsuarioPermisos(){
     }
   }
   alert("Permisos y Nivel Modificados con Exito");
+  $("#modal_permisos").modal('toggle');
   construirMenu();
 }
 function obtenerPermiso(id_usr){

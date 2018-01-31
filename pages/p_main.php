@@ -1,8 +1,6 @@
 <?php
 require '../class/parametricas/entidad_parametrica_cls.php';
 require '../class/config/session_val.php';
-
-
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -61,13 +59,13 @@ require '../class/config/session_val.php';
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-click="top-menu-toggled">
+          <button type="button" class="navbar-toggle pull-right" data-click="top-menu-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="p_main.php" class="navbar-brand" style='width: auto;'>
-            <strong class='text-white sombrear'>Pagina Principal</strong>
+          <a href="p_main.php" class="navbar-brand pull-left" style='width: auto;'>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
             <!--   <img src="../assets/img/logo.png" alt=""> -->
           </a>
         </div>

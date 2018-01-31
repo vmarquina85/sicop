@@ -61,7 +61,7 @@ require '../class/config/session_val.php';
             <i class="material-icons">menu</i>
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
-            <strong class='text-white sombrear'>Levantamiento de Inventario</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
           </a>
         </div>
         <!-- begin mobile sidebar expand / collapse button -->
@@ -178,7 +178,7 @@ require '../class/config/session_val.php';
   <!-- ================== END PAGE LEVEL JS ================== -->
   <script>
   //globals-----------------------------------------------------
-  var selectedIdUser;
+  var selectedIdUser='';
   construirMenu();
   //------------------------------------------------------------
   $(document).ready(function () {

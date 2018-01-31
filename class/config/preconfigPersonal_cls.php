@@ -1,5 +1,10 @@
 <?php
-$clase= new parametricas;$clase2= new parametricas;$clase3= new parametricas;$clase4= new parametricas;$clase5= new parametricas;
-$clase6=new parametricas;$clase7=new parametricas;$clase8=new parametricas;
-$clase9= new parametricas;
+require "../class/parametricas/entidad_parametrica_cls.php";
+$clase= new parametricas;
+$rs_operativo=$clase->Get_Operativo();
+$rs_departamento=$clase->get_departamentos();
+$rs_estadoCivil=$clase->get_tablatipo('ESTADO_CIVIL');
+$rs_GradoInst=$clase->get_tablatipo('GRADO_INSTRUCCION');
+$rs_Profesion=$clase->get_tablatipo('PROFESIONES');
+$rs_cargo=$clase->get_tablatipo('CARGO_LABORAL');
 ?>

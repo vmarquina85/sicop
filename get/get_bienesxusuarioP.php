@@ -41,9 +41,10 @@ if (sizeof($rs_pendientes)>0 ){
   echo  "</tbody>";
 echo  "</table>
 </div>
+</br>
 <span class='pull-right'>
-  <button id='aceptarPendientes' onclick='AceptarPapeletas()' class='btn btn-success btn-xs'>Aceptar</button>
-  <button id='rechazarPendientes' onclick='RechazarPapeletas()' class='btn btn-danger btn-xs'>Rechazar</button>
+<button id='rechazarPendientes' onclick='RechazarPapeletas()' class='btn btn-danger btn-sm'><i class='fa fa-ban'></i> Rechazar</button>
+  <button id='aceptarPendientes' onclick='AceptarPapeletas()' class='btn btn-success btn-sm'><i class='fa fa-check'></i> Aceptar</button>
 </span>
 </div>";
 }?>

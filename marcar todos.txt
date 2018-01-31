@@ -1,4 +1,0 @@
-<button id='mark_all' class='btn btn-warning btn-xs'><i class='fa fa-check-square-o'></i> Marcar todos</button>
-<br>
-<br>
-no olvidar

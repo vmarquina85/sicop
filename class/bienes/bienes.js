@@ -152,6 +152,7 @@ function obtener_detalle(objeto){
   http.send(null);
   return resultado;
 }
+
 function AlertEliminar(objeto){
   fila=objeto.closest('tr');
   $("#alertform")[0].reset();

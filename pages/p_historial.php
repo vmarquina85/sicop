@@ -67,7 +67,7 @@ require '../class/config/preconfig_cls.php'
             <span class="icon-bar"></span>
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
-            <strong class='text-white sombrear'>Historial</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
             <!--   <img src="../assets/img/logo.png" alt=""> -->
           </a>
         </div>
@@ -197,7 +197,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../class/historial/p_historial.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
   <script>
-  var selectedIdUser;
+  var selectedIdUser='';
   construirMenu();
   $(document).ready(function() {
     App.init();

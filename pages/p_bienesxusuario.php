@@ -60,7 +60,7 @@ require '../class/config/session_val.php';
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-            <strong class='text-white sombrear'>Recepción de Bienes</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
           </a>
         </div>
         <!-- end mobile sidebar expand / collapse button -->
@@ -158,7 +158,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-original-title="Minimizar/Maximinzar" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
               </div>
-              <h4 class="panel-title">Papeletas Pendientes</h4>
+              <h4 class="panel-title"><i class='fa fa-warning'></i> Papeletas Pendientes</h4>
             </div>
             <div class="panel-body" id='tab_pendientes'>
               <div class="table-responsive">
@@ -178,7 +178,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-original-title="Minimizar/Maximinzar" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
               </div>
-              <h4 class="panel-title">Papeletas Rechazadas</h4>
+              <h4 class="panel-title"><i class='fa fa-ban'></i> Papeletas Rechazadas</h4>
             </div>
             <div class="panel-body" id='tab_rechazados'>
               <div class="table-responsive">
@@ -198,7 +198,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="Ampliar"><i class="fa fa-expand"></i></a>
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Minimizar/Maximinzar"><i class="fa fa-minus"></i></a>
               </div>
-              <h4 class="panel-title">Bienes Recibidos</h4>
+              <h4 class="panel-title"><i class='fa fa-check'></i> Bienes Recibidos</h4>
             </div>
             <div class="panel-body">
               <div class="table-responsive">
@@ -253,7 +253,7 @@ echo '<img src="../assets/img/girl.png" alt="">';
   <script src="../class/ajax/ajax.js"></script>
   <script src="../class/bienes/bienesxusuario.js"></script>
   <script>
-  var selectedIdUser;
+  var selectedIdUser='';
   construirMenu();
   $(document).ready(function () {
     var fila;

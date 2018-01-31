@@ -1,5 +1,6 @@
 <?php
 require '../class/config/session_val.php';
+require '../class/config/preconfigPersonal_cls.php';
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -27,7 +28,8 @@ require '../class/config/session_val.php';
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
   <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
 
-  <link href="../assets/css/datatables.css" rel="stylesheet" />
+  <!-- <link href="../assets/css/datatables.css" rel="stylesheet" /> -->
+  <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
@@ -40,6 +42,17 @@ require '../class/config/session_val.php';
   .ui-front {
     z-index: 1150;
   }
+  .prueba{
+    background: #E0E0E0;
+    border-radius: 3px;
+    padding: 5px;
+
+  }
+  .radio{
+    display: inline;
+  }
+
+
   </style>
 </head>
 <body>
@@ -69,7 +82,7 @@ require '../class/config/session_val.php';
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-            <strong class='text-white sombrear'>Mantenimiento Personal</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
           </a>
         </div>
         <!-- end mobile sidebar expand / collapse button -->
@@ -112,7 +125,7 @@ require '../class/config/session_val.php';
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
           </div>
-          <h4 class="panel-title">Lista de Personal Registrado</h4>
+          <h4 class="panel-title">Lista de Funcionarios Registrado</h4>
         </div>
 
         <div class="panel-body">
@@ -120,12 +133,35 @@ require '../class/config/session_val.php';
             <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
             <button class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
           </div>
+          <form class='form-inline' method='POST' id='panelForm'>
+            <div class="form-group  form-group-sm  m-r-10">
+              <input type="text" class="form-control" id="txt_Nombre"  placeholder="Nombre" maxlength="100"/>
+            </div>
+            <div class="form-group  form-group-sm m-r-10">
+              <input type="text" class="form-control" id="txt_Paterno"  placeholder="Apellido Paterno"  maxlength="100"/>
+            </div>
+            <div class="form-group  form-group-sm m-r-10">
+              <input type="text" class="form-control" id="txt_Materno"  placeholder="Apellido Materno" maxlength="100"/>
+            </div>
+            <select onchange='search(1)' id="sl_Operativo" class=' default-select2 form-control input-sm m-r-10  m-b-5'>
+              <option value="*" disabled selected>Operativo</option>
+              <option value="*">TODOS</option>
+              <?php for ($i=0; $i < sizeof($rs_operativo) ; $i++) {  ?>
+                <option value="<?php echo utf8_encode($rs_operativo[$i]['id_dep']);?>"><?php echo utf8_encode($rs_operativo[$i]['descripcion']); ?></option>
+              <?php  }?>
+            </select>
+            <div onclick='search(1)' class="btn btn-info btn-sm submit"><i class="fa fa-search"></i> Buscar</div>
+            <div onclick='vertodos()' class="btn btn-default btn-sm "><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</div>
+          </form>
+          <br>
+          <ul id='paginator' class="pagination">
+          </ul>
           <div class="table-responsive">
-            <table id='tb_personal' class=" dt table table-codensed table-bordered">
+            <table class=" dt table table-codensed table-bordered">
               <thead>
                 <th class='p-0 text-center  bg-grey-200'></th>
                 <th class='p-0 text-center  bg-grey-200'></th>
-                <th class='p-0 text-center  bg-grey-200'></th>
+
                 <th class='p-0 text-center  bg-grey-200'>Paterno</th>
                 <th class='p-0 text-center  bg-grey-200'>Materno</th>
                 <th class='p-0 text-center  bg-grey-200'>Nombres</th>
@@ -138,7 +174,7 @@ require '../class/config/session_val.php';
                 <th class='p-0 text-center  bg-grey-200'>Estado</th>
                 <th class='p-0 text-center  bg-grey-200'>Id</th>
               </thead>
-              <tbody>
+              <tbody id='tb_detallePersonal'>
               </tbody>
             </table>
           </div>
@@ -150,12 +186,12 @@ require '../class/config/session_val.php';
           <div class="modal-content ">
             <div class="modal-header header-success">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Nuevo registro de personal</h4>
+              <h4 class="modal-title text-white">Nuevo registro de Funcionario</h4>
             </div>
 
             <div class="modal-body">
               <ul class="nav nav-tabs">
-                <li class='active'><a href="#tabPersona" data-toggle="tab">Datos de Personal</a></li>
+                <li class='active'><a href="#tabPersona" data-toggle="tab"><img src="../assets/img/usuario.png" alt=""> Datos de Personal</a></li>
                 <li><a href="#tabCentro" data-toggle="tab">Centro de Labores</a></li>
               </ul>
               <div class="tab-content">
@@ -164,36 +200,36 @@ require '../class/config/session_val.php';
                     <!-- fila 1 -->
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Nombre</span>
-                      <input id='inputNombre' type="text" class="form-control input-sm" >
+                      <input id='inputNombre' type="text" class="form-control input-sm" maxlength="100" >
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Apellido Paterno</span>
-                      <input id='inputApePat' type="text" class="form-control input-sm" >
+                      <input id='inputApePat' type="text" class="form-control input-sm" maxlength="100" >
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Apellido Materno</span>
-                      <input id='inputApeMat' type="text" class="form-control input-sm" >
+                      <input id='inputApeMat' type="text" class="form-control input-sm" maxlength="100" >
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">DNI</span>
-                          <input id='inputDni' type="text" class="form-control input-sm" >
+                          <input id='inputDni' type="text" class="form-control input-sm" maxlength="8" >
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">RUC</span>
-                          <input id='inputRuc' type="text" class="form-control input-sm" >
+                          <input id='inputRuc' type="text" class="form-control input-sm" maxlength="11" >
                         </div>
                       </div>
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Fecha Nac</span>
-                      <input id='inputFecNac' type="text" class="form-control input-sm" >
+                      <input id='inputFecNac' type="text" class="form-control input-sm datepicker-default" >
                     </div>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm ">Sexo</span>
+                    <div class="input-group m-b-10 m-t-10">
+                      <span class="prueba">Sexo</span>
                       <div class="radio">
                         <label>
                           <input name="radioSexo" type="radio" value="M"/>
@@ -208,71 +244,131 @@ require '../class/config/session_val.php';
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Dirección</span>
-                      <input id='inputDireccion' type="text" class="form-control input-sm" >
+                      <input id='inputDireccion' type="text" class="form-control input-sm" maxlength="150" >
                     </div>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Departamento</span>
-                      <select id="selectDepartamento"  class='form-control input-sm'></select>
+                    <div class="row">
+                    <div class="col-md-6">
+                      <div class="input-group m-b-5 ">
+                        <span class="input-group-addon input-sm">Departamento</span>
+                        <select id="selectDepartamento"  onchange="fn_obtenerProvincia();fn_obtenerDistrito()" class='form-control input-sm'>
+                          <option value="*">--SELECCIONAR--</option>
+                          <?php
+                          for ($i=0; $i < sizeof($rs_departamento); $i++) {
+                            echo '<option value="'.$rs_departamento[$i]["id_dep"].'">'.$rs_departamento[$i]["departamento"].'</option>';
+                          }
+                          ?>
+                        </select>
+                      </div>
                     </div>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Provincia</span>
-                      <select id="selectProvincia"  class='form-control input-sm'></select>
+                    <div class="col-md-6">
+                      <div class="input-group m-b-5 ">
+                        <span class="input-group-addon input-sm">Provincia</span>
+                        <select id="selectProvincia" onchange="fn_obtenerDistrito()"  class='form-control input-sm'>
+                          <option value="*">--SELECCIONAR--</option>
+                        </select>
+                      </div>
+                    </div>
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Distrito</span>
-                      <select id="selectDistrito"  class='form-control input-sm'></select>
+                      <select id="selectDistrito"  class='form-control input-sm'>
+                        <option value="*">--SELECCIONAR--</option>
+                      </select>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Telefono</span>
-                          <input id='selectTelefono' type="text" class="form-control input-sm" >
+                          <input id='Telefono' type="text" class="form-control input-sm" maxlength="9"  >
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Celular</span>
-                          <input id='selectCelular' type="text" class="form-control input-sm" >
+                          <input id='Celular' type="text" class="form-control input-sm" maxlength="9" >
                         </div>
                       </div>
                     </div>
                     <div class="input-group m-b-5 ">
                       <span class="input-group-addon input-sm">Estado Civil</span>
-                      <select id="selectEstadoCivil"  class='form-control input-sm'></select>
+                      <select id="selectEstadoCivil"  class='form-control input-sm'>
+                        <option value="*">--SELECCIONAR--</option>
+                        <?php
+                        for ($i=0; $i <sizeof($rs_estadoCivil) ; $i++) {
+                          echo '<option value="'.$rs_estadoCivil[$i]['id_tipo'].'">'.$rs_estadoCivil[$i]['descripcion'].'</option>';
+                        }?>
+                      </select>
                     </div>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Grado Inst</span>
-                      <select id="selectGrado"  class='form-control input-sm'></select>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Grado Inst</span>
+                          <select id="selectGrado"  class='form-control input-sm'>
+                            <option value="*">--SELECCIONAR--</option>
+                            <?php
+                            for ($i=0; $i <sizeof($rs_GradoInst) ; $i++) {
+                              echo '<option value="'.$rs_GradoInst[$i]['id_tipo'].'">'.$rs_GradoInst[$i]['descripcion'].'</option>';
+                            }?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Profesion</span>
+                          <select id="selectProfesion"  class='form-control input-sm'>
+                            <option value="*">--SELECCIONAR--</option>
+                            <?php
+                            for ($i=0; $i <sizeof($rs_Profesion) ; $i++) {
+                              echo '<option value="'.$rs_Profesion[$i]['id_tipo'].'">'.$rs_Profesion[$i]['descripcion'].'</option>';
+                            }?>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Profesion</span>
-                      <select id="selectProfesion"  class='form-control input-sm'></select>
-                    </div>
+
+
                   </form>
                 </div>
                 <div class="tab-pane fade" id='tabCentro' >
                   <div class="input-group m-b-5 ">
-                    <span class="input-group-addon input-sm">Lugar Actual</span>
-                    <select id="selectLugarActual"  class='form-control input-sm'></select>
+                    <span class="input-group-addon input-sm">Dependencia</span>
+                    <select id="selectLugarActual"  onchange="fn_obtenerAreas();fn_obtenerOficina()" class='form-control input-sm'>
+                        <option value="*">--SELECCIONAR--</option>
+                      <?php for ($i=0; $i <sizeof($rs_operativo) ; $i++) {
+                        echo '<option value="'.$rs_operativo[$i]['id_dep'].'">'.$rs_operativo[$i]['descripcion'].'</option>';
+                      }
+                       ?>
+                    </select>
+
                   </div>
                   <div class="input-group m-b-5 ">
                     <span class="input-group-addon input-sm">Area</span>
-                    <select id="selectArea"  class='form-control input-sm'></select>
+                    <select id="selectArea"  onchange="fn_obtenerOficina()" class='form-control input-sm'>
+                        <option value="*">--SELECCIONAR--</option>
+                    </select>
                   </div>
                   <div class="input-group m-b-5 ">
                     <span class="input-group-addon input-sm">Oficina</span>
-                    <select id="selectOficina"  class='form-control input-sm'></select>
+                    <select id="selectOficina"  class='form-control input-sm'>
+                        <option value="*">--SELECCIONAR--</option>
+                    </select>
                   </div>
-                  <div class="input-group m-b-5 ">
+                  <div class="input-group">
                     <span class="input-group-addon input-sm">Cargo</span>
-                    <select id="selectCargo"  class='form-control input-sm'></select>
+                    <select id="selectCargo"  class='form-control input-sm'>
+                      <option value="*">--SELECCIONAR--</option>
+                    <?php for ($i=0; $i <sizeof($rs_cargo) ; $i++) {
+                      echo '<option value="'.$rs_cargo[$i]['id_tipo'].'">'.$rs_cargo[$i]['descripcion'].'</option>';
+                    }
+                     ?>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:;" class="btn btn-sm btn-success">Crear</a>
+              <a href="javascript:f_NuevoFuncionario();"; class="btn btn-sm btn-success">Crear</a>
             </div>
           </div>
         </div>
@@ -302,6 +398,7 @@ require '../class/config/session_val.php';
   <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
   <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
   <script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.js"></script>
+  <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
   <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
   <script src="../class/config/config.js"></script>
   <script src="../class/menu/menu.js"></script>
@@ -317,13 +414,19 @@ require '../class/config/session_val.php';
 
   <script>
   //globals-----------------------------------------------------
-  var selectedIdUser;
-construirMenu();
+  var selectedIdUser='';
+  construirMenu();
   //------------------------------------------------------------
   $(document).ready(function() {
     App.init();
-    personalSelect();
-    inicializarDatatables();
+    search(1);
+    iniciarSelect();
+    // inicializarDatatables();
+    $(".datepicker-default").datepicker({
+      todayHighlight: !0,
+      autoclose: true,
+      format: 'dd/mm/yyyy'
+    })
   });
   </script>
 

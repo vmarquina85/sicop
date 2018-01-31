@@ -86,7 +86,7 @@ require '../class/config/session_val.php';
           </button>
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
-            <strong class='text-white sombrear'>Mantenimiento Usuarios</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
           </a>
         </div>
         <!-- end mobile sidebar expand / collapse button -->
@@ -306,7 +306,7 @@ require '../class/config/session_val.php';
 
 <script>
 //globals-----------------------------------------------------
-var selectedIdUser;
+var selectedIdUser='';
 construirMenu();
 
 //------------------------------------------------------------

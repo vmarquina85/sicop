@@ -64,7 +64,7 @@ require '../class/config/session_val.php';
           <a href="p_main.php" class="navbar-brand" style='width: auto;'>
             <!--  <i style ='color:#00BCD4'class="material-icons md-48">local_shipping</i> -->
 
-            <strong class='text-white sombrear'>Traslados</strong>
+            <strong class='text-white sombrear'><img src="../assets/img/package.png" alt=""> SICOP</strong>
 
           </a>
         </div>
@@ -432,7 +432,7 @@ require '../class/config/session_val.php';
             <!-- ================== END PAGE LEVEL JS ================== -->
             <script>
             //globals-----------------------------------------------------
-            var selectedIdUser;
+            var selectedIdUser='';
             construirMenu();
             //------------------------------------------------------------
             $(document).ready(function () {

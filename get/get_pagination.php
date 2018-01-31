@@ -53,6 +53,18 @@ $Estado=$_REQUEST["estado"];
 $rs_bienes=$bien-> GET_pages($tipo,$prefix,$patrimonial,$serie,$codigointerno,$DocumentoAlta,$Operativo,$Marca,$Asignado,$Estado);
 $rows=$rs_bienes[0]["cuenta"];
 }
+if ($page=='personal') {
+
+require '../class/personal/p_personal_cls.php' ;
+$personal=new personal;
+//obtener total de rows
+$nombre=$_REQUEST["nombre"];
+$apepat=$_REQUEST["apepat"];
+$apemat=$_REQUEST["apemat"];
+$dependencia=$_REQUEST["dependencia"];
+$rs_personal=$personal->GET_pages($nombre,$apepat,$apemat,$dependencia);
+$rows=$rs_personal[0]["cuenta"];
+}
 
 //numeros total de registros
 
@@ -66,10 +78,10 @@ if ($last<1){
 }
 //establecer variable $numeroPagina
 $numeroPagina=1;
-//obtener el numero de pagina 
+//obtener el numero de pagina
 if(isset($_REQUEST['pn'])){
   $numeroPagina=preg_replace('#[^0-9]#','', $_REQUEST['pn']);
-}           
+}
 // esto asegura de que el numero de pagina no este debajo de 1, o mas de nuestra ultima pagina
 if ($numeroPagina<1) {
   $numeroPagina=1;
@@ -83,11 +95,11 @@ if ($last>1) {
   echo "<li class='active'><a href='javascript:search(".$numeroPagina.")'>".$numeroPagina."</a></li>";
 
   if ($numeroPagina+4<$last) {
-    for ($i=($numeroPagina+1); $i <=$numeroPagina+4; $i++) { 
+    for ($i=($numeroPagina+1); $i <=$numeroPagina+4; $i++) {
       echo "<li><a href='javascript:search(".$i.")'>".$i."</a></li>";
     }
   }else{
-      for ($i=($numeroPagina+1); $i <=$last; $i++) { 
+      for ($i=($numeroPagina+1); $i <=$last; $i++) {
       echo "<li><a href='javascript:search(".$i.")'>".$i."</a></li>";
     }
   }
@@ -107,8 +119,8 @@ if ($numeroPagina==$last) {
   </a>
   </li>";
 }
-  
 
-} 
+
+}
 echo "</ul> ";
 ?>
