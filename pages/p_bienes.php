@@ -54,6 +54,20 @@ require '../class/config/session_val.php';
     width: 24px;
     height:24px;
   }
+  @media print {
+      .myDivToPrint {
+          background-color: white;
+          height: 100%;
+          width: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          margin: 0;
+          padding: 15px;
+          font-size: 14px;
+          line-height: 18px;
+      }
+  }
   </style>
 </head>
 <body>
@@ -71,7 +85,7 @@ require '../class/config/session_val.php';
   <!-- begin #page-container -->
   <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
     <!-- begin #header -->
-    <div id="header" class="header navbar navbar-inverse bg-navbar navbar-fixed-top">
+    <div id="header" class="header navbar navbar-inverse bg-navbar navbar-fixed-top hidden-print">
       <!-- begin container-fluid -->
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
@@ -113,7 +127,7 @@ require '../class/config/session_val.php';
     </div>
     <!-- end #header -->
     <!-- begin #top-menu -->
-    <div id="top-menu" class="top-menu">
+    <div id="top-menu" class="top-menu hidden-print">
       <!-- begin top-menu nav -->
 
       <ul id='nav_menu' class="nav">
@@ -121,6 +135,9 @@ require '../class/config/session_val.php';
     </div>
 
     <div id="content" class="content">
+<!-- INICIO AKI -->
+<div class="hidden-print">
+
 
       <div class="panel panel-success">
         <div class="panel-heading">
@@ -925,49 +942,62 @@ require '../class/config/session_val.php';
                   </div>
                 </div>
               </form>
-
             </div>
             <div class="modal-footer">
               <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
               <a href="javascript:BajaBien(fila);" class="btn btn-sm btn-danger">Dar de Baja</a>
             </div>
-
           </div>
         </div>
       </div>
 
+<!-- TERMINA AKI -->
+</div>
+      <div class="modal fade" id="md_codigoBarra" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="dialog-normal modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header header-info hidden-print">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title text-white">Codigo de Barras</h4>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                    <h5 id='bc_tipoBien' class='p-0 m-0'></h5>
+                <svg id="bc_code128" class='p-0 m-0'></svg>
+                <!-- <h5 id='bc_valor' class='pager-0'></h5> -->
+              </div>
+            </div>
+            <div class="modal-footer hidden-print">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" onclick='window.print()' class="btn btn-primary">Imprimir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
     <!-- end #content -->
-
     <!-- begin theme-panel -->
-
     <!-- end theme-panel -->
-
     <!-- begin scroll to top btn -->
-    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade hidden-print" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
     <!-- end scroll to top btn -->
   </div>
   <!-- end page container -->
-
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
   <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
   <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
   <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <!--[if lt IE 9]>
-  <script src="../assets/crossbrowserjs/html5shiv.js"></script>
-  <script src="../assets/crossbrowserjs/respond.min.js"></script>
-  <script src="../assets/crossbrowserjs/excanvas.min.js"></script>
-  <![endif]-->
   <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
   <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
   <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+  <script src="../assets/plugins/barcode/barcode.js"></script>
   <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
-
   <!-- ================== END BASE JS ================== -->
-
   <!-- ================== BEGIN PAGE LEVEL JS ================== -->
   <script src="../assets/js/apps.min.js"></script>
   <script src="../class/ajax/ajax.js"></script>
@@ -976,12 +1006,10 @@ require '../class/config/session_val.php';
   <script src="../class/menu/menu.js"></script>
   <script src="../class/login/killerSession.js"></script>
   <!-- ================== END PAGE LEVEL JS ================== -->
-
   <script>
   //globals-----------------------------------------------------
   var selectedIdUser='';
   construirMenu();
-
   //------------------------------------------------------------
   $(document).ready(function() {
     var fila;
@@ -990,13 +1018,11 @@ require '../class/config/session_val.php';
     App.init();
     search(1);
     iniciarSelect();
-
     $(".datepicker-default").datepicker({
       todayHighlight: !0,
-       autoclose: true,
+      autoclose: true,
       format: 'dd/mm/yyyy'
     })
-
   });
   var tipoBien =[
     <?php for($i=0;$i<sizeof($rs_tipobien);$i++)

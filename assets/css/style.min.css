@@ -2023,6 +2023,9 @@ to {
 .header-success{
       background-color: #26A69A;
 }
+.header-info{
+   background-color:#03A9F4;
+}
 
 
 .modal-header .close {

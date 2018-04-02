@@ -12,7 +12,7 @@ class usuarios extends conectar
 
 	function get_usuarios($limit,$offset,$parametro){
 		$sql="select u.usr_id,u.usr_login,(p.ape_paterno||' '||p.ape_materno||', '||p.nombres) as completo,u.usr_niv,u.usr_idper,u.usr_est,p.ape_paterno,p.nombres
-		from USUARIO u inner join personal p on u.usr_idper=p.id_personal where u.usr_id<>'0' ";
+		from usuarios u inner join personal p on u.usr_idper=p.id_personal where u.usr_id<>'0' ";
 		if (!empty($parametro)) {
 			$sql=$sql. " and usr_id like '%".strtoupper($parametro)."%' or usr_login like '%".strtoupper($parametro)."%' or (p.ape_paterno||' '||p.ape_materno||', '||p.nombres) like '%".strtoupper($parametro)."%' or usr_niv like '%".strtoupper($parametro)."%' or usr_idper like '%".strtoupper($parametro)."%'";
 		}
@@ -26,7 +26,7 @@ class usuarios extends conectar
 
 	function Get_pages($parametro){
 		$sql="select count(A.*) as cuenta from (select u.usr_id,u.usr_login,(p.ape_paterno||' '||p.ape_materno||', '||p.nombres) as completo,u.usr_niv,u.usr_idper,u.usr_est,p.ape_paterno,p.nombres
-		from USUARIO u inner join personal p on u.usr_idper=p.id_personal where u.usr_id<>'0'";
+		from usuarios u inner join personal p on u.usr_idper=p.id_personal where u.usr_id<>'0'";
 		if (!empty($parametro)) {
 			$sql=$sql." and usr_id like '%".strtoupper($parametro)."%' or usr_login like '%".strtoupper($parametro)."%' or (p.ape_paterno||' '||p.ape_materno||', '||p.nombres) like '%".strtoupper($parametro)."%' or usr_niv like '%".strtoupper($parametro)."%' or usr_idper like '%".strtoupper($parametro)."%'";
 		}

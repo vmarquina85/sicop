@@ -783,5 +783,20 @@ function procesoDepreciacion(){
       }
     });
   }
+}
+function imprimirCodbar(objeto) {
+  fila=objeto.closest('tr');
+  var codigo=fila.getElementsByTagName('td')[4].innerHTML;
+  var tipbien=fila.getElementsByTagName('td')[5].innerHTML
+  JsBarcode("#bc_code128", codigo,
+  {
+    displayValue:true,
+    height: 50,
+    width: 2,
+    textMargin: 0
+  });
+  document.getElementById('bc_tipoBien').innerHTML=tipbien;
+  // document.getElementById('bc_valor').innerHTML=codigo;
+  $('#md_codigoBarra').modal('toggle');
 
 }

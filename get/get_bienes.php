@@ -24,8 +24,8 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
         <img title='Editar' src="../assets/img/page_edit.png" alt="">
       </a>
     </td>
-      <td  onclick='reporteBien(this)' class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
-        <img title='Imprimir' src="../assets/img/printer.png" alt="">
+      <td  onclick='imprimirCodbar(this)' class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
+        <img title='Imprimir código de barras' src="../assets/img/barcode.png" alt="">
       </a></td>
       <!-- <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
         <img title='Dar de Alta' src="../assets/img/arrow_up.png" alt="">
