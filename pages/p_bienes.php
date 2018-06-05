@@ -2,6 +2,7 @@
 require '../class/parametricas/entidad_parametrica_cls.php';
 require '../class/config/preconfig_cls.php';
 require '../class/config/session_val.php';
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -55,18 +56,21 @@ require '../class/config/session_val.php';
     height:24px;
   }
   @media print {
-      .myDivToPrint {
-          background-color: white;
-          height: 100%;
-          width: 100%;
-          position: fixed;
-          top: 0;
-          left: 0;
-          margin: 0;
-          padding: 15px;
-          font-size: 14px;
-          line-height: 18px;
-      }
+    .myDivToPrint {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+  .logomuni{
+    display: inline-block;
   }
   </style>
 </head>
@@ -135,824 +139,824 @@ require '../class/config/session_val.php';
     </div>
 
     <div id="content" class="content">
-<!-- INICIO AKI -->
-<div class="hidden-print">
+      <!-- INICIO AKI -->
+      <div class="hidden-print">
 
 
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <div class="panel-heading-btn">
+              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+              <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            </div>
+            <h4 class="panel-title">Administración de Bienes</h4>
           </div>
-          <h4 class="panel-title">Administración de Bienes</h4>
+
+          <div class="panel-body">
+
+            <div class='bg-grey-200  m-b-10 '>
+              <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
+              <button class="btn btn-default btn-xs m-b-10 m-t-10 " onclick="exportar_excel()"><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
+              <div class="progress-status hide pull-right"><img src="../assets/img/Rolling.gif" class=' m-t-10 m-r-10'></div>
+              <button class="btn btn-default btn-xs m-b-10 m-t-10 m-r-10 pull-right" onclick="procesoDepreciacion()"><img src="../assets/img/dollar.png" alt="Depreciar Bienes"> Depreciar Bienes</button>
+            </div>
+
+
+            <form class='form-inline' method='POST' id='panelForm'>
+              <select onchange="search(1)" id="sl_tipobien" data-click="panel-refresh" class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <option value="*">TODOS</option>
+                <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
+                  <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
+                <?php  }?>
+
+              </select>
+              <div class="form-group  form-group-sm  m-r-10 m-b-5">
+                <input type="text" class="form-control" id="txt_codpatrimonial"  placeholder="Cod. Patrimonial" />
+              </div>
+              <div class="form-group  form-group-sm m-r-10 m-b-5">
+                <input type="text" class="form-control" id="txt_serie"  placeholder="Serie" />
+              </div>
+              <div class="form-group  form-group-sm m-r-10 m-b-5">
+                <input type="text" class="form-control" id="txt_codinterno"  placeholder="Cod. Interno" />
+              </div>
+              <div class="form-group  form-group-sm m-r-10 m-b-5">
+                <input type="text" class="form-control" id="txt_docalta"  placeholder="Doc. de Alta" />
+              </div> <br>
+              <select onchange='search(1)' id="sl_Operativo" class=' default-select2 form-control input-sm m-r-10  m-b-5'>
+                <option value="*" disabled selected>Operativo</option>
+                <option value="*">TODOS</option>
+                <?php for ($i=0; $i < sizeof($rs_operativo) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_operativo[$i]['id_dep']);?>"><?php echo utf8_encode($rs_operativo[$i]['descripcion']); ?></option>
+                <?php  }?>
+              </select>
+              <select onchange='search(1)' id="sl_Marca" class='default-select2 select form-control input-sm m-r-10  m-b-5'>
+                <option value="*" disabled selected>Marca</option>
+                <option value="*">TODOS</option>
+                <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
+                  <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
+                <?php  }?>
+              </select>
+              <select onchange='search(1)' id="sl_Asignacion" class='form-control input-sm m-r-10  m-b-5'>
+                <option value="*" disabled selected>Asignación</option>
+                <option value="*">TODOS</option>
+                <option value="A">ASIGNADOS</option>
+                <option value="N">NO ASIGNADOS</option>
+              </select>
+              <select onchange='search(1)' id="sl_estado" class='form-control input-sm m-r-10  m-b-5'>
+                <option value="*" disabled selected>Estado</option>
+                <option value="*">TODOS</option>
+                <option value="A">ACTIVO</option>
+                <option value="B">DE BAJA</option>
+              </select>
+              <div onclick='search(1)' class="btn btn-info btn-sm m-b-5 submit"><i class="fa fa-search"></i> Buscar</div>
+              <div onclick='vertodos()' class="btn btn-default btn-sm m-b-5"><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</div>
+            </form>
+            <br>
+            <ul id='paginator' class="pagination">
+            </ul>
+            <div class='table-responsive'>
+              <table id='data-table' class='table table-bordered table-hover f-s-11'>
+                <thead>
+                  <tr>
+                    <th colspan="4" class='p-0 text-center  bg-grey-200'>Acciones</th>
+                    <th class='p-0 text-center  bg-grey-200'>Patrimonial</th>
+                    <th class='p-0 text-center  bg-grey-200'>Tipo de Bien</th>
+                    <th class='p-0 text-center  bg-grey-200'>Marca</th>
+                    <th class='p-0 text-center  bg-grey-200'>Fec Adq</th>
+                    <th class='p-0 text-center  bg-grey-200'>Est Fisico</th>
+                    <th class='p-0 text-center  bg-grey-200'>Valor Adq</th>
+                    <th class='p-0 text-center  bg-grey-200'>Valor Libro</th>
+                    <th class='p-0 text-center  bg-grey-200'>Doc. Alta</th>
+                    <th class='p-0 text-center  bg-grey-200'>Dependencia</th>
+                    <th class='p-0 text-center  bg-grey-200'>Area</th>
+                    <th class='p-0 text-center  bg-grey-200'>Asignado</th>
+                    <th class='p-0 text-center  bg-grey-200'>Estado</th>
+                    <th class='p-0 text-center  bg-grey-200'>Id Interno</th>
+                    <th class='p-0 text-center  bg-grey-200'>Reg por</th>
+                    <th class='p-0 text-center  bg-grey-200'>Fecha reg</th>
+                    <th class='p-0 text-center  bg-grey-200'>Mod por</th>
+                  </tr>
+                </thead>
+                <tbody id='tb_detalle_bienes'>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <div class="panel-body">
-
-          <div class='bg-grey-200  m-b-10 '>
-            <button class="btn btn-default btn-xs m-b-10 m-t-10  m-l-10" onclick='javascript:nuevoRegistro();'><img src="../assets/img/new_reg.png" alt="Nuevo Registro"> Nuevo Registro</button>
-            <button class="btn btn-default btn-xs m-b-10 m-t-10 " onclick="exportar_excel()"><img src="../assets/img/excel.png" alt="Exportar excel"> Exportar a Excel</button>
-            <div class="progress-status hide pull-right"><img src="../assets/img/Rolling.gif" class=' m-t-10 m-r-10'></div>
-            <button class="btn btn-default btn-xs m-b-10 m-t-10 m-r-10 pull-right" onclick="procesoDepreciacion()"><img src="../assets/img/dollar.png" alt="Depreciar Bienes"> Depreciar Bienes</button>
-          </div>
-
-
-          <form class='form-inline' method='POST' id='panelForm'>
-            <select onchange="search(1)" id="sl_tipobien" data-click="panel-refresh" class='default-select2 form-control input-sm m-r-10 m-b-15'>
-              <option value="*">TODOS</option>
-              <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
-                <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
-              <?php  }?>
-
-            </select>
-            <div class="form-group  form-group-sm  m-r-10 m-b-5">
-              <input type="text" class="form-control" id="txt_codpatrimonial"  placeholder="Cod. Patrimonial" />
-            </div>
-            <div class="form-group  form-group-sm m-r-10 m-b-5">
-              <input type="text" class="form-control" id="txt_serie"  placeholder="Serie" />
-            </div>
-            <div class="form-group  form-group-sm m-r-10 m-b-5">
-              <input type="text" class="form-control" id="txt_codinterno"  placeholder="Cod. Interno" />
-            </div>
-            <div class="form-group  form-group-sm m-r-10 m-b-5">
-              <input type="text" class="form-control" id="txt_docalta"  placeholder="Doc. de Alta" />
-            </div> <br>
-            <select onchange='search(1)' id="sl_Operativo" class=' default-select2 form-control input-sm m-r-10  m-b-5'>
-              <option value="*" disabled selected>Operativo</option>
-              <option value="*">TODOS</option>
-              <?php for ($i=0; $i < sizeof($rs_operativo) ; $i++) {  ?>
-                <option value="<?php echo utf8_encode($rs_operativo[$i]['id_dep']);?>"><?php echo utf8_encode($rs_operativo[$i]['descripcion']); ?></option>
-              <?php  }?>
-            </select>
-            <select onchange='search(1)' id="sl_Marca" class='default-select2 select form-control input-sm m-r-10  m-b-5'>
-              <option value="*" disabled selected>Marca</option>
-              <option value="*">TODOS</option>
-              <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
-                <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
-              <?php  }?>
-            </select>
-            <select onchange='search(1)' id="sl_Asignacion" class='form-control input-sm m-r-10  m-b-5'>
-              <option value="*" disabled selected>Asignación</option>
-              <option value="*">TODOS</option>
-              <option value="A">ASIGNADOS</option>
-              <option value="N">NO ASIGNADOS</option>
-            </select>
-            <select onchange='search(1)' id="sl_estado" class='form-control input-sm m-r-10  m-b-5'>
-              <option value="*" disabled selected>Estado</option>
-              <option value="*">TODOS</option>
-              <option value="A">ACTIVO</option>
-              <option value="B">DE BAJA</option>
-            </select>
-            <div onclick='search(1)' class="btn btn-info btn-sm m-b-5 submit"><i class="fa fa-search"></i> Buscar</div>
-            <div onclick='vertodos()' class="btn btn-default btn-sm m-b-5"><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</div>
-          </form>
-          <br>
-          <ul id='paginator' class="pagination">
-          </ul>
-          <div class='table-responsive'>
-            <table id='data-table' class='table table-bordered table-hover f-s-11'>
-              <thead>
-                <tr>
-                  <th colspan="4" class='p-0 text-center  bg-grey-200'>Acciones</th>
-                  <th class='p-0 text-center  bg-grey-200'>Patrimonial</th>
-                  <th class='p-0 text-center  bg-grey-200'>Tipo de Bien</th>
-                  <th class='p-0 text-center  bg-grey-200'>Marca</th>
-                  <th class='p-0 text-center  bg-grey-200'>Fec Adq</th>
-                  <th class='p-0 text-center  bg-grey-200'>Est Fisico</th>
-                  <th class='p-0 text-center  bg-grey-200'>Valor Adq</th>
-                  <th class='p-0 text-center  bg-grey-200'>Valor Libro</th>
-                  <th class='p-0 text-center  bg-grey-200'>Doc. Alta</th>
-                  <th class='p-0 text-center  bg-grey-200'>Dependencia</th>
-                  <th class='p-0 text-center  bg-grey-200'>Area</th>
-                  <th class='p-0 text-center  bg-grey-200'>Asignado</th>
-                  <th class='p-0 text-center  bg-grey-200'>Estado</th>
-                  <th class='p-0 text-center  bg-grey-200'>Id Interno</th>
-                  <th class='p-0 text-center  bg-grey-200'>Reg por</th>
-                  <th class='p-0 text-center  bg-grey-200'>Fecha reg</th>
-                  <th class='p-0 text-center  bg-grey-200'>Mod por</th>
-                </tr>
-              </thead>
-              <tbody id='tb_detalle_bienes'>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div id='mymodal' class="modal fade"  aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header header-success">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Registro de Bienes</h4>
-            </div>
-            <div class="modal-body">
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#datosbien" data-toggle="tab" aria-expanded="false"><img src="../assets/img/bienes.png" alt=""> Datos del Bien</a></li>
-                <li class=""><a href="#datosUsuarios" data-toggle="tab" aria-expanded="false"><img src="../assets/img/usuario.png" alt=""> Usuario Asignado</a></li>
-                <li class=""><a href="#detallesTecnico" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Técnicos</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane fade active in" id="datosbien">
-                  <form id='datosBien'>
-                    <!-- fila 1 -->
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm" >Denominación</span>
-                      <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
-                    </div>
-                    <!-- fila2 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Grupo Genérico</span>
-                          <input id='txt_grupo' type="text" class="form-control input-sm" disabled >
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Clase</span>
-                          <input id='txt_clase' type="text" class="form-control input-sm" disabled>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 3 -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Codigo Patrimonial</span>
-                          <input id='txt_prefix'  onchange="ValidaSoloNumeros()" type="text" class="form-control input-sm" disabled >
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Nro Generado</span>
-                          <input id='txt_correlativo' type="text" class="form-control txt-red input-sm" disabled >
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila 4 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Tipo de Cta.</span>
-                          <select id='sl_tipoCuenta' onchange='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable")' class="form-control input-sm">
-                            <option value="">-- Seleccione Tipo --</option>
-                            <option value="E">DE USO ESTATAL</option>
-                            <option value="P">DE USO PRIVADO</option>
-                          </select>
-                        </div>
-
-                      </div>
-                      <div class="col-md-6">
-                        <div class="radio">
-                          <label>
-                            <input name="rtipocta" onclick='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable")' checked type="radio" value="A"/>
-                            Activo Fijo
-                          </label>
-                          <label>
-                            <input name="rtipocta" onclick='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable") 'type="radio" value="O"/>
-                            Cuenta de Orden
-                          </label>
-                        </div>
-                      </div>
-
-                    </div>
-                    <!-- fila 5 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Cuenta Contable</span>
-                          <select   id="sl_CuentaContable"  class='form-control input-sm'>
-                            <option value="">-- Seleccione Cuenta --</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 6 -->
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Forma Adq.</span>
-                          <select id="sl_formAdq" class='form-control input-sm'>
-                            <option value="">-- Seleccione Forma --</option>
-                            <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
-                              <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-
-                      </div>
-                      <div class="col-md-3">
-                        <div class="input-group m-b-5 ">
-
-                          <input type="text" class="form-control input-sm datepicker-default" id="txt_fechaAdq" placeholder="Fecha Adq." >
-                          <span class="input-group-addon input-sm">
-                            <img src="../assets/img/date.png" alt="">
-                          </span>
-                        </div>
-
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Cod. Interno</span>
-                          <input id='txt_codInterno' type="text" class='form-control input-sm' style="text-transform:uppercase;">
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila7 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Resolución alta</span>
-                          <input id='txt_resAlta' type="text" class='form-control input-sm' >
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila 8 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Valor Adq.</span>
-                          <input  id='txt_valoradq' onkeypress="ValidaSoloDec()" type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Valor Libros</span>
-                          <input id='txt_valorlib' onkeypress="ValidaSoloDec()"  type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 9 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Estado del Bien</span>
-                          <select name="" id="sl_estadoBien" class='form-control input-sm'>
-                            <option value="">-- Seleccione Estado --</option>
-                            <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
-                              <option value="<?php echo $rs_estado[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="checkbox">
-                          <label>
-                            <input id='cb_asegurado' type="checkbox" value="">
-                            Asegurado
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-
-                <div class="tab-pane fade" id="datosUsuarios">
-                  <form id='form_usuario'>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Usuario</span>
-                      <select onchange='llenarPersonalDestino(1);' id="sl_usuarioAsignado"  class='form-control input-sm'>
-                        <option value="*">--Seleccionar Asignado--</option>
-                        <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
-                          <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
-                        <?php  }?>
-                      </select>
-                    </div>
-                    <div id='datosDestino'>
+        <div id='mymodal' class="modal fade"  aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header header-success">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title text-white">Registro de Bienes</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#datosbien" data-toggle="tab" aria-expanded="false"><img src="../assets/img/bienes.png" alt=""> Datos del Bien</a></li>
+                  <li class=""><a href="#datosUsuarios" data-toggle="tab" aria-expanded="false"><img src="../assets/img/usuario.png" alt=""> Usuario Asignado</a></li>
+                  <li class=""><a href="#detallesTecnico" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Técnicos</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane fade active in" id="datosbien">
+                    <form id='datosBien'>
+                      <!-- fila 1 -->
                       <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Local</span>
-                        <select name="" id="sl_localAsignado" class='form-control input-sm' disabled>
-                          <option value="">-- Seleccione local --</option>
+                        <span class="input-group-addon input-sm" >Denominación</span>
+                        <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
+                      </div>
+                      <!-- fila2 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Grupo Genérico</span>
+                            <input id='txt_grupo' type="text" class="form-control input-sm" disabled >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Clase</span>
+                            <input id='txt_clase' type="text" class="form-control input-sm" disabled>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 3 -->
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Codigo Patrimonial</span>
+                            <input id='txt_prefix'  onchange="ValidaSoloNumeros()" type="text" class="form-control input-sm" disabled >
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Nro Generado</span>
+                            <input id='txt_correlativo' type="text" class="form-control txt-red input-sm" disabled >
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila 4 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Tipo de Cta.</span>
+                            <select id='sl_tipoCuenta' onchange='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable")' class="form-control input-sm">
+                              <option value="">-- Seleccione Tipo --</option>
+                              <option value="E">DE USO ESTATAL</option>
+                              <option value="P">DE USO PRIVADO</option>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <div class="radio">
+                            <label>
+                              <input name="rtipocta" onclick='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable")' checked type="radio" value="A"/>
+                              Activo Fijo
+                            </label>
+                            <label>
+                              <input name="rtipocta" onclick='ObtenerCuentas("sl_tipoCuenta","rtipocta","sl_CuentaContable") 'type="radio" value="O"/>
+                              Cuenta de Orden
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- fila 5 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Cuenta Contable</span>
+                            <select   id="sl_CuentaContable"  class='form-control input-sm'>
+                              <option value="">-- Seleccione Cuenta --</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 6 -->
+                      <div class="row">
+                        <div class="col-md-5">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Forma Adq.</span>
+                            <select id="sl_formAdq" class='form-control input-sm'>
+                              <option value="">-- Seleccione Forma --</option>
+                              <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
+                                <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="col-md-3">
+                          <div class="input-group m-b-5 ">
+
+                            <input type="text" class="form-control input-sm datepicker-default" id="txt_fechaAdq" placeholder="Fecha Adq." >
+                            <span class="input-group-addon input-sm">
+                              <img src="../assets/img/date.png" alt="">
+                            </span>
+                          </div>
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Cod. Interno</span>
+                            <input id='txt_codInterno' type="text" class='form-control input-sm' style="text-transform:uppercase;">
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila7 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Resolución alta</span>
+                            <input id='txt_resAlta' type="text" class='form-control input-sm' >
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila 8 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Valor Adq.</span>
+                            <input  id='txt_valoradq' onkeypress="ValidaSoloDec()" type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Valor Libros</span>
+                            <input id='txt_valorlib' onkeypress="ValidaSoloDec()"  type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 9 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Estado del Bien</span>
+                            <select name="" id="sl_estadoBien" class='form-control input-sm'>
+                              <option value="">-- Seleccione Estado --</option>
+                              <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
+                                <option value="<?php echo $rs_estado[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="checkbox">
+                            <label>
+                              <input id='cb_asegurado' type="checkbox" value="">
+                              Asegurado
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="tab-pane fade" id="datosUsuarios">
+                    <form id='form_usuario'>
+                      <div class="input-group m-b-5 ">
+                        <span class="input-group-addon input-sm">Usuario</span>
+                        <select onchange='llenarPersonalDestino(1);' id="sl_usuarioAsignado"  class='form-control input-sm'>
+                          <option value="*">--Seleccionar Asignado--</option>
+                          <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
+                            <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
+                          <?php  }?>
                         </select>
                       </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Area</span>
-                        <select name="" id="sl_areaAsignado" class='form-control input-sm' disabled>
-                          <option value="">-- Seleccione Area --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Oficina</span>
-                        <select name="" id="sl_oficinaAsignado" class='form-control input-sm' disabled>
-                          <option value="">-- Seleccione Oficina --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Cargo</span>
-                        <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
-                          <option value="">-- Seleccione Cargo --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">DNI</span>
-                        <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade" id="detallesTecnico">
-                  <form id='form_detaTecnico'>
-                    <div class="row">
-                      <div class="col-md-4">
+                      <div id='datosDestino'>
                         <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Marca</span>
-                          <select name="" id="sl_marcaBien" class='form-control input-sm'>
-                            <option value="">-- Seleccione Marca --</option>
-                            <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
-                              <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
-                            <?php  }?>
+                          <span class="input-group-addon input-sm">Local</span>
+                          <select name="" id="sl_localAsignado" class='form-control input-sm' disabled>
+                            <option value="">-- Seleccione local --</option>
                           </select>
                         </div>
-                      </div>
-                      <div class="col-md-4">
                         <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Modelo</span>
-                          <input id='txt_modeloBien' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Tipo</span>
-                          <input id='txt_tipoBien' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- fila 12 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Dimensión</span>
-                          <input id='txt_dimension' type="text" maxlength="15" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 13 -->
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Color</span>
-                          <select name="" id="sl_colorBien" class='form-control input-sm'>
-                            <option value="">-- Seleccione Color --</option>
-                            <?php for ($i=0; $i < sizeof($rs_colores) ; $i++) {  ?>
-                              <option value="<?php echo utf8_encode($rs_colores[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_colores[$i]['descripcion']); ?></option>
-                            <?php  }?>
+                          <span class="input-group-addon input-sm">Area</span>
+                          <select name="" id="sl_areaAsignado" class='form-control input-sm' disabled>
+                            <option value="">-- Seleccione Area --</option>
                           </select>
                         </div>
-                      </div>
-                      <div class="col-md-4">
                         <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Serie</span>
-                          <input id='txt_serieBien' type="text" class='form-control input-sm' >
+                          <span class="input-group-addon input-sm">Oficina</span>
+                          <select name="" id="sl_oficinaAsignado" class='form-control input-sm' disabled>
+                            <option value="">-- Seleccione Oficina --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Cargo</span>
+                          <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                            <option value="">-- Seleccione Cargo --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">DNI</span>
+                          <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Placa</span>
-                          <input id='txt_placaBien' type="text" class='form-control input-sm' >
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="detallesTecnico">
+                    <form id='form_detaTecnico'>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Marca</span>
+                            <select name="" id="sl_marcaBien" class='form-control input-sm'>
+                              <option value="">-- Seleccione Marca --</option>
+                              <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
+                                <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Modelo</span>
+                            <input id='txt_modeloBien' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Tipo</span>
+                            <input id='txt_tipoBien' type="text" class='form-control input-sm' >
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- fila 14 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Nro Motor</span>
-                          <input id='txt_MotorBien' type="text" class='form-control input-sm' >
+
+                      <!-- fila 12 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Dimensión</span>
+                            <input id='txt_dimension' type="text" maxlength="15" class='form-control input-sm' >
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Nro Chasis</span>
-                          <input id='txt_chasisBien' type="text" class='form-control input-sm' >
+                      <!-- fila 13 -->
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Color</span>
+                            <select name="" id="sl_colorBien" class='form-control input-sm'>
+                              <option value="">-- Seleccione Color --</option>
+                              <?php for ($i=0; $i < sizeof($rs_colores) ; $i++) {  ?>
+                                <option value="<?php echo utf8_encode($rs_colores[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_colores[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Serie</span>
+                            <input id='txt_serieBien' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Placa</span>
+                            <input id='txt_placaBien' type="text" class='form-control input-sm' >
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- fila 15 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Observación</span>
-                          <textarea name="" id="ta_observacionBien" rows="3" class='form-control'></textarea>
+                      <!-- fila 14 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Nro Motor</span>
+                            <input id='txt_MotorBien' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Nro Chasis</span>
+                            <input id='txt_chasisBien' type="text" class='form-control input-sm' >
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <!-- fila 15 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Observación</span>
+                            <textarea name="" id="ta_observacionBien" rows="3" class='form-control'></textarea>
+                          </div>
+                        </div>
+                      </div>
 
 
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
 
 
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:crearBien();" class="btn btn-sm btn-success">Registrar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id='modal_edit' class="modal fade"  aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header header-warning">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Editar Bien</h4>
-            </div>
-            <div class="modal-body">
-              <ul class="nav nav-tabs">
-                <li id='tabUpdt1' class="active"><a href="#datosbienUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/bienes.png" alt=""> Datos del Bien</a></li>
-                <li id='tabUpdt2' class=""><a href="#datosUsuariosUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/usuario.png" alt=""> Usuario Asignado</a></li>
-                <li id='tabUpdt3' class=""><a href="#detallesTecnicoUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Tecnicos</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane fade active in" id="datosbienUpdt">
-                  <form id='datosBien'>
-                    <!-- fila 1 -->
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm" >Denominación</span>
-                      <input id='txt_bienDescripcionUpdt' onchange="LlenarDatosBien('txt_bienDescripcionUpdt','txt_prefixUpdt','txt_grupoUpdt','txt_claseUpdt')" type="text" class="form-control input-sm" disabled >
-                    </div>
-                    <!-- fila2 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Grupo Genérico</span>
-                          <input id='txt_grupoUpdt' type="text" class="form-control input-sm" disabled >
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Clase</span>
-                          <input id='txt_claseUpdt' type="text" class="form-control input-sm" disabled>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 3 -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Codigo Patrimonial</span>
-                          <input id='txt_prefixUpdt'  onchange="ValidaSoloNumeros()" type="text" class="form-control input-sm" disabled >
-                        </div>
-                      </div>
-                      <div class="col-md-2">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Nro Generado</span>
-                          <input id='txt_correlativoUpdt' type="text" class="form-control txt-red input-sm" disabled >
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila 4 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm" >Tipo de Cta.</span>
-                          <select id='sl_tipoCuentaUpdt' onchange='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' class="form-control input-sm">
-                            <option value="">-- Seleccione Tipo --</option>
-                            <option value="E">DE USO ESTATAL</option>
-                            <option value="P">DE USO PRIVADO</option>
-                          </select>
-                        </div>
-
-                      </div>
-                      <div class="col-md-6">
-                        <div class="radio">
-                          <label>
-                            <input name="rtipoctaUpdt" onclick='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' checked type="radio" value="A"/>
-                            Activo Fijo
-                          </label>
-                          <label>
-                            <input name="rtipoctaUpdt" onclick='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' type="radio" value="O"/>
-                            Cuenta de Orden
-                          </label>
-                        </div>
-                      </div>
-
-                    </div>
-                    <!-- fila 5 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Cuenta Contable</span>
-                          <select   id="sl_CuentaContableUpdt"  class='form-control input-sm'>
-                            <option value="">-- Seleccione Cuenta --</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 6 -->
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Forma Adq.</span>
-                          <select id="sl_formAdqUpdt" class='form-control input-sm'>
-                            <option value="">-- Seleccione Forma --</option>
-                            <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
-                              <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-
-                      </div>
-                      <div class="col-md-3">
-                        <div class="input-group m-b-5 ">
-
-                          <input type="text" class="form-control input-sm datepicker-default" id="txt_fechaAdqUpdt" placeholder="Fecha Adq." >
-                          <span class="input-group-addon input-sm">
-                            <img src="../assets/img/date.png" alt="">
-                          </span>
-                        </div>
-
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Cod. Interno</span>
-                          <input id='txt_codInternoUpdt' type="text" class='form-control input-sm' style="text-transform:uppercase;">
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila7 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Resolución alta</span>
-                          <input id='txt_resAltaUpdt' type="text" class='form-control input-sm' >
-                        </div>
-
-                      </div>
-                    </div>
-                    <!-- fila 8 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Valor Adq.</span>
-                          <input  id='txt_valoradqUpdt' onkeypress="ValidaSoloDec()" type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Valor Libros</span>
-                          <input id='txt_valorlibUpdt' onkeypress="ValidaSoloDec()"  type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 9 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Estado del Bien</span>
-                          <select name="" id="sl_estadoBienUpdt" class='form-control input-sm'>
-                            <option value="">-- Seleccione Estado --</option>
-                            <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
-                              <option value="<?php echo $rs_estado[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="checkbox">
-                          <label>
-                            <input id='cb_aseguradoUpdt' type="checkbox" value="">
-                            Asegurado
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade" id="datosUsuariosUpdt">
-                  <form id='form_usuario'>
-                    <div class="input-group m-b-5 ">
-                      <span class="input-group-addon input-sm">Usuario</span>
-                      <select onchange='llenarPersonalDestino(2);' id="sl_usuarioAsignadoUpdt"  class='form-control input-sm' disabled>
-                        <option value="*">--Seleccionar Asignado--</option>
-                        <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
-                          <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
-                        <?php  }?>
-                      </select>
-                    </div>
-                    <div id='datosDestinoUpdt'>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Local</span>
-                        <select name="" id="sl_localAsignado" class='form-control input-sm'>
-                          <option value="">-- Seleccione local --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Area</span>
-                        <select name="" id="sl_areaAsignado" class='form-control input-sm'>
-                          <option value="">-- Seleccione Area --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Oficina</span>
-                        <select name="" id="sl_oficinaAsignado" class='form-control input-sm'>
-                          <option value="">-- Seleccione Oficina --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">Cargo</span>
-                        <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
-                          <option value="">-- Seleccione Cargo --</option>
-                        </select>
-                      </div>
-                      <div class="input-group m-b-5 ">
-                        <span class="input-group-addon input-sm">DNI</span>
-                        <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-
-                <div class="tab-pane fade" id="detallesTecnicoUpdt">
-                  <form id='form_detaTecnico'>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Marca</span>
-                          <select name="" id="sl_marcaBienUpdt" class='form-control input-sm'>
-                            <option value="">-- Seleccione Marca --</option>
-                            <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
-                              <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Modelo</span>
-                          <input id='txt_modeloBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Tipo</span>
-                          <input id='txt_tipoBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- fila 12 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Dimensión</span>
-                          <input id='txt_dimensionUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 13 -->
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Color</span>
-                          <select name="" id="sl_colorBienUpdt" class='form-control input-sm'>
-                            <option value="">-- Seleccione Color --</option>
-                            <?php for ($i=0; $i < sizeof($rs_colores) ; $i++) {  ?>
-                              <option value="<?php echo utf8_encode($rs_colores[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_colores[$i]['descripcion']); ?></option>
-                            <?php  }?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Serie</span>
-                          <input id='txt_serieBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Placa</span>
-                          <input id='txt_placaBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 14 -->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Nro Motor</span>
-                          <input id='txt_MotorBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Nro Chasis</span>
-                          <input id='txt_chasisBienUpdt' type="text" class='form-control input-sm' >
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fila 15 -->
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="input-group m-b-5 ">
-                          <span class="input-group-addon input-sm">Observación</span>
-                          <textarea name="" id="ta_observacionBienUpdt" rows="3" class='form-control'></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+              <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                <a href="javascript:crearBien();" class="btn btn-sm btn-success">Registrar</a>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div id='modal_edit' class="modal fade"  aria-hidden="true" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header header-warning">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title text-white">Editar Bien</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs">
+                  <li id='tabUpdt1' class="active"><a href="#datosbienUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/bienes.png" alt=""> Datos del Bien</a></li>
+                  <li id='tabUpdt2' class=""><a href="#datosUsuariosUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/usuario.png" alt=""> Usuario Asignado</a></li>
+                  <li id='tabUpdt3' class=""><a href="#detallesTecnicoUpdt" data-toggle="tab" aria-expanded="false"><img src="../assets/img/tecnico.png" alt=""> Detalles Tecnicos</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane fade active in" id="datosbienUpdt">
+                    <form id='datosBien'>
+                      <!-- fila 1 -->
+                      <div class="input-group m-b-5 ">
+                        <span class="input-group-addon input-sm" >Denominación</span>
+                        <input id='txt_bienDescripcionUpdt' onchange="LlenarDatosBien('txt_bienDescripcionUpdt','txt_prefixUpdt','txt_grupoUpdt','txt_claseUpdt')" type="text" class="form-control input-sm" disabled >
+                      </div>
+                      <!-- fila2 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Grupo Genérico</span>
+                            <input id='txt_grupoUpdt' type="text" class="form-control input-sm" disabled >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Clase</span>
+                            <input id='txt_claseUpdt' type="text" class="form-control input-sm" disabled>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 3 -->
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Codigo Patrimonial</span>
+                            <input id='txt_prefixUpdt'  onchange="ValidaSoloNumeros()" type="text" class="form-control input-sm" disabled >
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Nro Generado</span>
+                            <input id='txt_correlativoUpdt' type="text" class="form-control txt-red input-sm" disabled >
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila 4 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm" >Tipo de Cta.</span>
+                            <select id='sl_tipoCuentaUpdt' onchange='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' class="form-control input-sm">
+                              <option value="">-- Seleccione Tipo --</option>
+                              <option value="E">DE USO ESTATAL</option>
+                              <option value="P">DE USO PRIVADO</option>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <div class="radio">
+                            <label>
+                              <input name="rtipoctaUpdt" onclick='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' checked type="radio" value="A"/>
+                              Activo Fijo
+                            </label>
+                            <label>
+                              <input name="rtipoctaUpdt" onclick='ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt")' type="radio" value="O"/>
+                              Cuenta de Orden
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- fila 5 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Cuenta Contable</span>
+                            <select   id="sl_CuentaContableUpdt"  class='form-control input-sm'>
+                              <option value="">-- Seleccione Cuenta --</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 6 -->
+                      <div class="row">
+                        <div class="col-md-5">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Forma Adq.</span>
+                            <select id="sl_formAdqUpdt" class='form-control input-sm'>
+                              <option value="">-- Seleccione Forma --</option>
+                              <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
+                                <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="col-md-3">
+                          <div class="input-group m-b-5 ">
+
+                            <input type="text" class="form-control input-sm datepicker-default" id="txt_fechaAdqUpdt" placeholder="Fecha Adq." >
+                            <span class="input-group-addon input-sm">
+                              <img src="../assets/img/date.png" alt="">
+                            </span>
+                          </div>
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Cod. Interno</span>
+                            <input id='txt_codInternoUpdt' type="text" class='form-control input-sm' style="text-transform:uppercase;">
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila7 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Resolución alta</span>
+                            <input id='txt_resAltaUpdt' type="text" class='form-control input-sm' >
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- fila 8 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Valor Adq.</span>
+                            <input  id='txt_valoradqUpdt' onkeypress="ValidaSoloDec()" type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Valor Libros</span>
+                            <input id='txt_valorlibUpdt' onkeypress="ValidaSoloDec()"  type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 9 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Estado del Bien</span>
+                            <select name="" id="sl_estadoBienUpdt" class='form-control input-sm'>
+                              <option value="">-- Seleccione Estado --</option>
+                              <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
+                                <option value="<?php echo $rs_estado[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="checkbox">
+                            <label>
+                              <input id='cb_aseguradoUpdt' type="checkbox" value="">
+                              Asegurado
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="datosUsuariosUpdt">
+                    <form id='form_usuario'>
+                      <div class="input-group m-b-5 ">
+                        <span class="input-group-addon input-sm">Usuario</span>
+                        <select onchange='llenarPersonalDestino(2);' id="sl_usuarioAsignadoUpdt"  class='form-control input-sm' disabled>
+                          <option value="*">--Seleccionar Asignado--</option>
+                          <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
+                            <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
+                          <?php  }?>
+                        </select>
+                      </div>
+                      <div id='datosDestinoUpdt'>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Local</span>
+                          <select name="" id="sl_localAsignado" class='form-control input-sm'>
+                            <option value="">-- Seleccione local --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Area</span>
+                          <select name="" id="sl_areaAsignado" class='form-control input-sm'>
+                            <option value="">-- Seleccione Area --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Oficina</span>
+                          <select name="" id="sl_oficinaAsignado" class='form-control input-sm'>
+                            <option value="">-- Seleccione Oficina --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">Cargo</span>
+                          <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                            <option value="">-- Seleccione Cargo --</option>
+                          </select>
+                        </div>
+                        <div class="input-group m-b-5 ">
+                          <span class="input-group-addon input-sm">DNI</span>
+                          <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="tab-pane fade" id="detallesTecnicoUpdt">
+                    <form id='form_detaTecnico'>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Marca</span>
+                            <select name="" id="sl_marcaBienUpdt" class='form-control input-sm'>
+                              <option value="">-- Seleccione Marca --</option>
+                              <?php for ($i=0; $i < sizeof($rs_marca) ; $i++) {  ?>
+                                <option value="<?php echo utf8_encode($rs_marca[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_marca[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Modelo</span>
+                            <input id='txt_modeloBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Tipo</span>
+                            <input id='txt_tipoBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- fila 12 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Dimensión</span>
+                            <input id='txt_dimensionUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 13 -->
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Color</span>
+                            <select name="" id="sl_colorBienUpdt" class='form-control input-sm'>
+                              <option value="">-- Seleccione Color --</option>
+                              <?php for ($i=0; $i < sizeof($rs_colores) ; $i++) {  ?>
+                                <option value="<?php echo utf8_encode($rs_colores[$i]['id_tipo']); ?>"><?php echo utf8_encode($rs_colores[$i]['descripcion']); ?></option>
+                              <?php  }?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Serie</span>
+                            <input id='txt_serieBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Placa</span>
+                            <input id='txt_placaBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 14 -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Nro Motor</span>
+                            <input id='txt_MotorBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Nro Chasis</span>
+                            <input id='txt_chasisBienUpdt' type="text" class='form-control input-sm' >
+                          </div>
+                        </div>
+                      </div>
+                      <!-- fila 15 -->
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="input-group m-b-5 ">
+                            <span class="input-group-addon input-sm">Observación</span>
+                            <textarea name="" id="ta_observacionBienUpdt" rows="3" class='form-control'></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
 
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:UpdateBien();" class="btn btn-sm btn-warning" disabled>Actualizar</a>
+              <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                <a href="javascript:UpdateBien();" class="btn btn-sm btn-warning">Actualizar</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div id='alert' class="modal fade" aria-hidden="true" style="display: none;">
-        <div class="dialog-normal modal-dialog">
-          <div class="modal-content ">
-            <div class="modal-header header-danger">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Eliminar bien</h4>
-            </div>
-            <div class="modal-body">
-              <form id='alertform'>
-                <div class="alert alert-danger m-b-0">
-                  <p><i class="fa fa-info-circle"></i> Por favor, digite la causa para eliminar este bien.</p>
-                </div>
-                <br>
-                <textarea id="ta_causal" cols="2" rows="2" maxlength="100" style='resize:none;' class="form-control"></textarea>
-              </form>
+        <div id='alert' class="modal fade" aria-hidden="true" style="display: none;">
+          <div class="dialog-normal modal-dialog">
+            <div class="modal-content ">
+              <div class="modal-header header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title text-white">Eliminar bien</h4>
+              </div>
+              <div class="modal-body">
+                <form id='alertform'>
+                  <div class="alert alert-danger m-b-0">
+                    <p><i class="fa fa-info-circle"></i> Por favor, digite la causa para eliminar este bien.</p>
+                  </div>
+                  <br>
+                  <textarea id="ta_causal" cols="2" rows="2" maxlength="100" style='resize:none;' class="form-control"></textarea>
+                </form>
 
-            </div>
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:eliminarBien(fila);" class="btn btn-sm btn-danger">Elminar</a>
-            </div>
+              </div>
+              <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                <a href="javascript:eliminarBien(fila);" class="btn btn-sm btn-danger">Elminar</a>
+              </div>
 
-          </div>
-        </div>
-      </div>
-      <div id='alert2' class="modal fade" aria-hidden="true" style="display: none;">
-        <div class="dialog-normal modal-dialog">
-          <div class="modal-content ">
-            <div class="modal-header header-danger">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title text-white">Dar de Baja a bien</h4>
-            </div>
-            <div class="modal-body">
-              <form id='alertform2' class='form-horizontal'>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Resolución de Baja</label>
-                  <div class="col-md-9">
-                    <input id='txt_resBaja' type="text" class="form-control" placeholder="Ej:RES. 137-2016-GAF-SISOL/MML">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Fecha Resol:</label>
-                  <div class="col-md-9">
-                    <input id='txt_fechaBaja' type="text" class="form-control datepicker-default" placeholder="Haz click para seleccionar la fecha">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Causal Baja</label>
-                  <div class="col-md-9">
-                    <select id='sl_causalBaja' name="" id="" class='form-control'>
-                      <option value="">--Seleccione Causal--</option>
-                      <option value="5">DESTRUCCION O SINIESTRO</option>
-                      <option value="1">EXCEDENCIA</option>
-                      <option value="3">MANTENIMIENTO O REPERACION ONEROSA</option>
-                      <option value="2">OBSOLESCENCIA TECNICA</option>
-                      <option value="4">PERDIDA ROBO O SUSTRACCION</option>
-                      <option value="8">RAEE</option>
-                      <option value="6">REEMBOLSO O REPOSICION</option>
-                      <option value="7">SITUACION DE CHATARRA</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Doc. SBN N:</label>
-                  <div class="col-md-9">
-                    <input id='txt_docBaja' type="text" class="form-control" placeholder='Ej:O/C 392-2005'>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-              <a href="javascript:BajaBien(fila);" class="btn btn-sm btn-danger">Dar de Baja</a>
             </div>
           </div>
         </div>
-      </div>
+        <div id='alert2' class="modal fade" aria-hidden="true" style="display: none;">
+          <div class="dialog-normal modal-dialog">
+            <div class="modal-content ">
+              <div class="modal-header header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title text-white">Dar de Baja a bien</h4>
+              </div>
+              <div class="modal-body">
+                <form id='alertform2' class='form-horizontal'>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Resolución de Baja</label>
+                    <div class="col-md-9">
+                      <input id='txt_resBaja' type="text" class="form-control" placeholder="Ej:RES. 137-2016-GAF-SISOL/MML">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Fecha Resol:</label>
+                    <div class="col-md-9">
+                      <input id='txt_fechaBaja' type="text" class="form-control datepicker-default" placeholder="Haz click para seleccionar la fecha">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Causal Baja</label>
+                    <div class="col-md-9">
+                      <select id='sl_causalBaja' name="" id="" class='form-control'>
+                        <option value="">--Seleccione Causal--</option>
+                        <option value="5">DESTRUCCION O SINIESTRO</option>
+                        <option value="1">EXCEDENCIA</option>
+                        <option value="3">MANTENIMIENTO O REPERACION ONEROSA</option>
+                        <option value="2">OBSOLESCENCIA TECNICA</option>
+                        <option value="4">PERDIDA ROBO O SUSTRACCION</option>
+                        <option value="8">RAEE</option>
+                        <option value="6">REEMBOLSO O REPOSICION</option>
+                        <option value="7">SITUACION DE CHATARRA</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">Doc. SBN N:</label>
+                    <div class="col-md-9">
+                      <input id='txt_docBaja' type="text" class="form-control" placeholder='Ej:O/C 392-2005'>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
+                <a href="javascript:BajaBien(fila);" class="btn btn-sm btn-danger">Dar de Baja</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<!-- TERMINA AKI -->
-</div>
+        <!-- TERMINA AKI -->
+      </div>
       <div class="modal fade" id="md_codigoBarra" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="dialog-normal modal-dialog">
           <div class="modal-content">
@@ -962,7 +966,13 @@ require '../class/config/session_val.php';
             </div>
             <div class="modal-body">
               <div class="text-center">
-                    <h5 id='bc_tipoBien' class='p-0 m-0'></h5>
+                <div class="logomuni">
+                  <img src="../assets/img/logo.png" style="width:32px;height:32px;vertical-align:middle;" alt="">
+                  <div style="display:inline;">
+                    SISTEMA METROPOLITANO DE LA SOLIDARIDAD
+                  </div>
+                </div>
+                <h6 id='bc_tipoBien' class='p-0 m-0'></h6>
                 <svg id="bc_code128" class='p-0 m-0'></svg>
                 <!-- <h5 id='bc_valor' class='pager-0'></h5> -->
               </div>
@@ -1040,5 +1050,5 @@ require '../class/config/session_val.php';
     source: tipoBien
   });
   </script>
-</body>
-</html>
+  </body>
+  </html>

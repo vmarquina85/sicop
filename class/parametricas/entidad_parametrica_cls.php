@@ -97,10 +97,20 @@ class parametricas extends conectar
 		left join tablatipo d on a.id_cargo=d.id_tipo and d.id_tabla='10'
 		where a.id_personal='".$idpersonal."'";
 		$res=pg_query(parent::con_sinv(),$sql);
-		while($reg=pg_fetch_assoc($res)){
-			$t[]=$reg;
+		if (pg_num_rows($res)>0) {
+			while($reg=pg_fetch_assoc($res)){
+				$t[]=$reg;
+			}
+
+		}else{
+				$t[0]["operativo"]="";
+				$t[0]["area"]="";
+				$t[0]["oficina"]="";
+				$t[0]["cargo"]="";
+				$t[0]["dni"]="";			
 		}
 		return $t;
+
 	}
 	function personalSelect(){
 			$t=array();

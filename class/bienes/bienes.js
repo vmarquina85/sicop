@@ -792,7 +792,7 @@ function imprimirCodbar(objeto) {
   {
     displayValue:true,
     height: 50,
-    width: 2,
+    width: 2.5,
     textMargin: 0
   });
   document.getElementById('bc_tipoBien').innerHTML=tipbien;
