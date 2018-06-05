@@ -16,3 +16,17 @@ function f_getBienes(){
   });
   http.send(null);
 }
+function seleccionar(objeto){
+  var button =objeto.getElementsByTagName('I');
+  $(button).toggleClass('hover-green');
+  fila=objeto.closest('tr');
+  $(fila).toggleClass('success');
+}
+function nuevo() {
+  $('select, .bootstrap-select,button').each(function(){
+    $(this).removeAttr('disabled');
+    $(this).removeClass('disabled');
+  });
+  $('#sl_local').data('selectpicker').$button.focus()
+$('')
+};

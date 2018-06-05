@@ -19,6 +19,7 @@ require '../class/config/session_val.php';
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../assets/css/animate.min.css" rel="stylesheet" />
@@ -31,12 +32,18 @@ require '../class/config/session_val.php';
   <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
   <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/plugins/switchery/switchery.min.css" rel="stylesheet">
+  <link href="../assets/plugins/StickyTableHeaders/css/component.css" rel="stylesheet">
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- ================== BEGIN BASE JS ================== -->
   <script src="../assets/plugins/pace/pace.min.js"></script>
   <!-- ================== END BASE JS ================== -->
-
+  <style >
+  .table-responsive {
+    height: 300px;
+    overflow-y: auto;
+  }
+</style>
 </head>
 <body>
   <!-- begin #page-loader -->
@@ -101,16 +108,41 @@ require '../class/config/session_val.php';
     </div>
 
     <div id="content" class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >Local</span>
+            <select  id="sl_local"  onchange="f_getBienes()" class='selectpicker form-control input-sm' data-live-search="true" disabled  >
+              <option value="*">--Seleccionar--</option>
+              <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
+                <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
+              <?php } ?>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >Fecha-Inventario</span>
+    <input type="text" id='input_fecha_inv' class='datepicker-default form-control input-sm' disabled>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >Fecha-Cierre</span>
+    <input type="text" id='input_fecha_cierre' class='datepicker-default form-control input-sm' disabled>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group m-b-10 ">
 
-      <div class="input-group m-b-5 ">
-        <span class="input-group-addon input-sm" >SELECCIONE LOCAL</span>
-        <select  id="sl_local"  onchange="f_getBienes()" class='form-control input-sm m-r-10  '>
-          <option value="*">--Seleccionar--</option>
-          <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
-            <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
-          <?php } ?>
-        </select>
+            <span class="input-group-addon input-sm" >Hoja Nro</span>
+            <input type="text" id='input_nro_hoja' class='form-control input-sm' disabled>
+          </div>
+        </div>
       </div>
+
+
+
       <div class="panel panel-success">
         <div class="panel-heading">
           <div class="panel-heading-btn">
@@ -120,24 +152,34 @@ require '../class/config/session_val.php';
           <h4 class="panel-title">Bienes del Local</h4>
         </div>
         <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table-bordered table hover">
-              <thead>
-                <tr>
-                  <th>id_Patrimonio</th>
-                  <th>Tipo de Bien</th>
-                  <th>Marca</th>
-                  <th>Asignado</th>
-                  <th>Check</th>
-                </tr>
-              </thead>
-              <tbody id='tb_detalle_bienes'></tbody>
-            </table>
-          </div>
 
+    <div class="table-responsive">
+      <table class="table table-bordered hover">
+        <thead>
+          <tr>
+            <th class='bg-grey-200 p-5'>Código</th>
+            <th class='bg-grey-200 p-5'>Tipo de Bien</th>
+            <th class='bg-grey-200 p-5'>Marca</th>
+            <th class='bg-grey-200 p-5'>Modelo</th>
+            <th class='bg-grey-200 p-5'>Area</th>
+            <!-- <th class='bg-grey-200 p-5'>Oficina</th> -->
+            <th class='bg-grey-200 p-5'>Asignado</th>
+            <th class='bg-grey-200 p-5'>ok</th>
+          </tr>
+        </thead>
+        <tbody id='tb_detalle_bienes'>
+        </tbody>
+      </table>
+    </div>
         </div>
       </div>
-      <!-- <button onclick='showProgressBar()' class="btn btn-block btn-lg btn-default m-b-5">Iniciar</button> -->
+      <div class="panel panel-default bg-green-grey">
+        <div class="panel-body">
+          <button type="button" class="btn btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
+          <button type="button" class="btn btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
+          <button type="button" class="btn btn-default"><img src="../assets/img/diskette.png" alt=""> Cierre</button>
+        </div>
+      </div>
     </div>
 
 
@@ -160,13 +202,16 @@ require '../class/config/session_val.php';
   <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
   <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
   <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+  <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
   <script src="../assets/plugins/switchery/switchery.min.js"></script>
+  <script src="../assets/plugins/StickyTableHeaders/js/jquery.stickyheader.js"></script>
   <script src="../assets/plugins/Highcharts/js/highcharts.js"></script>
   <script src="../assets/plugins/Highcharts/js/exporting.js"></script>
   <script src="../assets/plugins/Highcharts/js/dark-unica.js"></script>
   <script src="../class/config/config.js"></script>
-    <script src="../class/Inventario/Inventario.js"></script>
+  <script src="../class/Inventario/Inventario.js"></script>
   <script src="../class/menu/menu.js"></script>
+
   <!-- ================== END BASE JS ================== -->
   <!-- ================== BEGIN PAGE LEVEL JS ================== -->
   <script src="../assets/js/apps.min.js"></script>
@@ -186,6 +231,9 @@ require '../class/config/session_val.php';
 
     // startTimeAndDate();
     // renderSwitcher();
+
+    $('.table-container').stickyTableHeader();
+
     $(".datepicker-default").datepicker({
       todayHighlight: !0,
       format: 'dd/mm/yyyy'
