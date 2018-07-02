@@ -19,7 +19,7 @@ echo '<html>
 ';
 $conexion= new conectar;
 $cn = $conexion->con_sinv();
-$cad = "Select p.descripcion as dependencia, a.id_areact, a.id_depact, a.id_ofiact, a.id_alterno, a.id_patrimonial, a.serie, a.modelo,
+$cad = "Select p.descripcion as dependencia, a.id_areact, a.id_depact, a.id_ofiact,o.descripcion as oficina, a.id_alterno, a.id_patrimonial, a.serie, a.modelo,
 a.observacion, a.id_estado, a.id_hardware, a.id_marca, a.id_color,to_char(a.fec_registro,'dd/mm/yy HH24:MI') as fechar,
 b.descripcion as tipo_equipo, d.descripcion as marca, e.descripcion as color, f.descripcion as estado, cc.tipo_cta as tip_c, cc.tip_uso_cta,
 g.descripcion as grupo,cl.descripcion as clase,a.doc_alta,
@@ -29,6 +29,7 @@ a.asegurado,a.id_asignado,a.tipo_bien,a.nro_motor,a.nro_chasis,a.placa,a.est_bie
 from equipos a
 inner join dependencias p on a.id_depact=p.id_dep
 left join areas r on a.id_depact=r.id_dep and a.id_areact=r.id_area
+left join oficinas o on a.id_depact=o.id_dep and a.id_areact=o.id_area and a.id_ofiact=o.id_oficina
 left join personal s on a.id_asignado=s.id_personal
 left join usuarios u on a.usr_registra=u.usr_id
 left join usuarios um on a.usr_modifica=um.usr_id
@@ -40,8 +41,7 @@ left join cuentac cc on a.cuenta=cc.cuenta
 left join grupos g on substring(a.id_patrimonial,1,2)=g.id_grupo
 left join clases cl on substring(a.id_patrimonial,3,2)=cl.id_clase
 where a.est_bien<>'E' ";
-/*if (!empty($txt_id))
- $cad.="and a.id_patrimonial='".trim($txt_id)."' ";*/
+
 if (!empty($serie)) $cad= $cad. "and a.serie like '%" . trim($serie) . "%' ";
 if (!empty($id_interno)) $cad= $cad. "and a.id_interno like '%" . $id_interno . "%' ";
 if (!empty($oc))  $cad= $cad. "and upper(doc_alta) like '%" . strtoupper(trim($oc)) . "%' ";

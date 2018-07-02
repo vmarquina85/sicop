@@ -1,3 +1,6 @@
+var date=new Date();
+var fecha=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+var popupElement = '<div class="btn-group btn-toggle"><button class="btn btn-warning"><i class="fa fa-warning"></i> <br>Revisar</button><button onclick="seleccionar(this)" class="btn btn-success active"><i class="fa fa-check"></i><br> OK</button></div>';
 function f_getBienes(){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
@@ -11,6 +14,13 @@ function f_getBienes(){
       if(http.status == 200) {
         var resultado = http.responseText;
         document.getElementById("tb_detalle_bienes").innerHTML = (resultado);
+        $("[data-toggle=popover]").popover(
+          {
+              animation: true,
+              content: popupElement,
+              html: true
+          }
+        );
       }
     }
   });
@@ -23,10 +33,7 @@ function seleccionar(objeto){
   $(fila).toggleClass('success');
 }
 function nuevo() {
-  $('select, .bootstrap-select,button').each(function(){
-    $(this).removeAttr('disabled');
-    $(this).removeClass('disabled');
-  });
-  $('#sl_local').data('selectpicker').$button.focus()
-$('')
+removeDisabled('select, .bootstrap-select,button');
+  $('#sl_local').data('selectpicker').$button.focus();
+  $('#input_fecha_inv').val(fecha);
 };

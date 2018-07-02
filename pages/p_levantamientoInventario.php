@@ -164,7 +164,7 @@ require '../class/config/session_val.php';
             <th class='bg-grey-200 p-5'>Area</th>
             <!-- <th class='bg-grey-200 p-5'>Oficina</th> -->
             <th class='bg-grey-200 p-5'>Asignado</th>
-            <th class='bg-grey-200 p-5'>ok</th>
+            <th class='bg-grey-200 p-5'>Est.</th>
           </tr>
         </thead>
         <tbody id='tb_detalle_bienes'>
@@ -177,7 +177,7 @@ require '../class/config/session_val.php';
         <div class="panel-body">
           <button type="button" class="btn btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
           <button type="button" class="btn btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
-          <button type="button" class="btn btn-default"><img src="../assets/img/diskette.png" alt=""> Cierre</button>
+          <button type="button" class="btn btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
         </div>
       </div>
     </div>
