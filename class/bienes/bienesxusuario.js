@@ -1,7 +1,7 @@
-function ObtenerSeleccion(){
+function ObtenerSeleccion(table){
   var seleccion= Array();
   var selected=0;
-  elemento=document.getElementById('table-pendientes');
+  elemento=document.getElementById(table);
   var rows= elemento.getElementsByTagName('TR');
   //1.- recorrer las filas que tengan la class warning
   for (var i = 0; i < rows.length; i++) {
@@ -25,7 +25,7 @@ function ObtenerSeleccion(){
 function AceptarPapeletas(){
   if (confirm("Está seguro que desea Aceptar estas Papeletas?")) {
     respuesta='A';
-    var selecciones=ObtenerSeleccion();
+    var selecciones=ObtenerSeleccion('table-pendientes');
     if (selecciones===0) {
       return;
     }else{
@@ -46,7 +46,7 @@ function AceptarPapeletas(){
 function RechazarPapeletas(){
   if (confirm("Está seguro que desea Rechazar estas Papeletas?")) {
     respuesta='R';
-    var selecciones=ObtenerSeleccion();
+    var selecciones=ObtenerSeleccion('table-pendientes');
     if (selecciones===0) {
       return;
     }else {

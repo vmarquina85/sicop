@@ -320,7 +320,6 @@ error_reporting(0);
                             </label>
                           </div>
                         </div>
-
                       </div>
                       <!-- fila 5 -->
                       <div class="row">
@@ -638,7 +637,6 @@ error_reporting(0);
                             </label>
                           </div>
                         </div>
-
                       </div>
                       <!-- fila 5 -->
                       <div class="row">
@@ -738,33 +736,33 @@ error_reporting(0);
                         <span class="input-group-addon input-sm">Usuario</span>
                         <select onchange='llenarPersonalDestino(2);' id="sl_usuarioAsignadoUpdt"  class='form-control input-sm' disabled>
                           <option value="*">--Seleccionar Asignado--</option>
-                          <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
-                            <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
+                          <?php for ($i=0; $i < sizeof($rs_personal_edit) ; $i++) {  ?>
+                            <option value="<?php echo utf8_encode($rs_personal_edit[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal_edit[$i]['completo']); ?></option>
                           <?php  }?>
                         </select>
                       </div>
                       <div id='datosDestinoUpdt'>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Local</span>
-                          <select name="" id="sl_localAsignado" class='form-control input-sm'>
+                          <select name="" id="sl_localAsignadoUpdt" class='form-control input-sm'>
                             <option value="">-- Seleccione local --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Area</span>
-                          <select name="" id="sl_areaAsignado" class='form-control input-sm'>
+                          <select name="" id="sl_areaAsignadoUpdt" class='form-control input-sm'>
                             <option value="">-- Seleccione Area --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Oficina</span>
-                          <select name="" id="sl_oficinaAsignado" class='form-control input-sm'>
+                          <select name="" id="sl_oficinaAsignadoUpdt" class='form-control input-sm'>
                             <option value="">-- Seleccione Oficina --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Cargo</span>
-                          <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                          <select name="" id="sl_cargoAsignadoUpdt" class='form-control input-sm' disabled>
                             <option value="">-- Seleccione Cargo --</option>
                           </select>
                         </div>
@@ -871,7 +869,7 @@ error_reporting(0);
 
               <div class="modal-footer">
                 <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Cancelar</a>
-                <a href="javascript:UpdateBien();" class="btn btn-sm btn-warning">Actualizar</a>
+                <button  onClick="UpdateBien()" type="button"class="btn btn-sm btn-warning" >Actualizar</button>
               </div>
             </div>
           </div>
@@ -1050,5 +1048,5 @@ error_reporting(0);
     source: tipoBien
   });
   </script>
-  </body>
-  </html>
+</body>
+</html>

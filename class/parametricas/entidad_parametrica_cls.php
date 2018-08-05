@@ -84,6 +84,20 @@ class parametricas extends conectar
 		}
 		return $t;
 	}
+	function get_personal_nombre_edit($local){
+			$t=array();
+		$sql="select distinct cast(p.id_personal as int),p.ape_paterno || ' ' || p.ape_materno || ', ' || p.nombres as completo from personal p
+		inner join localxfun l on p.id_personal=l.id_personal where p.id_personal NOT IN ('1127')";
+		if ($local!='') {
+			$sql=$sql. " and l.id_dep='".$local."'";
+		}
+		$sql=$sql. "	order by 2";
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$t[]=$reg;
+		}
+		return $t;
+	}
 	function get_personal_datos($idpersonal){
 			$t=array();
 		$sql="select  a.id_personal,
@@ -107,7 +121,7 @@ class parametricas extends conectar
 				$t[0]["area"]="";
 				$t[0]["oficina"]="";
 				$t[0]["cargo"]="";
-				$t[0]["dni"]="";			
+				$t[0]["dni"]="";
 		}
 		return $t;
 

@@ -11,11 +11,19 @@ $fecha = $aniodesde . "/" . $mesdesde . "/" . $diadesde;
 //idcorrelativo
 $id_pat = trim($_REQUEST['id_patrimonial']);
 //idalterno
-$updt = "insert into equipos(id_patrimonial,id_hardware,id_marca,id_asignado,serie,id_color,modelo,id_estado,id_alterno,
-fec_registro,usr_registra,observacion,id_depact,id_areact,id_ofiact,tipo_cta,cuenta,forma_adq,valor_lib,nro_motor,nro_chasis,
-fecha_adq,placa,asegurado,est_bien,doc_alta,tipo_bien,id_interno,dimension,valor_tasa)
-values('" . $id_pat . "','" . $_REQUEST['id_tip'] . "','" . $_REQUEST['id_marca'] . "','" . $_REQUEST['id_personal'] . "','" . strtoupper($_REQUEST['serie']) . "','" . $_REQUEST['id_col'] . "','". strtoupper($_REQUEST['modelo']) . "','" . $_REQUEST['id_est'] . "','" . $id_alt . "',now(),'" . $usrreg . "','" . trim(utf8_decode($_REQUEST['observa'])) . "','" . $_REQUEST['id_local'] . "','" . $_REQUEST['id_area'] . "','" . $_REQUEST['id_oficina'] . "','" . $_REQUEST['tipo_cta'] . "','" . $_REQUEST['cuenta'] . "','" . $_REQUEST['forma_adq'] . "','" . $_REQUEST['valor_libros'] . "','" . $_REQUEST['motor'] . "','" . strtoupper($_REQUEST['chasis']) . "','" . $fecha . "','" . strtoupper($_REQUEST['placa']) . "','" . $_REQUEST['chkasegurado'] . "','A','" . utf8_decode(strtoupper($_REQUEST['resol_alta'])) . "','" . $_REQUEST['tipo'] . "','" . $_REQUEST['id_interno'] . "','" . $_REQUEST['dime'] . "','" . $_REQUEST['valor_adq'] . "')";
-pg_query($ins);
+$updt = "update equipos set tipo_cta='".$_REQUEST['tipo_cta'] ."',cuenta='".$_REQUEST['cuenta']."',forma_adq='".$_REQUEST['forma_adq']."'
+,fecha_adq='".$_REQUEST['fecha_adq']."',id_interno='".$_REQUEST['id_interno']."',doc_alta='".$_REQUEST['resol_alta']."'
+,valor_tasa='".$_REQUEST['valor_adq']."',valor_lib='".$_REQUEST['valor_libros']."', id_estado='".$_REQUEST['id_est']."',asegurado='".$_REQUEST['chkasegurado']."'
+,id_marca='".$_REQUEST['id_marca']."',modelo='".$_REQUEST['modelo']."',tipo_bien='".$_REQUEST['tipo']."',dimension='".$_REQUEST['dime']."',id_color='".$_REQUEST['id_col']."'
+,serie='".$_REQUEST['serie']."',placa='".$_REQUEST['placa']."',nro_motor='".$_REQUEST['motor']."',nro_chasis='".$_REQUEST['chasis']."',observacion='".$_REQUEST['observa']."' where id_patrimonial='".$id_pat."'";
+
+try {
+  pg_query($updt);
+  pg_close($cn);
+} catch (Exception $e) {
+echo $e;
 pg_close($cn);
-echo substr($ind, -4);
+}
+echo "ok";
+
 ?>

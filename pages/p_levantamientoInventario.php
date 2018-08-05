@@ -32,7 +32,7 @@ require '../class/config/session_val.php';
   <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
   <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/plugins/switchery/switchery.min.css" rel="stylesheet">
-  <link href="../assets/plugins/StickyTableHeaders/css/component.css" rel="stylesheet">
+  <!-- <link href="../assets/plugins/StickyTableHeaders/css/component.css" rel="stylesheet"> -->
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <!-- ================== BEGIN BASE JS ================== -->
@@ -40,7 +40,7 @@ require '../class/config/session_val.php';
   <!-- ================== END BASE JS ================== -->
   <style >
   .table-responsive {
-    height: 300px;
+    height: 250px;
     overflow-y: auto;
   }
 </style>
@@ -106,13 +106,43 @@ require '../class/config/session_val.php';
       <ul  id='nav_menu' class="nav">
       </ul>
     </div>
+    <div class="bg-grey-200">
+      <div class="panel-body">
+        <button type="button" class="btn btn-xs btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
+        <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
+        <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
+      </div>
+    </div>
+    <div id="content" class="p-l-30 p-r-30 p-t-10">
 
-    <div id="content" class="content">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="input-group m-b-10 ">
-            <span class="input-group-addon input-sm" >Local</span>
-            <select  id="sl_local"  onchange="f_getBienes()" class='selectpicker form-control input-sm' data-live-search="true" disabled  >
+            <span class="input-group-addon input-sm" >Hoja Nro</span>
+            <input type="text" id='input_nro_hoja' class='form-control input-sm' disabled>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >Fecha-Inventario</span>
+            <input type="text" id='input_fecha_inv' class='datepicker-default form-control input-sm' disabled>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >Fecha-Cierre</span>
+            <input type="text" id='input_fecha_cierre' class='datepicker-default form-control input-sm' disabled>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm" >centro</span>
+            <select  id="sl_local"  onchange="f_getBienes();DisableElement(this)" class='selectpicker form-control input-sm' data-live-search="true" disabled  >
               <option value="*">--Seleccionar--</option>
               <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
                 <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
@@ -120,28 +150,7 @@ require '../class/config/session_val.php';
             </select>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="input-group m-b-10 ">
-            <span class="input-group-addon input-sm" >Fecha-Inventario</span>
-    <input type="text" id='input_fecha_inv' class='datepicker-default form-control input-sm' disabled>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="input-group m-b-10 ">
-            <span class="input-group-addon input-sm" >Fecha-Cierre</span>
-    <input type="text" id='input_fecha_cierre' class='datepicker-default form-control input-sm' disabled>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="input-group m-b-10 ">
-
-            <span class="input-group-addon input-sm" >Hoja Nro</span>
-            <input type="text" id='input_nro_hoja' class='form-control input-sm' disabled>
-          </div>
-        </div>
       </div>
-
-
 
       <div class="panel panel-success">
         <div class="panel-heading">
@@ -149,37 +158,33 @@ require '../class/config/session_val.php';
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
           </div>
-          <h4 class="panel-title">Bienes del Local</h4>
+          <h4 class="panel-title">Bienes de Centro</h4>
         </div>
         <div class="panel-body">
 
-    <div class="table-responsive">
-      <table class="table table-bordered hover">
-        <thead>
-          <tr>
-            <th class='bg-grey-200 p-5'>Código</th>
-            <th class='bg-grey-200 p-5'>Tipo de Bien</th>
-            <th class='bg-grey-200 p-5'>Marca</th>
-            <th class='bg-grey-200 p-5'>Modelo</th>
-            <th class='bg-grey-200 p-5'>Area</th>
-            <!-- <th class='bg-grey-200 p-5'>Oficina</th> -->
-            <th class='bg-grey-200 p-5'>Asignado</th>
-            <th class='bg-grey-200 p-5'>Est.</th>
-          </tr>
-        </thead>
-        <tbody id='tb_detalle_bienes'>
-        </tbody>
-      </table>
-    </div>
+          <div class="table-responsive">
+            <table id='tb_bienes_inv' class="table table-email hover">
+              <thead>
+                <tr>
+                  <th class='bg-grey-200 p-2 text-center'>Código</th>
+                  <th class='bg-grey-200 p-2 text-center'>Tipo de Bien</th>
+                  <th class='bg-grey-200 p-2 text-center'>Marca</th>
+                  <th class='bg-grey-200 p-2 text-center'>Modelo</th>
+                  <th class='bg-grey-200 p-2 text-center'>Area</th>
+                  <th colspan='3' class='bg-grey-200 p-2 text-center'>Asignado</th>
+
+                </tr>
+              </thead>
+              <tbody id='tb_detalle_bienes'>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel-footer text-right">
+          <button  class='btn btn-xs btn-success' onclick="ObtenerInvOk('tb_bienes_inv')" id="btn_next"> Siguiente</button>
         </div>
       </div>
-      <div class="panel panel-default bg-green-grey">
-        <div class="panel-body">
-          <button type="button" class="btn btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
-          <button type="button" class="btn btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
-          <button type="button" class="btn btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
-        </div>
-      </div>
+
     </div>
 
 

@@ -29,6 +29,15 @@ function get_bienes(limit,offset){
   // http.onreadystatechange = useHttpResponseDistritoPac;
   http.send(null);
 }
+function prueba() {
+  var radiobutton=document.getElementsByName('rtipoctaUpdt');
+  for (var i = 0; i < radiobutton.length; i++) {
+    if (radiobutton[i].value=='O') {
+      radiobutton[i].checked=true;
+    }
+  }
+
+}
 function exportar_excel(){
   var id_local=document.getElementById('sl_Operativo').value;
   var id_marc=document.getElementById('sl_Marca').value;
@@ -292,7 +301,7 @@ function llenarPersonalDestino(valor){
     var idpersonal= document.getElementById("sl_usuarioAsignadoUpdt").value;
   }
 
-  var url = "../get/datosPersonalAsignado.php?idpersonal="+idpersonal;
+  var url = "../get/datosPersonalAsignado.php?idpersonal="+idpersonal+"&code="+valor;
   http.open("GET", url, true);
   http.addEventListener('readystatechange', function() {
     if (http.readyState == 4) {
@@ -520,7 +529,11 @@ function editarBien(objeto){
         LlenarDatosBien('txt_bienDescripcionUpdt','txt_prefixUpdt','txt_grupoUpdt','txt_claseUpdt');
         document.getElementById('txt_correlativoUpdt').value=resultado[0].correl;
         document.getElementById('sl_tipoCuentaUpdt').value=resultado[0].tipo_cta;
-        document.getElementsByName('rtipoctaUpdt').value=resultado[0].radio;
+        for (var i = 0; i < document.getElementsByName('rtipoctaUpdt').length; i++) {
+          if (document.getElementsByName('rtipoctaUpdt')[i].value==resultado[0].radio) {
+            document.getElementsByName('rtipoctaUpdt')[i].checked=true;
+          }
+        }
         ObtenerCuentas("sl_tipoCuentaUpdt","rtipoctaUpdt","sl_CuentaContableUpdt");
         document.getElementById('sl_CuentaContableUpdt').value=resultado[0].cuenta;
         document.getElementById('sl_formAdqUpdt').value=resultado[0].forma_adq;
@@ -695,7 +708,7 @@ function UpdateBien(){
   }
 
   if (document.getElementById('sl_estadoBienUpdt').value==''){
-    alert('Digite Valor en Libros')
+    alert('Digite Estado del Bien')
     var div=document.getElementById('sl_estadoBienUpdt').closest('div');
     $(div).toggleClass('has-error');
     document.getElementById('sl_estadoBienUpdt').focus();
@@ -722,16 +735,16 @@ function UpdateBien(){
   var cuentaContable=document.getElementById('sl_CuentaContableUpdt').value;
   var formaAdq=document.getElementById('sl_formAdqUpdt').value;
   var fechaAdq=document.getElementById('txt_fechaAdqUpdt').value;
-  var codigointerno=document.getElementById('txt_codinternoUpdt').value;
+  var codigointerno=document.getElementById('txt_codInternoUpdt').value;
   var resoAlta=document.getElementById('txt_resAltaUpdt').value;
   var valorAdq=document.getElementById('txt_valoradqUpdt').value;
   var valorLib=document.getElementById('txt_valorlibUpdt').value;
   var estadoBien=document.getElementById('sl_estadoBienUpdt').value;
   var asegurado=document.getElementById('cb_aseguradoUpdt').value;
-  var usuario=document.getElementById('sl_usuarioAsignadoUpdt').value;
-  var local=document.getElementById('sl_localAsignadoUpdt').value;
-  var area=document.getElementById('sl_areaAsignadoUpdt').value;
-  var oficina=document.getElementById('sl_oficinaAsignadoUpdt').value;
+  // var usuario=document.getElementById('sl_usuarioAsignadoUpdt').value;
+  // var local=document.getElementById('sl_localAsignadoUpdt').value;
+  // var area=document.getElementById('sl_areaAsignadoUpdt').value;
+  // var oficina=document.getElementById('sl_oficinaAsignadoUpdt').value;
   var marca=document.getElementById('sl_marcaBienUpdt').value;
   var modelo=document.getElementById('txt_modeloBienUpdt').value;
   var tipo=document.getElementById('txt_tipoBienUpdt').value;
@@ -751,9 +764,9 @@ function UpdateBien(){
   }
   var observacion=document.getElementById('ta_observacionBienUpdt').value;
   // var idpersonal= document.getElementById("sl_usuarioAsignadoUpdt").value;
-  var url = "../insert/UpdateDataBienes.php?id_patrimonial="+id_patrimonial+"&id_marca="+marca+"&id_personal="+usuario+"&serie="+serie
-  +"id_col="+color+"&modelo="+modelo+"&id_est="+estadoBien+"&observa="+observacion+
-  "&id_local="+local+"&id_area="+area+"&id_oficina="+oficina+"&tipo_cta="+tipo_cta+
+  var url = "../update/UpdateDataBienes.php?id_patrimonial="+id_patrimonial+"&id_marca="+marca+"&serie="+serie
+  +"&id_col="+color+"&modelo="+modelo+"&id_est="+estadoBien+"&observa="+observacion+
+  "&tipo_cta="+tipo_cta+
   "&cuenta="+cuentaContable+"&forma_adq="+formaAdq+"&valor_libros="+valorLib+
   "&motor="+motor+"&chasis="+chasis+"&fecha_adq="+fechaAdq+"&placa="+placa+
   "&chkasegurado="+aseg+"&resol_alta="+resoAlta+"&tipo="+tipo+"&id_interno="+codigointerno+"&dime="+dimension+"&valor_adq="+valorAdq;
@@ -762,8 +775,13 @@ function UpdateBien(){
     if (http.readyState == 4) {
       if(http.status == 200) {
         var resultado = http.responseText.trim();
-        alert('Bien Actualizado con Exito')
-        $('#mymodal').modal('toggle');
+        if (resultado=="ok") {
+          alert('Bien Actualizado con Exito')
+          $('#modal_edit').modal('toggle');
+        }else{
+          alert('Error al Actualizar Datos : '+ resultado)
+          $('#modal_edit').modal('toggle');
+        }
       }
     }
   });

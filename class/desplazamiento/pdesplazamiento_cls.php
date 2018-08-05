@@ -32,7 +32,7 @@ class desplazamiento extends conectar
 		if($mov_tipo!='*'){
 			$sql=$sql." and a.mov_tipo='".$mov_tipo."'";
 		}else{
-				$sql=$sql." and a.mov_tipo in ('1','2','3')";
+				$sql=$sql." and a.mov_tipo in ('1','2','3','6')";
 		}
 		if ($nro!='') {
 			$sql=$sql."and substring(a.mov_orden,2,7)='" . $nro . "'";
@@ -80,7 +80,7 @@ class desplazamiento extends conectar
 			if($mov_tipo!='*'){
 				$sql=$sql." and a.mov_tipo='".$mov_tipo."'";
 			}else{
-					$sql=$sql." and a.mov_tipo in ('1','2','3')";
+					$sql=$sql." and a.mov_tipo in ('1','2','3','6')";
 			}
 			if ($nro!='') {
 				$sql=$sql."and substring(a.mov_orden,2,7)='" . $nro . "'";

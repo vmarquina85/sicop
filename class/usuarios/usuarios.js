@@ -209,7 +209,7 @@ function desactivarUsuario(tr){
     http.send(null);
     alert('Usuario Desactivado');
     get_usuarios(10,0);
-    init_paginadorx(1);
+    init_paginador(1);
   }
 }
 function obtenerObject(object){

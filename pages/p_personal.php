@@ -303,7 +303,7 @@ require '../class/config/preconfigPersonal_cls.php';
                       <div class="col-md-6">
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Grado Inst</span>
-                          <select id="selectGrado"  class='form-control input-sm'>
+                          <select id="SelectGrado"  class='form-control input-sm'>
                             <option value="*">--SELECCIONAR--</option>
                             <?php
                             for ($i=0; $i <sizeof($rs_GradoInst) ; $i++) {
