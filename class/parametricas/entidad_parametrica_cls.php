@@ -22,7 +22,15 @@ class parametricas extends conectar
 		}
 		return $t;
 	}
-
+	function Get_cuentaContable_noFilter(){
+			$t=array();
+		$sql="select cuenta,cuenta||' - '||trim(denomina) as denomina from cuentac" ;
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$t[]=$reg;
+		}
+		return $t;
+	}
 	function Get_tipo_bien(){
 			$t=array();
 		$sql="select distinct b.descripcion,b.id_tipo,b.prefijo from equipos a inner join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5' order by 1" ;

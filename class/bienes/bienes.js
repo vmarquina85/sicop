@@ -277,6 +277,7 @@ function ObtenerCuentas(idtipo_cuenta,idradio,idcuentaCont){
   });
   http.send(null);
 }
+
 function ValidaSoloDec() {
   if ((event.keyCode >= 48) && (event.keyCode <= 57)) {
     event.returnValue = true;

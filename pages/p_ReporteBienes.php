@@ -164,35 +164,51 @@ error_reporting(0);
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Oficina:</span>
-                <select id="selectOficina"  class=' form-control input-sm'>
+                <select id="selectOficina"  class=' form-control input-sm default-select2'>
                     <option value="*">TODOS</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Tipo Bien:</span>
-                <select onchange="search(1)" id="sl_tipobien" data-click="panel-refresh" class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
                     <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
                   <?php  }?>
-
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Cuenta:</span>
-                <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
+                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                  <option value="*">TODOS</option>
+                  <?php for ($i=0; $i < sizeof($rs_cuentac_noFilter) ; $i++) {  ?>
+                  <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
+                  <?php  }?>
+                </select>
+
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Estado:</span>
-                <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
+                <select id="sl_estadoBien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                  <option value="*">TODOS</option>
+                  <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
+                  <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                  <?php  }?>
+                </select>
+
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Forma:</span>
-                <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
+                <select  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                  <option value="*">TODOS</option>
+                  <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
+                    <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
+                  <?php  }?>
+                </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Fecha de Adquisición:</span>
-                <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" >
+                <input id='txt_bienDescripcion' type="text" class="form-control datepicker-default input-sm" >
               </div>
             </div>
             <div class="panel-footer text-center">
