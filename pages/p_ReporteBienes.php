@@ -145,27 +145,27 @@ error_reporting(0);
             <div class="panel-heading">
               <h3 class="panel-title">Parámetros</h3>
             </div>
-            <div class="panel-body bg-grey-200">
+            <div id='frm_param' class="panel-body bg-grey-200">
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Local:</span>
-                <select id="selectLugarActual"  onchange="fn_obtenerAreas();fn_obtenerOficina()" class=' default-select2 form-control input-sm'>
-                    <option value="*">TODOS</option>
+                <select id="ltarget"  onchange="fn_obtenerAreas();fn_obtenerOficina()" class=' default-select2 form-control input-sm'>
+                  <option value="*">TODOS</option>
                   <?php for ($i=0; $i <sizeof($rs_operativo) ; $i++) {
                     echo '<option value="'.$rs_operativo[$i]['id_dep'].'">'.$rs_operativo[$i]['descripcion'].'</option>';
                   }
-                   ?>
+                  ?>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Area:</span>
-                <select id="selectArea"  onchange="fn_obtenerOficina()" class='default-select2 form-control input-sm'>
-                    <option value="*">TODOS</option>
+                <select id="atarget"  onchange="fn_obtenerOficina()" class='default-select2 form-control input-sm'>
+                  <option value="*">TODOS</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Oficina:</span>
-                <select id="selectOficina"  class=' form-control input-sm default-select2'>
-                    <option value="*">TODOS</option>
+                <select id="otarget"  class=' form-control input-sm default-select2'>
+                  <option value="*">TODOS</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
@@ -182,7 +182,7 @@ error_reporting(0);
                 <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_cuentac_noFilter) ; $i++) {  ?>
-                  <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
+                    <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
                   <?php  }?>
                 </select>
 
@@ -192,7 +192,7 @@ error_reporting(0);
                 <select id="sl_estadoBien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
-                  <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                    <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
                   <?php  }?>
                 </select>
 
@@ -207,13 +207,17 @@ error_reporting(0);
                 </select>
               </div>
               <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Fecha de Adquisición:</span>
-                <input id='txt_bienDescripcion' type="text" class="form-control datepicker-default input-sm" >
+                <span class="input-group-addon input-sm" >Desde:</span>
+                <input  type="text" class="form-control datepicker-default input-sm" >
+              </div>
+              <div class="input-group m-b-10 ">
+                <span class="input-group-addon input-sm" >Hasta:</span>
+                <input  type="text" class="form-control datepicker-default input-sm" >
               </div>
             </div>
             <div class="panel-footer text-center">
 
-              <button type="button" class='btn btn-default' name="button">Generar Reporte</button>
+              <button type="button" onclick="GenerarReporte()" class='btn btn-default' name="button" >Generar Reporte</button>
             </div>
           </div>
         </div>
@@ -221,20 +225,14 @@ error_reporting(0);
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Vista Previa de Reporte</h3>
-
             </div>
             <div class="panel-body">
-<iframe src="" frameborder="0">
-
-</iframe>
-                <button class="btn btn-default btn-sm m-b-10 m-t-10 m-r-10 pull-right" onclick="javascript:;"><i class="fa fa-print fa-2x"></i></button>
-
+<iframe  frameBorder="0" id='pdfReport' style='width: 100%;height: 440px;' src="" ></iframe>
             </div>
-
           </div>
         </div>
       </div>
-        </div>
+    </div>
     <!-- end #content -->
     <!-- begin theme-panel -->
     <!-- end theme-panel -->
@@ -260,7 +258,8 @@ error_reporting(0);
   <script src="../assets/js/apps.min.js"></script>
   <script src="../class/ajax/ajax.js"></script>
   <script src="../class/bienes/bienes.js"></script>
-    <script src="../class/personal/p_personal.js"></script>
+  <script src="../class/reportes/Reportes.js"></script>
+  <script src="../class/personal/p_personal.js"></script>
   <script src="../class/config/config.js"></script>
   <script src="../class/menu/menu.js"></script>
   <script src="../class/login/killerSession.js"></script>

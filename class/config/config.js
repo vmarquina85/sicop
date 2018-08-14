@@ -25,6 +25,59 @@ function getPasswordModal(type,tr){
   }
 
 }
+function ObtenerDatosdeform(div, index){
+  // definimos los arreglos
+  var retorno = new Array();
+  var campos=div.children;
+  // recorremos el form
+  for (var i=0; i<campos.length; i++) {
+    // asignamos los valores de cada elemento del form al array retorno
+    retorno[i]=campos[i].children[index].value;
+  }
+  return retorno;
+}
+function Query_Array(parametros,url,Async=true){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+  // Crea el modurl automaticamente
+  var modurl=url;
+  for (var i = 0; i < parametros.length; i++) {
+    if (i==0) {
+      modurl=modurl+"?"+i+"="+parametros[i];
+    }else{
+      modurl=modurl+"&"+i+"="+parametros[i];
+    }
+  }
+  // se ejecuta el modurl mediante un httpRequest
+  var ArrayReturn;
+  http.open("GET", modurl, Async);
+  http.addEventListener('readystatechange', function() {
+    if (http.readyState == 4) {
+      if(http.status == 200) {
+        var resultado = JSON.parse(http.responseText);
+        ArrayReturn= resultado;
+      }
+    }
+  });
+http.send(null);
+return ArrayReturn;
+}
+function Query_Report(parametros,url,ltarget,atarget,otarget,Async=true){
+  // Crea el modurl automaticamente
+  var modurl=url;
+  for (var i = 0; i < parametros.length; i++) {
+    if (i==0) {
+      modurl=modurl+"?"+i+"="+parametros[i];
+    }else{
+      modurl=modurl+"&"+i+"="+parametros[i];
+    }
+  }
+  modurl=modurl+'&ltarget='+ltarget+'&atarget='+atarget+'&otarget='+otarget;
+$('#pdfReport').attr('src', modurl);
+// Mostrar Reporte
+}
+
 function validarVaciosIN(elemento){
   //elemento -> este es el div del cual se quiere recorrer
   // EI.- VERIFICAR VACIOS-----------------------
