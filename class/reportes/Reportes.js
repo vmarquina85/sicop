@@ -7,10 +7,4 @@ function GenerarReporte() {
   var ot=document.getElementById('otarget').options[document.getElementById('otarget').selectedIndex].text;
   // var arrayresultado=Query_Array(parametros,'../get/get_reporte.php');
   Query_Report(parametros,'../get/get_pdf_reporte.php',lt,at,ot);
-
-
-
-
-
-
 }
