@@ -136,19 +136,31 @@ error_reporting(0);
       <ul id='nav_menu' class="nav">
       </ul>
     </div>
-
     <div id="content" class="content">
       <!-- INICIO AKI -->
       <div class="row">
         <div class="col-md-3">
-          <div class="panel panel-info">
+          <div class="panel panel-success">
             <div class="panel-heading">
+              <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse" data-original-title="Minimizar" title="Minimizar"><i class="fa fa-minus"></i></a>
+              </div>
               <h3 class="panel-title">Parámetros</h3>
             </div>
-            <div id='frm_param' class="panel-body bg-grey-200">
+            <form id='frm_param' class="panel-body bg-grey-200">
+              <div class="input-group m-b-10 ">
+                <span class="input-group-addon input-sm" >Usuarios:</span>
+                <select id="utarget" class='default-select2 form-control input-sm'>
+                  <option value="*">TODOS</option>
+                  <?php for ($i=0; $i <sizeof($rs_personal) ; $i++) {
+                    echo "<option value='".utf8_encode($rs_personal[$i]['id_personal'])."'>".utf8_decode($rs_personal[$i]['completo'])."</option>";
+                  }
+                  ?>
+                </select>
+              </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Local:</span>
-                <select id="ltarget"  onchange="fn_obtenerAreas();fn_obtenerOficina()" class=' default-select2 form-control input-sm'>
+                <select id="ltarget"  onchange="fn_obtenerAreas('ltarget','atarget');fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i <sizeof($rs_operativo) ; $i++) {
                     echo '<option value="'.$rs_operativo[$i]['id_dep'].'">'.$rs_operativo[$i]['descripcion'].'</option>';
@@ -158,19 +170,19 @@ error_reporting(0);
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Area:</span>
-                <select id="atarget"  onchange="fn_obtenerOficina()" class='default-select2 form-control input-sm'>
+                <select id="atarget"  onchange="fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
                   <option value="*">TODOS</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Oficina:</span>
-                <select id="otarget"  class=' form-control input-sm default-select2'>
+                <select id="otarget"  class=' form-control input-sm '>
                   <option value="*">TODOS</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Tipo Bien:</span>
-                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
                     <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
@@ -179,7 +191,7 @@ error_reporting(0);
               </div>
               <div class="input-group m-b-10 ">
                 <span class="input-group-addon input-sm" >Cuenta:</span>
-                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_cuentac_noFilter) ; $i++) {  ?>
                     <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
@@ -188,8 +200,8 @@ error_reporting(0);
 
               </div>
               <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Estado:</span>
-                <select id="sl_estadoBien"  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <span class="input-group-addon input-sm" >Estado Físico:</span>
+                <select id="sl_estadoBien"  class=' default-select2 form-control input-sm m-r-10'>
                   <option value="*">TODOS</option>
                   <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
                     <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
@@ -198,12 +210,11 @@ error_reporting(0);
 
               </div>
               <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Forma:</span>
-                <select  class='default-select2 form-control input-sm m-r-10 m-b-15'>
+                <span class="input-group-addon input-sm" >Situación:</span>
+                <select  class='default-select2 form-control input-sm m-r-10'>
                   <option value="*">TODOS</option>
-                  <?php for ($i=0; $i < sizeof($rs_forma) ; $i++) {  ?>
-                    <option value="<?php echo $rs_forma[$i]['id_tipo'] ?>"><?php echo utf8_encode($rs_forma[$i]['descripcion']); ?></option>
-                  <?php  }?>
+                  <option value="A">ACTIVO</option>
+                  <option value="B">DE BAJA</option>
                 </select>
               </div>
               <div class="input-group m-b-10 ">
@@ -214,20 +225,24 @@ error_reporting(0);
                 <span class="input-group-addon input-sm" >Hasta:</span>
                 <input  type="text" class="form-control datepicker-default input-sm" >
               </div>
-            </div>
+            </form>
             <div class="panel-footer text-center">
 
-              <button type="button" onclick="GenerarReporte()" class='btn btn-default' name="button" >Generar Reporte</button>
+              <!-- <button type="button" onclick="limpiarFormulario('#frm_param')" class='btn btn-primary' name="button" > <img src="" alt="">Limpiar</button> -->
+              <button type="button" onclick="GenerarReporte()" class='btn btn-primary' name="button" > <img src="" alt="">Generar</button>
+
             </div>
           </div>
         </div>
         <div class="col-md-9">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Vista Previa de Reporte</h3>
-            </div>
-            <div class="panel-body">
-<iframe  frameBorder="0" id='pdfReport' style='width: 100%;height: 440px;' src="" ></iframe>
+            <div class="panel-body text-center vertical-center" style='height:470px' >
+              <div id="VisorReporte">
+                <img src="../assets/img/vector/clipboard.svg" stye='margin-left: auto;margin-right: auto;display: block;' alt="">
+                <div class="text-success">
+                  PARA VISUALIZAR TU REPORTE LLENA LOS PARÁMETROS <br> Y HAGA CLICK EN EL BOTON <strong>GENERAR REPORTE</strong>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -259,7 +274,7 @@ error_reporting(0);
   <script src="../class/ajax/ajax.js"></script>
   <script src="../class/bienes/bienes.js"></script>
   <script src="../class/reportes/Reportes.js"></script>
-  <script src="../class/personal/p_personal.js"></script>
+  <script src="../class/parametricas/parametricas.js"></script>
   <script src="../class/config/config.js"></script>
   <script src="../class/menu/menu.js"></script>
   <script src="../class/login/killerSession.js"></script>
@@ -282,6 +297,6 @@ error_reporting(0);
     })
   });
 
-  </script>
+</script>
 </body>
 </html>

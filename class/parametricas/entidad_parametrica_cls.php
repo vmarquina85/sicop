@@ -40,6 +40,15 @@ class parametricas extends conectar
 		}
 		return $t;
 	}
+	function Get_tipo_bien_2(){
+			$t=array();
+		$sql="select distinct descripcion,id_tipo,prefijo from tablatipo  where id_tabla='5' order by 1" ;
+		$res=pg_query(parent::con_sinv(),$sql);
+		while($reg=pg_fetch_assoc($res)){
+			$t[]=$reg;
+		}
+		return $t;
+	}
 	function Get_detalleBien($idp){
 			$t=array();
 		$sql="Select a.id_alterno, a.id_patrimonial,substring(a.id_patrimonial,1,8) as prefix,substring(a.id_patrimonial,10,4) as correl,a.tipo_cta,a.cuenta,k.tipo_cta as radio,a.forma_adq,a.fecha_adq,a.id_interno,a.doc_alta,a.valor_tasa,a.valor_lib, a.serie, a.modelo, a.observacion, a.id_estado, a.id_asignado, a.est_bien,
@@ -111,8 +120,7 @@ class parametricas extends conectar
 		$sql="select  a.id_personal,
 		(a.ape_paterno || ' '|| a.ape_materno || ', '||a.nombres) as funcionario,a.dni,a.id_dep,o.descripcion as operativo,a.id_area, b.descripcion as area,a.id_oficina, f.descripcion as oficina,a.id_cargo,
 		d.descripcion as cargo,a.id_oficina,a.id_dep
-		from usuarios u
-		inner join personal a on u.usr_idper=a.id_personal
+		from  personal 
 		left join dependencias o on a.id_dep=o.id_dep
 		left join areas b on a.id_area=b.id_area and a.id_dep=b.id_dep
 		left join oficinas f on a.id_dep=f.id_dep and a.id_area=f.id_area and a.id_oficina=f.id_oficina

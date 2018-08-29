@@ -2,7 +2,7 @@
 require '../class/conexion/conexion_cls.php';
 class Reporte extends conectar
 {
-function Select_Reporte_Bienes($local,$area,$oficina,$tipbien,$cuenta,$estado,$forma,$desde,$hacia){
+function Select_Reporte_Bienes($usuario,$local,$area,$oficina,$tipbien,$cuenta,$estado,$situa,$desde,$hasta){
 		$respuesta=array();
     $sql="Select a.id_areact, a.id_depact, a.id_patrimonial,
     	b.descripcion as tipo_equipo, f.descripcion as estado,
@@ -15,7 +15,10 @@ function Select_Reporte_Bienes($local,$area,$oficina,$tipbien,$cuenta,$estado,$f
     	left join oficinas o on a.id_depact=o.id_dep and a.id_areact=o.id_area and a.id_ofiact=o.id_oficina
     	inner join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5'
     	left join tablatipo f on a.id_estado=f.id_tipo and f.id_tabla='9'
-    	where a.est_bien='A' ";
+    	where 1=1 ";
+			if ($usuario <> '*') {
+					$sql = $sql . "and id_asignado='" . $usuario . "' ";
+			}
       if ($local <> '*') {
           $sql = $sql . "and id_depact='" . $local . "' ";
       }
@@ -31,8 +34,8 @@ function Select_Reporte_Bienes($local,$area,$oficina,$tipbien,$cuenta,$estado,$f
       if ($estado <> '*') {
           $sql = $sql . "and id_estado='" . $estado . "' ";
       }
-      if ($forma <> '*') {
-          $sql = $sql . "and forma_adq='" . $forma . "' ";
+      if ($situa <> '*') {
+          $sql = $sql . "and est_bien='" . $situa . "' ";
       }
       if ($cuenta<> '*') {
           $sql = $sql . "and cuenta='" . $cuenta. "' ";

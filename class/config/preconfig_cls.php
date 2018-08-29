@@ -2,6 +2,7 @@
 $clase= new parametricas;
 $rs_marca=$clase->Get_marca();
 $rs_tipobien=$clase->Get_tipo_bien();
+$rs_tipobien_2=$clase->Get_tipo_bien_2();
 $rs_operativo=$clase->Get_Operativo();
 $rs_origen=$clase->Get_Operativo();
 $rs_destino=$clase->Get_Operativo();

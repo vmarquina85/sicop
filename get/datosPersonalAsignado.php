@@ -4,7 +4,7 @@ $perso=new parametricas;
 $idpersonal=$_REQUEST["idpersonal"];
 $rs_personal=$perso->get_personal_datos($idpersonal);
 $code=$_REQUEST['code'];
-
+error_reporting(0);
 if ($code=='1') {
   echo "<div class='input-group m-b-5 '>
     <span class='input-group-addon input-sm'>Local</span>

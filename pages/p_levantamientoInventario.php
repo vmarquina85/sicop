@@ -171,7 +171,7 @@ require '../class/config/session_val.php';
                   <th class='bg-grey-200 p-2 text-center'>Marca</th>
                   <th class='bg-grey-200 p-2 text-center'>Modelo</th>
                   <th class='bg-grey-200 p-2 text-center'>Area</th>
-                  <th colspan='3' class='bg-grey-200 p-2 text-center'>Asignado</th>
+                  <th colspan='4' class='bg-grey-200 p-2 text-center'>Asignado</th>
 
                 </tr>
               </thead>
@@ -186,7 +186,33 @@ require '../class/config/session_val.php';
       </div>
 
     </div>
-
+    <div class="modal fade" id="md_codigoBarra" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="dialog-normal modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header header-info hidden-print">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-white">Codigo de Barras</h4>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <div class="logomuni">
+                <img src="../assets/img/logo.png" style="width:32px;height:32px;vertical-align:middle;" alt="">
+                <div style="display:inline;">
+                  SISTEMA METROPOLITANO DE LA SOLIDARIDAD
+                </div>
+              </div>
+              <h6 id='bc_tipoBien' class='p-0 m-0'></h6>
+              <svg id="bc_code128" class='p-0 m-0'></svg>
+              <!-- <h5 id='bc_valor' class='pager-0'></h5> -->
+            </div>
+          </div>
+          <div class="modal-footer hidden-print">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" onclick='window.print()' class="btn btn-primary">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- end #content -->
     <!-- begin theme-panel -->
@@ -210,11 +236,10 @@ require '../class/config/session_val.php';
   <script src="../assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
   <script src="../assets/plugins/switchery/switchery.min.js"></script>
   <script src="../assets/plugins/StickyTableHeaders/js/jquery.stickyheader.js"></script>
-  <script src="../assets/plugins/Highcharts/js/highcharts.js"></script>
-  <script src="../assets/plugins/Highcharts/js/exporting.js"></script>
-  <script src="../assets/plugins/Highcharts/js/dark-unica.js"></script>
+  <script src="../assets/plugins/barcode/barcode.js"></script>
   <script src="../class/config/config.js"></script>
   <script src="../class/Inventario/Inventario.js"></script>
+  <script src="../class/bienes/bienes.js"></script>
   <script src="../class/menu/menu.js"></script>
 
   <!-- ================== END BASE JS ================== -->
@@ -251,47 +276,6 @@ require '../class/config/session_val.php';
     }
     $('.progress').fadeOut();
   }
-  var green = "#00acac",
-  red = "#ff5b57",
-  blue = "#348fe2",
-  purple = "#727cb6",
-  orange = "#f59c1a",
-  black = "#2d353c";
-  var renderSwitcher = function() {
-    if ($("[data-render=switchery]").length !== 0) {
-      $("[data-render=switchery]").each(function() {
-        var e = green;
-        if ($(this).attr("data-theme")) {
-          switch ($(this).attr("data-theme")) {
-            case "red":
-            e = red;
-            break;
-            case "blue":
-            e = blue;
-            break;
-            case "purple":
-            e = purple;
-            break;
-            case "orange":
-            e = orange;
-            break;
-            case "black":
-            e = black;
-            break
-          }
-        }
-        var t = {};
-        t.color = e;
-        t.secondaryColor = $(this).attr("data-secondary-color") ? $(this).attr("data-secondary-color") : "#dfdfdf";
-        t.className = $(this).attr("data-classname") ? $(this).attr("data-classname") : "switchery";
-        t.disabled = $(this).attr("data-disabled") ? true : false;
-        t.disabledOpacity = $(this).attr("data-disabled-opacity") ? $(this).attr("data-disabled-opacity") : .5;
-        t.speed = $(this).attr("data-speed") ? $(this).attr("data-speed") : "0.5s";
-        var n = new Switchery(this, t)
-      })
-    }
-  };
-
   // Build the chart
   //  Highcharts.chart('graph', {
   //      chart: {
@@ -328,60 +312,60 @@ require '../class/config/session_val.php';
   //          }]
   //      }]
   //  });
-  $('#graph').highcharts({
-
-    chart: {
-
-      renderTo: 'detalle_ingresos',
-      type: 'column'
-    },
-
-    colors:["#99DC79"],
-    title: {
-      text: 'GRÁFICO'
-    },
-    subtitle: {
-      // text: 'Fecha : '+ f.getDate() + "/" + pad(f.getMonth()+1,2) + "/" + f.getFullYear()
-      text: 'INGRESOS POR ESPECIALIDAD'
-    },
-    xAxis: {
-      type: 'category',
-      labels: {
-
-        enabled: true
-      }
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -70,
-      y: 100,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: '',
-      shadow: true
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: 'Ingresos (Soles)'
-      }
-    },
-    tooltip: {
-      pointFormat: 'Ventas: S/. <b>{point.y:.2f} </b>'
-    },
-    credits: {
-      enabled: false
-    },
-    exporting: {
-      enabled: false
-    },
-    series: [{
-      name: 'Ingresos',
-      data: [ ]
-    }]
-  });
+  // $('#graph').highcharts({
+  //
+  //   chart: {
+  //
+  //     renderTo: 'detalle_ingresos',
+  //     type: 'column'
+  //   },
+  //
+  //   colors:["#99DC79"],
+  //   title: {
+  //     text: 'GRÁFICO'
+  //   },
+  //   subtitle: {
+  //     // text: 'Fecha : '+ f.getDate() + "/" + pad(f.getMonth()+1,2) + "/" + f.getFullYear()
+  //     text: 'INGRESOS POR ESPECIALIDAD'
+  //   },
+  //   xAxis: {
+  //     type: 'category',
+  //     labels: {
+  //
+  //       enabled: true
+  //     }
+  //   },
+  //   legend: {
+  //     layout: 'vertical',
+  //     align: 'right',
+  //     verticalAlign: 'top',
+  //     x: -70,
+  //     y: 100,
+  //     floating: true,
+  //     borderWidth: 1,
+  //     backgroundColor: '',
+  //     shadow: true
+  //   },
+  //   yAxis: {
+  //     min: 0,
+  //     title: {
+  //       text: 'Ingresos (Soles)'
+  //     }
+  //   },
+  //   tooltip: {
+  //     pointFormat: 'Ventas: S/. <b>{point.y:.2f} </b>'
+  //   },
+  //   credits: {
+  //     enabled: false
+  //   },
+  //   exporting: {
+  //     enabled: false
+  //   },
+  //   series: [{
+  //     name: 'Ingresos',
+  //     data: [ ]
+  //   }]
+  // });
   </script>
 </body>
 </html>

@@ -63,7 +63,7 @@ function Query_Array(parametros,url,Async=true){
 http.send(null);
 return ArrayReturn;
 }
-function Query_Report(parametros,url,ltarget,atarget,otarget,Async=true){
+function Query_Report(parametros,url,utarget,ltarget,atarget,otarget,Async=true){
   // Crea el modurl automaticamente
   var modurl=url;
   for (var i = 0; i < parametros.length; i++) {
@@ -73,8 +73,8 @@ function Query_Report(parametros,url,ltarget,atarget,otarget,Async=true){
       modurl=modurl+"&"+i+"="+parametros[i];
     }
   }
-  modurl=modurl+'&ltarget='+ltarget+'&atarget='+atarget+'&otarget='+otarget;
-$('#pdfReport').attr('src', modurl);
+  modurl=modurl+'&utarget='+utarget+'&ltarget='+ltarget+'&atarget='+atarget+'&otarget='+otarget;
+return '<iframe frameborder="0" id="pdfReport" style="width: 100%;height: 440px;" src="'+modurl+'"></iframe>';
 // Mostrar Reporte
 }
 
@@ -128,7 +128,9 @@ function validarPasw(elemento){
     return false;
   }
 }
-
+function limpiarFormulario(formulario){
+  $(formulario)[0].reset();
+}
 function iniciarPasswordMeter(){
   $("#new_contrasena").passwordStrength(), $("#repetir_contrasena").passwordStrength({
     targetDiv: "#passwordStrengthDiv2"

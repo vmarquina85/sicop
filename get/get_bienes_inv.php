@@ -19,6 +19,9 @@ $rs_bienes=$bien-> Get_bien2('*','','','','','',$Operativo,'*','A','A');
     <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>
         <a href="javascript:;" onclick='seleccionarOk(this)' class="email-btn" data-click="email-highlight"><i class="material-icons">done</i></a>
     </td>
+    <td  onclick='imprimirCodbar(this)' class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
+      <img title='Imprimir código de barras' src="../assets/img/barcode.png" alt="">
+    </a></td>
 
 
 

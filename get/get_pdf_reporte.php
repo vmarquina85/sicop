@@ -2,7 +2,7 @@
 require '../class/reportes/Reportes.php' ;
 require '../assets/plugins/fpdf/fpdf.php';
 $reporte= new Reporte;
-$rs_reporte=$reporte->Select_Reporte_Bienes($_REQUEST['0'],$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8']);
+$rs_reporte=$reporte->Select_Reporte_Bienes($_REQUEST['0'],$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9']);
 
 class PDF extends FPDF {
     //Cabecera de pgina
@@ -32,17 +32,23 @@ class PDF extends FPDF {
         $this->Cell(80, 4, ': SISTEMA METROPOLITANO DE LA SOLIDARIDAD', 0, 1, '');
         if ($_GET['0'] <> '*') {
             $this->SetFont('Arial', '', 8);
+            $this->Cell(30, 4, 'Usuario', 0, 0, '');
+            $this->SetFont('Arial', 'B', 8);
+            $this->Cell(80, 4, ': ' . $_GET['utarget'], 0, 1, '');
+        }
+        if ($_GET['1'] <> '*') {
+            $this->SetFont('Arial', '', 8);
             $this->Cell(30, 4, 'Local', 0, 0, '');
             $this->SetFont('Arial', 'B', 8);
             $this->Cell(80, 4, ': ' . $_GET['ltarget'], 0, 1, '');
         }
-        if ($_GET['1'] <> '*') {
+        if ($_GET['2'] <> '*') {
             $this->SetFont('Arial', '', 8);
             $this->Cell(30, 4, 'Area', 0, 0, '');
             $this->SetFont('Arial', 'B', 8);
             $this->Cell(80, 4, ': ' . $_GET['atarget'], 0, 1, '');
         }
-        if ($_GET['2'] <> '*') {
+        if ($_GET['3'] <> '*') {
             $this->SetFont('Arial', '', 8);
             $this->Cell(30, 4, 'Oficina', 0, 0, '');
             $this->SetFont('Arial', 'B', 8);

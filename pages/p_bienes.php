@@ -1033,10 +1033,10 @@ error_reporting(0);
     })
   });
   var tipoBien =[
-    <?php for($i=0;$i<sizeof($rs_tipobien);$i++)
+    <?php for($i=0;$i<sizeof($rs_tipobien_2);$i++)
     {
       ?>
-      '<?php echo $rs_tipobien[$i]["prefijo"] .' - ' .$rs_tipobien[$i]["descripcion"] ?>',
+      '<?php echo $rs_tipobien_2[$i]["prefijo"] .' - ' .$rs_tipobien_2[$i]["descripcion"] ?>',
       <?php
     }
     ?>
