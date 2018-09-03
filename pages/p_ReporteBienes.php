@@ -69,9 +69,7 @@ error_reporting(0);
       line-height: 18px;
     }
   }
-  .logomuni{
-    display: inline-block;
-  }
+
   </style>
 </head>
 <body>
