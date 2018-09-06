@@ -26,11 +26,11 @@ require '../class/config/session_val.php';
   <link href="../assets/css/style.min.css" rel="stylesheet" />
   <link href="../assets/css/style-responsive.min.css" rel="stylesheet" />
   <link href="../assets/css/theme/default.css" rel="stylesheet" id="theme" />
+  <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/plugins/DataTables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet"/>
   <link href="../assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet"/>
   <link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
-  <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link href="../assets/plugins/switchery/switchery.min.css" rel="stylesheet">
   <!-- <link href="../assets/plugins/StickyTableHeaders/css/component.css" rel="stylesheet"> -->
   <link href="../assets/css/sysinv.css" rel="stylesheet" />
@@ -111,6 +111,9 @@ require '../class/config/session_val.php';
         <button type="button" class="btn btn-xs btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
         <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
         <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
+
+
+
       </div>
     </div>
     <div id="content" class="p-l-30 p-r-30 p-t-10">
@@ -141,8 +144,8 @@ require '../class/config/session_val.php';
       <div class="row">
         <div class="col-md-12">
           <div class="input-group m-b-10 ">
-            <span class="input-group-addon input-sm" >centro</span>
-            <select  id="sl_local"  onchange="f_getBienes();DisableElement(this)" class='selectpicker form-control input-sm' data-live-search="true" disabled  >
+            <span class="input-group-addon input-sm" >Centro</span>
+            <select  id="sl_local"  onchange="f_getBienes();DisableElement(this)" class='default-select2 form-control input-sm' data-live-search="true" disabled  >
               <option value="*">--Seleccionar--</option>
               <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
                 <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
@@ -255,6 +258,7 @@ require '../class/config/session_val.php';
   //globals-----------------------------------------------------
   var selectedIdUser='';
   construirMenu();
+  iniciarCentros();
   //------------------------------------------------------------
   $(document).ready(function () {
     App.init();

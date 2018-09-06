@@ -77,6 +77,20 @@ function Query_Report(parametros,url,utarget,ltarget,atarget,otarget,Async=true)
 return '<iframe frameborder="0" id="pdfReport" style="width: 100%;height: 440px;" src="'+modurl+'"></iframe>';
 // Mostrar Reporte
 }
+function Query_Report_excel(parametros,url,utarget,ltarget,atarget,otarget,Async=true){
+  // Crea el modurl automaticamente
+  var modurl=url;
+  for (var i = 0; i < parametros.length; i++) {
+    if (i==0) {
+      modurl=modurl+"?"+i+"="+parametros[i];
+    }else{
+      modurl=modurl+"&"+i+"="+parametros[i];
+    }
+  }
+  modurl=modurl+'&utarget='+utarget+'&ltarget='+ltarget+'&atarget='+atarget+'&otarget='+otarget;
+return modurl;
+// Mostrar Reporte
+}
 
 function validarVaciosIN(elemento){
   //elemento -> este es el div del cual se quiere recorrer

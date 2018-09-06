@@ -120,7 +120,7 @@ class parametricas extends conectar
 		$sql="select  a.id_personal,
 		(a.ape_paterno || ' '|| a.ape_materno || ', '||a.nombres) as funcionario,a.dni,a.id_dep,o.descripcion as operativo,a.id_area, b.descripcion as area,a.id_oficina, f.descripcion as oficina,a.id_cargo,
 		d.descripcion as cargo,a.id_oficina,a.id_dep
-		from  personal 
+		from  personal a
 		left join dependencias o on a.id_dep=o.id_dep
 		left join areas b on a.id_area=b.id_area and a.id_dep=b.id_dep
 		left join oficinas f on a.id_dep=f.id_dep and a.id_area=f.id_area and a.id_oficina=f.id_oficina

@@ -4,7 +4,7 @@ class Reporte extends conectar
 {
 function Select_Reporte_Bienes($usuario,$local,$area,$oficina,$tipbien,$cuenta,$estado,$situa,$desde,$hasta){
 		$respuesta=array();
-    $sql="Select a.id_areact, a.id_depact, a.id_patrimonial,
+    $sql="Select a.id_areact, p.descripcion  as id_depact, a.id_patrimonial,
     	b.descripcion as tipo_equipo, f.descripcion as estado,
     	r.siglas as area,o.siglas as oficina,
     	to_char(a.fecha_adq,'dd/mm/yyyy') as fecha_adq,a.id_interno,a.valor_lib,

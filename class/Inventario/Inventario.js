@@ -84,3 +84,7 @@ function ObtenerInvOk(table){
 
   return array;
 }
+
+function iniciarCentros(){
+  $(".default-select2").select2();
+}

@@ -145,89 +145,95 @@ error_reporting(0);
               </div>
               <h3 class="panel-title">Parámetros</h3>
             </div>
-            <form id='frm_param' class="panel-body bg-grey-200">
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Usuarios:</span>
-                <select id="utarget" class='default-select2 form-control input-sm'>
-                  <option value="*">TODOS</option>
-                  <?php for ($i=0; $i <sizeof($rs_personal) ; $i++) {
-                    echo "<option value='".utf8_encode($rs_personal[$i]['id_personal'])."'>".utf8_decode($rs_personal[$i]['completo'])."</option>";
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Local:</span>
-                <select id="ltarget"  onchange="fn_obtenerAreas('ltarget','atarget');fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
-                  <option value="*">TODOS</option>
-                  <?php for ($i=0; $i <sizeof($rs_operativo) ; $i++) {
-                    echo '<option value="'.$rs_operativo[$i]['id_dep'].'">'.$rs_operativo[$i]['descripcion'].'</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Area:</span>
-                <select id="atarget"  onchange="fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
-                  <option value="*">TODOS</option>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Oficina:</span>
-                <select id="otarget"  class=' form-control input-sm '>
-                  <option value="*">TODOS</option>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Tipo Bien:</span>
-                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
-                  <option value="*">TODOS</option>
-                  <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
-                    <option value="<?php echo $rs_tipobien[$i]['prefijo'].'@'.$rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
-                  <?php  }?>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Cuenta:</span>
-                <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
-                  <option value="*">TODOS</option>
-                  <?php for ($i=0; $i < sizeof($rs_cuentac_noFilter) ; $i++) {  ?>
-                    <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
-                  <?php  }?>
-                </select>
+            <div class="panel-body bg-grey-200" >
+              <div class="table-responsive" style='height:345px;overflow-y: scroll'>
 
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Estado Físico:</span>
-                <select id="sl_estadoBien"  class=' default-select2 form-control input-sm m-r-10'>
-                  <option value="*">TODOS</option>
-                  <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
-                    <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
-                  <?php  }?>
-                </select>
+                <form id='frm_param'>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Usuarios:</span>
+                    <select id="utarget" class='default-select2 form-control input-sm'>
+                      <option value="*">TODOS</option>
+                      <?php for ($i=0; $i <sizeof($rs_personal) ; $i++) {
+                        echo "<option value='".utf8_encode($rs_personal[$i]['id_personal'])."'>".utf8_decode($rs_personal[$i]['completo'])."</option>";
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Local:</span>
+                    <select id="ltarget"  onchange="fn_obtenerAreas('ltarget','atarget');fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
+                      <option value="*">TODOS</option>
+                      <?php for ($i=0; $i <sizeof($rs_operativo) ; $i++) {
+                        echo '<option value="'.$rs_operativo[$i]['id_dep'].'">'.$rs_operativo[$i]['descripcion'].'</option>';
+                      }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Area:</span>
+                    <select id="atarget"  onchange="fn_obtenerOficina('ltarget','atarget','otarget')" class='default-select2 form-control input-sm'>
+                      <option value="*">TODOS</option>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Oficina:</span>
+                    <select id="otarget"  class='default-select2 form-control input-sm '>
+                      <option value="*">TODOS</option>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Tipo Bien:</span>
+                    <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
+                      <option value="*">TODOS</option>
+                      <?php for ($i=0; $i < sizeof($rs_tipobien) ; $i++) {  ?>
+                        <option value="<?php echo $rs_tipobien[$i]['id_tipo']; ?>"><?php echo utf8_encode($rs_tipobien[$i]['descripcion']); ?></option>
+                      <?php  }?>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Cuenta:</span>
+                    <select id="sl_tipobien"  class='default-select2 form-control input-sm m-r-10'>
+                      <option value="*">TODOS</option>
+                      <?php for ($i=0; $i < sizeof($rs_cuentac_noFilter) ; $i++) {  ?>
+                        <option value="<?php echo $rs_cuentac_noFilter[$i]['cuenta']  ?>"><?php echo utf8_encode($rs_cuentac_noFilter[$i]['denomina']); ?></option>
+                      <?php  }?>
+                    </select>
 
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Estado Físico:</span>
+                    <select id="sl_estadoBien"  class=' default-select2 form-control input-sm m-r-10'>
+                      <option value="*">TODOS</option>
+                      <?php for ($i=0; $i < sizeof($rs_estado) ; $i++) {  ?>
+                        <option value="<?php echo $rs_estado[$i]['id_tipo']  ?>"><?php echo utf8_encode($rs_estado[$i]['descripcion']); ?></option>
+                      <?php  }?>
+                    </select>
+
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Situación:</span>
+                    <select  class='default-select2 form-control input-sm m-r-10'>
+                      <option value="*">TODOS</option>
+                      <option value="A">ACTIVO</option>
+                      <option value="B">DE BAJA</option>
+                    </select>
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Desde:</span>
+                    <input  type="text" class="form-control datepicker-default input-sm" >
+                  </div>
+                  <div class="input-group m-b-10 ">
+                    <span class="input-group-addon input-sm" >Hasta:</span>
+                    <input  type="text" class="form-control datepicker-default input-sm" >
+                  </div>
+                </form>
               </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Situación:</span>
-                <select  class='default-select2 form-control input-sm m-r-10'>
-                  <option value="*">TODOS</option>
-                  <option value="A">ACTIVO</option>
-                  <option value="B">DE BAJA</option>
-                </select>
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Desde:</span>
-                <input  type="text" class="form-control datepicker-default input-sm" >
-              </div>
-              <div class="input-group m-b-10 ">
-                <span class="input-group-addon input-sm" >Hasta:</span>
-                <input  type="text" class="form-control datepicker-default input-sm" >
-              </div>
-            </form>
+            </div>
             <div class="panel-footer text-center">
 
               <!-- <button type="button" onclick="limpiarFormulario('#frm_param')" class='btn btn-primary' name="button" > <img src="" alt="">Limpiar</button> -->
-              <button type="button" onclick="GenerarReporte()" class='btn btn-primary' name="button" > <img src="" alt="">Generar</button>
+              <button type="button" onclick="GenerarReporte_excel()" class='btn btn-primary' name="button" > <img src="../assets/img/excel.png" alt=""> Exportar</button>
+              <button type="button" onclick="GenerarReporte()" class='btn btn-primary' name="button" > <img src="../assets/img/notepad.png" style='height:16px;width:16px' alt=""> Generar</button>
 
             </div>
           </div>
