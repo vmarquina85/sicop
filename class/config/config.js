@@ -229,8 +229,8 @@ function startTimeAndDate() {
   var s = today.getSeconds();
   m = checkTime(m);
   s = checkTime(s);
-  document.getElementById('date').innerHTML=today.getDate() + "/" + checkTime(today.getMonth() + 1) + "/" + today.getFullYear();
-  document.getElementById('time').innerHTML =h + ":" + m + ":" + s;
+  // document.getElementById('date').innerHTML=today.getDate() + "/" + checkTime(today.getMonth() + 1) + "/" + today.getFullYear();
+  document.getElementById('time').innerHTML ="<i class='fa fa-clock-o'></i> "+ h + ":" + m + ":" + s;
   var t = setTimeout(startTimeAndDate, 500);
 }
 function checkTime(i) {

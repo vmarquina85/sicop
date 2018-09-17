@@ -430,16 +430,16 @@ function crearBien(){
     $(div).removeClass('has-error');
   }
 
-  if (document.getElementById('sl_colorBien').value==''){
-    alert('Seleccione un Color');
-    var div=document.getElementById('sl_colorBien').closest('div');
-    $(div).toggleClass('has-error');
-    document.getElementById('sl_colorBien').focus();
-    return false;
-  }else{
-    var div=document.getElementById('sl_colorBien').closest('div');
-    $(div).removeClass('has-error');
-  }
+  // if (document.getElementById('sl_colorBien').value==''){
+  //   alert('Seleccione un Color');
+  //   var div=document.getElementById('sl_colorBien').closest('div');
+  //   $(div).toggleClass('has-error');
+  //   document.getElementById('sl_colorBien').focus();
+  //   return false;
+  // }else{
+  //   var div=document.getElementById('sl_colorBien').closest('div');
+  //   $(div).removeClass('has-error');
+  // }
 
 
 
@@ -803,10 +803,10 @@ function procesoDepreciacion(){
     });
   }
 }
-function imprimirCodbar(objeto) {
+function imprimirCodbar(objeto,poscod,postip) {
   fila=objeto.closest('tr');
-  var codigo=fila.getElementsByTagName('td')[4].innerHTML;
-  var tipbien=fila.getElementsByTagName('td')[5].innerHTML
+  var codigo=fila.getElementsByTagName('td')[poscod].innerHTML;
+  var tipbien=fila.getElementsByTagName('td')[postip].innerHTML
   JsBarcode("#bc_code128", codigo,
   {
     displayValue:true,

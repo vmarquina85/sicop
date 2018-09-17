@@ -111,13 +111,11 @@ require '../class/config/session_val.php';
         <button type="button" class="btn btn-xs btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
         <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
         <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
-
-
-
+        <h5 class='pull-right m-0' style='font-weight: 700;' id="time"><i class="fa fa-clock"></i></h5>
       </div>
     </div>
     <div id="content" class="p-l-30 p-r-30 p-t-10">
-
+      
       <div class="row">
         <div class="col-md-4">
           <div class="input-group m-b-10 ">
@@ -259,6 +257,7 @@ require '../class/config/session_val.php';
   var selectedIdUser='';
   construirMenu();
   iniciarCentros();
+  startTimeAndDate();
   //------------------------------------------------------------
   $(document).ready(function () {
     App.init();
