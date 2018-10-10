@@ -84,6 +84,49 @@ function ObtenerInvOk(table){
 
   return array;
 }
+function grabarInventario() {
+//
+  var arrayOK= Array();
+  var arrayMod= Array();
+  arrayOK=ObtenerInvOk('tb_bienes_inv');
+  arrayMod=ObtenerEdit('tb_bienes_inv');
+  for (var i = 0; i < arrayOK.length; i++) {
+    alert(arrayOK[i]);
+  }
+  for (var j = 0; j < arrayMod.length; j++) {
+    alert(arrayMod[j]);
+  }
+}
+
+
+function inventarioExist(codigo) {
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+
+}
+
+function ObtenerEdit(table){
+  var seleccion= Array();
+  var selected=0;
+  elemento=document.getElementById(table);
+  var rows= elemento.getElementsByTagName('TR');
+  //1.- recorrer las filas que tengan la class warning
+  for (var i = 0; i < rows.length; i++) {
+    if (rows[i].className.indexOf("warning")>=0) {
+      selected=selected+1;
+      seleccion.push(i);
+    }
+  }
+  var array=Array(selected);
+  //3.- obtener nro y id_patrimonial de estas filas y guardarlos en la matriz
+  for (var i = 0; i < seleccion.length; i++) {
+    array[i]=rows[seleccion[i]].getElementsByTagName("td")[0].innerHTML;
+
+  }
+
+  return array;
+}
 
 function iniciarCentros(){
   $(".default-select2").select2();

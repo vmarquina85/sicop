@@ -15,7 +15,7 @@ function Select_Reporte_Bienes($usuario,$local,$area,$oficina,$tipbien,$cuenta,$
     	left join oficinas o on a.id_depact=o.id_dep and a.id_areact=o.id_area and a.id_ofiact=o.id_oficina
     	inner join tablatipo b on a.id_hardware=b.id_tipo and b.id_tabla='5'
     	left join tablatipo f on a.id_estado=f.id_tipo and f.id_tabla='9'
-    	where 1=1 ";
+    	where a.est_bien<>'E'";
 			if ($usuario <> '*') {
 					$sql = $sql . "and id_asignado='" . $usuario . "' ";
 			}

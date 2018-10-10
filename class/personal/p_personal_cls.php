@@ -8,7 +8,7 @@ class personal extends conectar
 	{
 		$this->t=array();
 	}
-	function personalSelect($limit, $offset,$nombre,$apepat,$apemat,$dependencia){
+	function personalSelect($limit, $offset,$nombres,$apepat,$apemat,$dependencia){
 		$sql="select a.ape_paterno as paterno,a.ape_materno as materno,a.nombres,a.dni,a.ruc,a.id_cargo,a.direccion as domicilio,
 		(a.direccion ||' ' || u.distrito) as direccion,a.id_area,a.id_personal,
 		o.descripcion as operativo, b.descripcion as area, f.descripcion as oficina,
@@ -22,13 +22,13 @@ class personal extends conectar
 		left join tablatipo d on a.id_cargo=d.id_tipo and d.id_tabla='10'
 		where a.id_personal<>''";
 		if ($nombres!='') {
-			$sql=$sql." and a.nombres='" . $nombres . "'";
+			$sql=$sql." and a.nombres like '%" . strtoupper($nombres) . "%'";
 		}
 		if ($apepat!='') {
-			$sql=$sql." and a.ape_paterno='" . $apepat . "'";
+			$sql=$sql." and a.ape_paterno like '%" . strtoupper($apepat) . "%'";
 		}
 		if ($apemat!='') {
-			$sql=$sql." and a.ape_materno='" . $apemat . "'";
+			$sql=$sql." and a.ape_materno like '%" . strtoupper($apemat) . "%'";
 		}
 		if ($dependencia!='*') {
 			$sql=$sql." and a.id_dep='" . $dependencia . "'";
@@ -40,7 +40,7 @@ class personal extends conectar
 		}
 		return $this->t;
 	}
-	function GET_pages($nombre,$apepat,$apemat,$dependencia){
+	function GET_pages($nombres,$apepat,$apemat,$dependencia){
 		$sql="Select count(A.*) as cuenta from (select a.ape_paterno as paterno,a.ape_materno as materno,a.nombres,a.dni,a.ruc,a.id_cargo,a.direccion as domicilio,
 		(a.direccion ||' ' || u.distrito) as direccion,a.id_area,a.id_personal,
 		o.descripcion as operativo, b.descripcion as area, f.descripcion as oficina,
@@ -54,13 +54,13 @@ class personal extends conectar
 		left join tablatipo d on a.id_cargo=d.id_tipo and d.id_tabla='10'
 		where a.id_personal<>'' ";
 		if ($nombres!='') {
-			$sql=$sql." and a.nombres='" . $nombres . "'";
+			$sql=$sql." and a.nombres='" . strtoupper($nombres) . "'";
 		}
 		if ($apepat!='') {
-			$sql=$sql." and a.ape_paterno='" . $apepat . "'";
+			$sql=$sql." and a.ape_paterno='" . strtoupper($apepat) . "'";
 		}
 		if ($apemat!='') {
-			$sql=$sql." and a.ape_materno='" . $apemat . "'";
+			$sql=$sql." and a.ape_materno='" . strtoupper($apemat) . "'";
 		}
 		if ($dependencia!='*') {
 			$sql=$sql." and a.id_dep='" . $dependencia . "'";

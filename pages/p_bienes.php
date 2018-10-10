@@ -419,7 +419,7 @@ error_reporting(0);
                       <div class="input-group m-b-5 ">
                         <span class="input-group-addon input-sm">Usuario</span>
                         <select onchange='llenarPersonalDestino(1);' id="sl_usuarioAsignado"  class='form-control input-sm'>
-                          <option value="*">--Seleccionar Asignado--</option>
+                          <option value="">--Seleccionar Asignado--</option>
                           <?php for ($i=0; $i < sizeof($rs_personal) ; $i++) {  ?>
                             <option value="<?php echo utf8_encode($rs_personal[$i]['id_personal']);?>"><?php echo utf8_decode($rs_personal[$i]['completo']); ?></option>
                           <?php  }?>
@@ -428,31 +428,31 @@ error_reporting(0);
                       <div id='datosDestino'>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Local</span>
-                          <select name="" id="sl_localAsignado" class='form-control input-sm' disabled>
+                          <select name="" id="sl_localAsignado" class='form-control input-sm' >
                             <option value="">-- Seleccione local --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Area</span>
-                          <select name="" id="sl_areaAsignado" class='form-control input-sm' disabled>
+                          <select name="" id="sl_areaAsignado" class='form-control input-sm' >
                             <option value="">-- Seleccione Area --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Oficina</span>
-                          <select name="" id="sl_oficinaAsignado" class='form-control input-sm' disabled>
+                          <select name="" id="sl_oficinaAsignado" class='form-control input-sm' >
                             <option value="">-- Seleccione Oficina --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">Cargo</span>
-                          <select name="" id="sl_cargoAsignado" class='form-control input-sm' disabled>
+                          <select name="" id="sl_cargoAsignado" class='form-control input-sm' >
                             <option value="">-- Seleccione Cargo --</option>
                           </select>
                         </div>
                         <div class="input-group m-b-5 ">
                           <span class="input-group-addon input-sm">DNI</span>
-                          <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" disabled>
+                          <input id='inputDniRegistro' type="text" class="form-control input-sm" value="" >
                         </div>
                       </div>
                     </form>
@@ -575,7 +575,7 @@ error_reporting(0);
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane fade active in" id="datosbienUpdt">
-                    <form id='datosBien'>
+                    <form >
                       <!-- fila 1 -->
                       <div class="input-group m-b-5 ">
                         <span class="input-group-addon input-sm" >Denominación</span>

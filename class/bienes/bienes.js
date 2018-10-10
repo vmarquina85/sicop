@@ -326,8 +326,6 @@ function crearBien(){
     var http=getXMLHTTPRequest();
   }
   //validando
-
-
   if (document.getElementById('txt_bienDescripcion').value==''){
     alert('Seleccione un tipo de bien');
     var div=document.getElementById('txt_bienDescripcion').closest('div');
@@ -338,7 +336,6 @@ function crearBien(){
     var div=document.getElementById('txt_bienDescripcion').closest('div');
     $(div).removeClass('has-error');
   }
-
   if (document.getElementById('sl_tipoCuenta').value==''){
     alert('Seleccione un tipo de Cuenta');
     var div=document.getElementById('sl_tipoCuenta').closest('div');
@@ -360,8 +357,6 @@ function crearBien(){
     var div=document.getElementById('sl_CuentaContable').closest('div');
     $(div).removeClass('has-error');
   }
-
-
   if (document.getElementById('sl_formAdq').value==''){
     alert('Seleccione Forma de Adquisición');
     var div=document.getElementById('sl_formAdq').closest('div');
@@ -382,8 +377,6 @@ function crearBien(){
     var div=document.getElementById('txt_fechaAdq').closest('div');
     $(div).removeClass('has-error');
   }
-
-
   if (document.getElementById('txt_valoradq').value==''){
     alert('Digite Valor de Adquisición')
     var div=document.getElementById('txt_valoradq').closest('div');
@@ -394,9 +387,6 @@ function crearBien(){
     var div=document.getElementById('txt_valoradq').closest('div');
     $(div).removeClass('has-error');
   }
-
-
-
   if (document.getElementById('txt_valorlib').value==''){
     alert('Digite Valor en Libros')
     var div=document.getElementById('txt_valorlib').closest('div');
@@ -407,7 +397,6 @@ function crearBien(){
     var div=document.getElementById('txt_valorlib').closest('div');
     $(div).removeClass('has-error');
   }
-
   if (document.getElementById('sl_estadoBien').value==''){
     alert('Digite Valor en Libros')
     var div=document.getElementById('sl_estadoBien').closest('div');
@@ -418,7 +407,6 @@ function crearBien(){
     var div=document.getElementById('sl_estadoBien').closest('div');
     $(div).removeClass('has-error');
   }
-
   if (document.getElementById('sl_usuarioAsignado').value==''){
     alert('Seleccione personal asignado')
     var div=document.getElementById('sl_usuarioAsignado').closest('div');
@@ -429,24 +417,9 @@ function crearBien(){
     var div=document.getElementById('sl_usuarioAsignado').closest('div');
     $(div).removeClass('has-error');
   }
-
-  // if (document.getElementById('sl_colorBien').value==''){
-  //   alert('Seleccione un Color');
-  //   var div=document.getElementById('sl_colorBien').closest('div');
-  //   $(div).toggleClass('has-error');
-  //   document.getElementById('sl_colorBien').focus();
-  //   return false;
-  // }else{
-  //   var div=document.getElementById('sl_colorBien').closest('div');
-  //   $(div).removeClass('has-error');
-  // }
-
-
-
   if (!confirm("Se guardara el registro actual. Esta seguro de continuar?")){
     return false;
   }
-
 
   var denominacion=document.getElementById('txt_bienDescripcion').value.substr(10);
   var tipo_cta=document.getElementById('sl_tipoCuenta').value;
@@ -506,7 +479,7 @@ function crearBien(){
         $('#mymodal').modal('toggle');
         var rs=get_datos_bien(prefix +'-'+resultado);
         actualizarMatriz(rs);
-        registrarAsignacion();
+        registrarAsignacion(2);
       }
     }
   });
@@ -569,11 +542,16 @@ function editarBien(objeto){
   });
   http.send(null);
 }
-function registrarAsignacion(){
+function registrarAsignacion(type=1){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
   }
-  var url = '../insert/insertDataAsignacion.php';
+  if (type==1) {
+      var url = '../insert/insertDataAsignacion.php';
+  }else{
+      var url = '../insert/insertDataAsignacion2.php';
+  }
+
   //parametros a ingresar
   var today = new Date();
   //origen

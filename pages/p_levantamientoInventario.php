@@ -59,7 +59,7 @@ require '../class/config/session_val.php';
   <!-- begin #page-container -->
   <div id="page-container" class="page-container fade page-without-sidebar page-header-fixed page-with-top-menu">
     <!-- begin #header -->
-    <div id="header" class="header navbar navbar-inverse bg-navbar navbar-fixed-top">
+    <div id="header" class="header navbar navbar-inverse bg-navbar navbar-fixed-top hidden-print">
       <!-- begin container-fluid -->
       <div class="container-fluid">
         <!-- begin mobile sidebar expand / collapse button -->
@@ -101,12 +101,12 @@ require '../class/config/session_val.php';
     </div>
     <!-- end #header -->
     <!-- begin #top-menu -->
-    <div id="top-menu" class="top-menu">
+    <div id="top-menu" class="top-menu hidden-print">
       <!-- begin top-menu nav -->
       <ul  id='nav_menu' class="nav">
       </ul>
     </div>
-    <div class="bg-grey-200">
+    <div class="bg-grey-200 hidden-print">
       <div class="panel-body">
         <button type="button" class="btn btn-xs btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
         <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
@@ -114,8 +114,8 @@ require '../class/config/session_val.php';
         <h5 class='pull-right m-0' style='font-weight: 700;' id="time"><i class="fa fa-clock"></i></h5>
       </div>
     </div>
-    <div id="content" class="p-l-30 p-r-30 p-t-10">
-      
+    <div id="content" class="p-l-30 p-r-30 p-t-10 hidden-print">
+
       <div class="row">
         <div class="col-md-4">
           <div class="input-group m-b-10 ">
@@ -182,7 +182,7 @@ require '../class/config/session_val.php';
           </div>
         </div>
         <div class="panel-footer text-right">
-          <button  class='btn btn-xs btn-success' onclick="ObtenerInvOk('tb_bienes_inv')" id="btn_next"> Siguiente</button>
+          <button  class='btn btn-xs btn-success' onclick="grabarInventario()" id="btn_next"> Siguiente</button>
         </div>
       </div>
 

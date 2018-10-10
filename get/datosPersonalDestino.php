@@ -4,8 +4,6 @@ $perso=new parametricas;
 $idpersonal=$_REQUEST["idpersonal"];
 $rs_personal=$perso->get_personal_datos($idpersonal);
  ?>
-
-<div id='datosDestino'>
   <div class="form-group">
     <label class="col-md-2 control-label">Area:</label>
     <div class="col-md-10">
@@ -46,4 +44,3 @@ $rs_personal=$perso->get_personal_datos($idpersonal);
 
     </div>
   </div>
-</div>
