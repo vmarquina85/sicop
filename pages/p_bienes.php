@@ -218,7 +218,7 @@ error_reporting(0);
               <table id='data-table' class='table table-bordered table-hover f-s-11'>
                 <thead>
                   <tr>
-                    <th colspan="4" class='p-0 text-center  bg-grey-200'>Acciones</th>
+                    <th colspan="3" class='p-0 text-center  bg-grey-200'>Acciones</th>
                     <th class='p-0 text-center  bg-grey-200'>Patrimonial</th>
                     <th class='p-0 text-center  bg-grey-200'>Tipo de Bien</th>
                     <th class='p-0 text-center  bg-grey-200'>Marca</th>

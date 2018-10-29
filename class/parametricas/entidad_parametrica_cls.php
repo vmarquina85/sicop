@@ -121,9 +121,9 @@ class parametricas extends conectar
 		(a.ape_paterno || ' '|| a.ape_materno || ', '||a.nombres) as funcionario,a.dni,a.id_dep,o.descripcion as operativo,a.id_area, b.descripcion as area,a.id_oficina, f.descripcion as oficina,a.id_cargo,
 		d.descripcion as cargo,a.id_oficina,a.id_dep
 		from  personal a
-		left join dependencias o on a.id_dep=o.id_dep
-		left join areas b on a.id_area=b.id_area and a.id_dep=b.id_dep
-		left join oficinas f on a.id_dep=f.id_dep and a.id_area=f.id_area and a.id_oficina=f.id_oficina
+		left join dependencias o on o.id_dep=a.id_dep
+		left join areas b on b.id_area=a.id_area and b.id_dep=a.id_dep
+		left join oficinas f on f.id_dep=a.id_dep and f.id_area=a.id_area and f.id_oficina=a.id_oficina
 		left join tablatipo d on a.id_cargo=d.id_tipo and d.id_tabla='10'
 		where a.id_personal='".$idpersonal."'";
 		$res=pg_query(parent::con_sinv(),$sql);

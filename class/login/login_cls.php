@@ -46,7 +46,7 @@ if (pg_num_rows($result) > 0) {
     $ca = "select dependencia,entidad from entorno";
     $r = pg_query($conexion, $ca);
     session_start();
-    session_name($ale);
+    // session_name($ale);
     $_SESSION['sicop_usr_name'] = $usr_name;
     $_SESSION['usr_login'] = $usr_login;
     $_SESSION['sicop_usr_id'] = $usr_id;

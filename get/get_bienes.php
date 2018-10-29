@@ -24,7 +24,7 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
         <img title='Editar' src="../assets/img/page_edit.png" alt="">
       </a>
     </td>
-      <td  onclick='imprimirCodbar(this,4,5)' class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
+      <td  onclick='imprimirCodbar(this,3,4)' class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
         <img title='Imprimir código de barras' src="../assets/img/barcode.png" alt="">
       </a></td>
       <!-- <td class='p-3 f-s-11 text-center m-r-10 m-l-10'><a href="javascript:;">
@@ -40,9 +40,9 @@ $rs_bienes=$bien-> Get_bien($tam, $inicio,$tipo,$prefix,$patrimonial,$serie,$cod
                 <img title='Dar de Alta' src='../assets/img/arrow_up.png'>
               </a></td>";
       };?>
-      <td class='p-3 f-s-11 text-center m-r-10 m-l-10' style='cursor:pointer;' onclick='AlertEliminar(this)'><a>
+      <!-- <td class='p-3 f-s-11 text-center m-r-10 m-l-10' style='cursor:pointer;' onclick='AlertEliminar(this)'><a>
         <img title='Eliminar' src="../assets/img/cancel.png" alt="">
-      </a></td>
+      </a></td> -->
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["id_patrimonial"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["tipo_equipo"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_bienes[$i]["marca"]); ?></td>

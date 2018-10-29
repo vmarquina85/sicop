@@ -491,7 +491,7 @@ function editarBien(objeto){
   }
 
   fila=objeto.closest('tr')
-  var id_patrimonial=fila.getElementsByTagName('td')[4].innerHTML;
+  var id_patrimonial=fila.getElementsByTagName('td')[3].innerHTML;
   var url = "../get/get_detalleBien.php?id_patrimonial="+id_patrimonial;
   http.open("GET", url, true);
   http.addEventListener('readystatechange', function() {
