@@ -20,8 +20,8 @@ if ($rs_usuarios[$i]["usr_est"]==1) {
 }
     echo "<li><a href='javascript:getPasswordModal(2,fila);'><img  src='../assets/img/keyring-icon.png'/> Cambiar Contraseña</a></li></ul></div></td>
 <td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["usr_id"])."</td>
-<td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["usr_login"])."</td>
-<td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["completo"])."</td>
+<td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".($rs_usuarios[$i]["usr_login"])."</td>
+<td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".($rs_usuarios[$i]["completo"])."</td>
 <td class='p-5 f-s-12 text-center m-r-10 m-l-10'> ".utf8_encode($rs_usuarios[$i]["usr_niv"])."</td>
 <td class='p-5 f-s-12 text-center m-r-10 m-l-10'><img src='../assets/img/0047-ID-icon.png' /> ".utf8_encode($rs_usuarios[$i]["usr_idper"])."</td>";
 if ($rs_usuarios[$i]["usr_est"]==1) {

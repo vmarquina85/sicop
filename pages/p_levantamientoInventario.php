@@ -43,6 +43,10 @@ require '../class/config/session_val.php';
     height: 250px;
     overflow-y: auto;
   }
+
+  .default-select2 {
+    width: 100% !important;
+  }
 </style>
 </head>
 <body>
@@ -108,14 +112,13 @@ require '../class/config/session_val.php';
     </div>
     <div class="bg-grey-200 hidden-print">
       <div class="panel-body">
-        <button type="button" class="btn btn-xs btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
-        <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
-        <button type="button" class="btn btn-xs btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
+        <button type="button" class="btn btn-sm btn-default" onclick='javascript:nuevo();'><img src="../assets/img/new_slide.png" alt=""> Nuevo</button>
+        <button type="button" class="btn btn-sm btn-default"><img src="../assets/img/diskette.png" alt=""> Grabar</button>
+        <button type="button" class="btn btn-sm btn-default"><img src="../assets/img/cancel.png" alt=""> Cierre</button>
         <h5 class='pull-right m-0' style='font-weight: 700;' id="time"><i class="fa fa-clock"></i></h5>
       </div>
     </div>
     <div id="content" class="p-l-30 p-r-30 p-t-10 hidden-print">
-
       <div class="row">
         <div class="col-md-4">
           <div class="input-group m-b-10 ">
@@ -143,7 +146,7 @@ require '../class/config/session_val.php';
         <div class="col-md-12">
           <div class="input-group m-b-10 ">
             <span class="input-group-addon input-sm" >Centro</span>
-            <select  id="sl_local"  onchange="f_getBienes();DisableElement(this)" class='default-select2 form-control input-sm' data-live-search="true" disabled  >
+            <select  id="sl_local"  onchange="javascript:DisableElement(this);" class='default-select2 ' data-live-search="true" disabled  >
               <option value="*">--Seleccionar--</option>
               <?php for ($i = 0; $i < sizeof($rs_origen); $i++) { ?>
                 <option value="<?php echo utf8_encode($rs_origen[$i]['id_dep']); ?>"><?php echo utf8_encode($rs_origen[$i]['descripcion']); ?></option>
@@ -152,68 +155,34 @@ require '../class/config/session_val.php';
           </div>
         </div>
       </div>
-
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-          </div>
-          <h4 class="panel-title">Bienes de Centro</h4>
-        </div>
-        <div class="panel-body">
-
-          <div class="table-responsive">
-            <table id='tb_bienes_inv' class="table table-email hover">
-              <thead>
-                <tr>
-                  <th class='bg-grey-200 p-2 text-center'>Código</th>
-                  <th class='bg-grey-200 p-2 text-center'>Tipo de Bien</th>
-                  <th class='bg-grey-200 p-2 text-center'>Marca</th>
-                  <th class='bg-grey-200 p-2 text-center'>Modelo</th>
-                  <th class='bg-grey-200 p-2 text-center'>Area</th>
-                  <th colspan='4' class='bg-grey-200 p-2 text-center'>Asignado</th>
-
-                </tr>
-              </thead>
-              <tbody id='tb_detalle_bienes'>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="panel-footer text-right">
-          <button  class='btn btn-xs btn-success' onclick="grabarInventario()" id="btn_next"> Siguiente</button>
-        </div>
-      </div>
-
-    </div>
-    <div class="modal fade" id="md_codigoBarra" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-      <div class="dialog-normal modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header header-info hidden-print">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title text-white">Codigo de Barras</h4>
-          </div>
-          <div class="modal-body">
-            <div class="text-center">
-              <div class="logomuni">
-                <img src="../assets/img/logo.png" style="width:32px;height:32px;vertical-align:middle;" alt="">
-                <div style="display:inline;">
-                  SISTEMA METROPOLITANO DE LA SOLIDARIDAD
-                </div>
-              </div>
-              <h6 id='bc_tipoBien' class='p-0 m-0'></h6>
-              <svg id="bc_code128" class='p-0 m-0'></svg>
-              <!-- <h5 id='bc_valor' class='pager-0'></h5> -->
-            </div>
-          </div>
-          <div class="modal-footer hidden-print">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" onclick='window.print()' class="btn btn-primary">Imprimir</button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="input-group m-b-10 ">
+            <span class="input-group-addon input-sm p-t-0 p-b-0" ><img src="../assets/img/vector/barcode.svg" style='width: 32px; height: 32px; padding=0px' alt=""></span>
+            <input type="text" class='form-control input-sm' onkeyup='InvBien(this)' onkeypress="javascript:ValidarCodPatrimonial(this);" maxlength="13">
           </div>
         </div>
       </div>
+      <div class="table-responsive">
+        <table id='tb_bienes_inv' class="table table-email hover">
+          <thead>
+            <tr>
+              <th class='bg-grey-200 p-2 text-center'>Código</th>
+              <th class='bg-grey-200 p-2 text-center'>Tipo de Bien</th>
+              <th class='bg-grey-200 p-2 text-center'>Marca</th>
+              <th class='bg-grey-200 p-2 text-center'>Modelo</th>
+              <th class='bg-grey-200 p-2 text-center'>Area</th>
+              <th colspan='4' class='bg-grey-200 p-2 text-center'>Asignado</th>
+            </tr>
+          </thead>
+          <tbody id='tb_detalle_bienes'>
+
+          </tbody>
+        </table>
+      </div>
     </div>
+
+
 
     <!-- end #content -->
     <!-- begin theme-panel -->
@@ -369,6 +338,6 @@ require '../class/config/session_val.php';
   //     data: [ ]
   //   }]
   // });
-  </script>
+</script>
 </body>
 </html>

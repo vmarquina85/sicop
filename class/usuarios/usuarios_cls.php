@@ -38,11 +38,11 @@ class usuarios extends conectar
 		return $this->t;
 	}
 	function desactivarUsuario($id_usr,$usrreg){
-		$sql="update usuarios set usr_est='0',fecha_mod=current_date,mod_id_usr='".$usrreg."' where usr_id='".$id_usr."'";
+		$sql="update usuarios set usr_est='0',fecha_mod=now()::timestamp,mod_id_usr='".$usrreg."' where usr_id='".$id_usr."'";
 		pg_query(parent::con_sinv(),$sql);
 	}
 	function activarUsuario($id_usr,$usrreg){
-		$sql="update usuarios set usr_est='1',fecha_mod=current_date,mod_id_usr='".$usrreg."' where usr_id='".$id_usr."'";
+		$sql="update usuarios set usr_est='1',fecha_mod=now()::timestamp,mod_id_usr='".$usrreg."' where usr_id='".$id_usr."'";
 		pg_query(parent::con_sinv(),$sql);
 	}
 	function get_Permisos_Activos($user){
@@ -92,7 +92,7 @@ class usuarios extends conectar
 				usr_login, usr_name, usr_id, usr_pwd, usr_dep, usr_est, usr_niv,
 				usr_idper, usr_flag, mod_id_usr, fecha_mod)
 				values('".strtoupper($login)."', null, '".trim($codigo)."', '".$passwrd."', null, '1', '".$nivel."',
-				'".$funcionario."', null, '".$_SESSION["sicop_usr_id"]."', current_date)";
+				'".$funcionario."', null, '".$_SESSION["sicop_usr_id"]."', now()::timestamp)";
 				pg_query(parent::con_sinv(),$sql);
 				return "1";
 			}

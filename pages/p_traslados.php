@@ -142,6 +142,7 @@ require '../class/config/session_val.php';
                     <option value="1">Interno</option>
                     <option value="2">Externo</option>
                     <option value="3">Mantenimiento</option>
+                    <option value="6">Translado Manual</option>
                   </select>
                   <button onclick='search(1)' class="btn btn-info btn-xs m-b-10 m-t-10"><i class="fa fa-search"></i> Buscar</button>
                   <button onclick='vertodos()' class="btn btn-default btn-xs m-b-10 m-t-10 "><img src="../assets/img/refresh.png" alt="Ver Todos"> Ver Todos</button>

@@ -25,7 +25,7 @@ $rs_desp = $desp->Get_desplazamiento($tam, $inicio, $numero, $origen, $destino, 
             <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["source"]); ?></td>
             <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["target"]); ?></td>
             <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["motivo"]); ?></td>
-            <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["entrego"]); ?></td>
+            <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo ($rs_desp[$i]["entrego"]); ?></td>
             <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo ($rs_desp[$i]["recibio"]); ?></td>
             <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php
             if ($rs_desp[$i]["mov_status"] == 'A') {

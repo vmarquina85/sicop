@@ -1,6 +1,7 @@
 var date=new Date();
 var fecha=date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
 var popupElement = '<div class="btn-group btn-toggle"><button class="btn btn-warning"><i class="fa fa-warning"></i> <br>Revisar</button><button onclick="seleccionar(this)" class="btn btn-success active"><i class="fa fa-check"></i><br> OK</button></div>';
+
 function f_getBienes(){
   if (window.XMLHttpRequest) {
     var http=getXMLHTTPRequest();
@@ -99,12 +100,7 @@ function grabarInventario() {
 }
 
 
-function inventarioExist(codigo) {
-  if (window.XMLHttpRequest) {
-    var http=getXMLHTTPRequest();
-  }
 
-}
 
 function ObtenerEdit(table){
   var seleccion= Array();
@@ -131,3 +127,60 @@ function ObtenerEdit(table){
 function iniciarCentros(){
   $(".default-select2").select2();
 }
+function InvBien(input){
+  var codigo =input.value;
+  if (codigo.length==13) {
+var elemento= new ibien(codigo);
+elemento.getData();
+elemento.ShowInfo();
+    }
+}
+//CLASE REQUEST
+function request(url){
+  this.url=url;
+}
+// METODOS DE REQUEST
+request.prototype.getUrl = function(){
+  return this.url;
+}
+request.prototype.sethttpRequest = function(){
+  if (window.XMLHttpRequest) {
+    var http=getXMLHTTPRequest();
+  }
+}
+request.prototype.executeRequest_dom  = function(async,dom_object){
+http.open("GET", this.url, async);
+http.addEventListener('readystatechange', function() {
+  if (http.readyState == 4) {
+    if(http.status == 200) {
+      var resultado = http.responseText;
+      document.getElementById(dom_object).innerHTML = (resultado);
+    }
+  }
+});
+  http.send(null);
+}
+
+
+
+
+
+  function ibien(codigo,tipo="",marca="",modelo="",area="",asignado="") {
+    this.codigo=codigo;
+    this.tipo=tipo;
+    this.marca=marca;
+    this.modelo=modelo;
+    this.area=area;
+    this.asignado=asignado;
+  }
+  //metodos de ibien
+  ibien.prototype.ShowInfo = function () {
+  alert('CODIGO:' + this.codigo + " TIPO:" + this.tipo + " MARCA:" + this.marca + " MODELO:" +   this.modelo + " AREA:"+  this.area + " ASIGNADO:" + this.asignado);
+};
+ibien.prototype.getData = function () {
+var req= new request('../get/get_bienes_inv.php');
+req.sethttpRequest();
+req.executeRequest_array(true, 'tb_detalle_bienes');
+
+
+};

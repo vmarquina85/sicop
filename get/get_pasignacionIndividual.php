@@ -19,11 +19,11 @@ $rs_desp=$desp->Get_asignaciones($tam, $inicio,$numero,$origen,$destino,$estado)
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["source"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["target"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["motivo"]); ?></td>
-      <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["entrego"]); ?></td>
-      <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo utf8_encode($rs_desp[$i]["recibio"]); ?></td>
+      <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo ($rs_desp[$i]["entrego"]); ?></td>
+      <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php echo ($rs_desp[$i]["recibio"]); ?></td>
       <td class='p-2 f-s-11 text-center m-r-10 m-l-10'><?php
       if ($rs_desp[$i]["mov_status"] == 'A') {
-        echo "<span class='label label-danger'>Anulado</span>";
+        echo "<span class='label label-danger'>Rechazado</span>";
       } else if ($rs_desp[$i]["mov_status"] == 'R') {
         echo "<span class='label label-success'>Recibido</span>";
       } else if ($rs_desp[$i]["mov_status"] == 'I') {

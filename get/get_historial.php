@@ -37,7 +37,7 @@ echo  "<tr>
         echo "TRASLADO MANUAL";
     }; echo "</td>
           <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".substr($rs_detalle[$i]['mov_orden'], 1, 8)."</td>
-          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['mov_fecha'])."</td>
+          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".$rs_detalle[$i]['mov_fecha']."</td>
           <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>";
           if ($rs_detalle[$i]['mov_status'] == 'A') {
               echo "<span class='label label-danger'>Anulado</span>";
@@ -51,8 +51,8 @@ echo  "<tr>
           <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['source'])."</td>
           <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['target'])."</td>
           <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['motivo'])."</td>
-          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['entrego'])."</td>
-          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".utf8_encode($rs_detalle[$i]['recibio'])."</td>
+          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".($rs_detalle[$i]['entrego'])."</td>
+          <td class='p-2 f-s-11 text-center m-r-10 m-l-10'>".($rs_detalle[$i]['recibio'])."</td>
           </tr>";
 }
 echo "</table>

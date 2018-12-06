@@ -51,14 +51,14 @@ $sql="select e.id_patrimonial,b.descripcion,e.modelo,m.descripcion as marca,e.se
 session_start();
  $sql="update cab_mov set mov_status='R' where mov_orden='".$orden."'";
 	pg_query(parent::con_sinv(),$sql);
- $sql2="update equipos set fec_modifica=current_date, id_asignado='".$_SESSION['usr_idper']."',id_depact='".$_SESSION['id_dep']."',id_areact='".$_SESSION['id_area']."',id_ofiact='".$_SESSION['id_oficina']."'  where id_alterno in (select det_equipo from det_mov where det_orden='".$orden."')";
+ $sql2="update equipos set fec_modifica=now()::timestamp, id_asignado='".$_SESSION['usr_idper']."',id_depact='".$_SESSION['id_dep']."',id_areact='".$_SESSION['id_area']."',id_ofiact='".$_SESSION['id_oficina']."'  where id_alterno in (select det_equipo from det_mov where det_orden='".$orden."')";
  	pg_query(parent::con_sinv(),$sql2);
 	}
 	function RechazarBienes($orden){
 session_start();
  $sql="update cab_mov set mov_status='A' where mov_orden='".$orden."'";
 	pg_query(parent::con_sinv(),$sql);
- // $sql2="update equipos set fec_modifica=current_date, id_asignado='".$_SESSION['usr_idper']."',id_depact='".$_SESSION['id_dep']."',id_areact='".$_SESSION['id_area']."',id_ofiact='".$_SESSION['id_oficina']."'  where id_alterno in (select det_equipo from det_mov where det_orden='".$orden."')";
+ // $sql2="update equipos set fec_modifica=now()::timestamp, id_asignado='".$_SESSION['usr_idper']."',id_depact='".$_SESSION['id_dep']."',id_areact='".$_SESSION['id_area']."',id_ofiact='".$_SESSION['id_oficina']."'  where id_alterno in (select det_equipo from det_mov where det_orden='".$orden."')";
  // pg_query(parent::con_sinv(),$sql2);
 	}
 }

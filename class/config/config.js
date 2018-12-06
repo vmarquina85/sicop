@@ -25,6 +25,13 @@ function getPasswordModal(type,tr){
   }
 
 }
+function ValidarCodPatrimonial(input) {
+  if ((event.keyCode>47)&&(event.keyCode<59)||(event.keyCode ==45)) {
+    event.returnValue = true;
+  }else{
+      event.returnValue = false;
+  }
+}
 function ObtenerDatosdeform(div, index){
   // definimos los arreglos
   var retorno = new Array();

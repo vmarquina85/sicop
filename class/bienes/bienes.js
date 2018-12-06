@@ -62,7 +62,7 @@ function vertodos(){
   $('#sl_Marca').val("*");
   $('#sl_estado').val("*");
   $('#sl_Asignacion').val("*");
-  $('#sl_tipobien').val("*");
+  $('#sl_tipobien').select2("val", "*");/////correccion de ver todos
   //limpiando imputs
   $('#txt_docalta').val("");
   $('#txt_codpatrimonial').val("");

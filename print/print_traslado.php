@@ -56,9 +56,9 @@ $rs_detalles=$class2->obtenerDet($prefijo.$idpapeleta);
     border-left: solid 1px rgba(0, 0, 0, 0.2);
     border-right: solid 1px rgba(0, 0, 0, 0.2);
   }
-  .txt-red{
-    color:red;
-  }
+.header{
+
+}
 
   </style>
   <style type="text/css" media="print">
@@ -231,51 +231,10 @@ $rs_detalles=$class2->obtenerDet($prefijo.$idpapeleta);
 
       </div>
       <p>E=ESTADO</p>
-      <p style='font-size:10px;'>NOTA: ESTE DOCUMENTO DEBE SER ALCANZADO POR EL RESPONSABLE DE PATRIMONIO DEL LOCAL DE ORIGEN Y ESTE A SU VEZ AL AREA DE PATRIMONIO, BAJO RESPONSABILIDAD</p>
+      <!-- <p style='font-size:10px;'>NOTA: ESTE DOCUMENTO DEBE SER ALCANZADO POR EL RESPONSABLE DE PATRIMONIO DEL LOCAL DE ORIGEN Y ESTE A SU VEZ AL AREA DE PATRIMONIO, BAJO RESPONSABILIDAD</p> -->
 
-      <div class="row">
-        <div class="col-sm-3">
-          <table class="table">
-            <tr>
-              <td style='border-top:0px'>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class='text-center' style='font-size: 10px ;'>RESPONSABLE DE PATRIMONIO DEPENDENCIA DE ORIGEN</td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-sm-3">
-          <table class="table">
-            <tr>
-              <td style='border-top:0px'>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class='text-center' style='font-size: 10px ;'>Vº Bº ADMINISTRACION DEPENDENCIA DE ORIGEN</td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-sm-3">
-          <table class="table">
-            <tr>
-              <td style='border-top:0px'>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class='text-center' style='font-size: 10px ;'>RESPONSABLE DE PATRIMONIO DEPENDENCIA DE DESTINO</td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-sm-3">
-          <table class="table">
-            <tr>
-              <td style='border-top:0px'>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class='text-center' style='font-size: 10px ;'>CARGO DE RECEPCION AREA DE PATRIMONIO</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-<p style='font-size:11px;' class='text-center'>DISTRIBUCION: ORIGINAL: AREA DE PATRIMONIO 1era COPIA: USUARIO QUE ENTREGA 2da COPIA: RESPONSABLE DEL PATRIMONIO - DEPENDENCIA DE DESTINO</p>
+
+<!-- <p style='font-size:11px;' class='text-center'>DISTRIBUCION: ORIGINAL: AREA DE PATRIMONIO 1era COPIA: USUARIO QUE ENTREGA 2da COPIA: USUARIO QUE RECIBE - DEPENDENCIA DE DESTINO</p> -->
 
 
 

@@ -50,7 +50,7 @@ class desplazamiento extends conectar
 		if ($_SESSION["usr_niv"] <> 'A'){
 		$sql.= " and (mov_transpo='" . $_SESSION['usr_idper'] . "' or mov_personal='" .  $_SESSION['usr_idper'] . "') ";
 		}
-		$sql=$sql." order by a.mov_fecha desc  limit ".$limit. " offset ".$offset ;
+		$sql=$sql." order by cast(a.mov_fecing as timestamp) desc  limit ".$limit. " offset ".$offset ;
 		$res=pg_query(parent::con_sinv(),$sql);
 		while($reg=pg_fetch_assoc($res)){
 			$this->t[]=$reg;
@@ -98,7 +98,7 @@ class desplazamiento extends conectar
 			if ($_SESSION["usr_niv"] <> 'A'){
 				$sql.= " and (mov_transpo='" . $_SESSION['usr_idper'] . "' or mov_personal='" .  $_SESSION['usr_idper'] . "') ";
 			}
-			$sql=$sql." order by cast(substring(mov_orden,2,7) as smallint) desc)A";
+			$sql=$sql." order by cast(a.mov_fecing as timestamp) desc )A";
 
 $res=pg_query(parent::con_sinv(),$sql);
 while($reg=pg_fetch_assoc($res)){
