@@ -1,14 +1,14 @@
 <?php header("Content-type: application/vnd.ms-excel");
-if (!ini_get('register_globals')) {
-$superglobals = array($_SERVER, $_ENV,
-$_FILES, $_COOKIE, $_POST, $_GET);
-if (isset($_SESSION)) {
-array_unshift($superglobals, $_SESSION);
-}
-foreach ($superglobals as $superglobal) {
-extract($superglobal, EXTR_SKIP);
-}
-}
+// if (!ini_get('register_globals')) {
+// $superglobals = array($_SERVER, $_ENV,
+// $_FILES, $_COOKIE, $_POST, $_GET);
+// if (isset($_SESSION)) {
+// array_unshift($superglobals, $_SESSION);
+// }
+// foreach ($superglobals as $superglobal) {
+// extract($superglobal, EXTR_SKIP);
+// }
+// }
 header("Content-Disposition: attachment;filename=Bienes.xls");
 include '../conexion/conexion_cls.php';
 require '../config/session_val.php';
@@ -24,7 +24,7 @@ a.observacion, a.id_estado, a.id_hardware, a.id_marca, a.id_color,to_char(a.fec_
 b.descripcion as tipo_equipo, d.descripcion as marca, e.descripcion as color, f.descripcion as estado, cc.tipo_cta as tip_c, cc.tip_uso_cta,
 g.descripcion as grupo,cl.descripcion as clase,a.doc_alta,
 r.descripcion as area, (s.ape_paterno || ' ' || s.ape_materno || ', ' || s.nombres) as personal,u.usr_login,um.usr_login as modificado,
-a.tipo_cta,a.cuenta,a.forma_adq,to_char(a.fecha_adq,'dd/mm/yyyy') as fecha_adq,a.id_interno,a.doc_alta,a.valor_lib,a.valor_tasa,
+a.tipo_cta,a.cuenta,a.forma_adq,to_char(a.fecha_adq,'dd/mm/yyyy') as fecha_adq,a.id_interno,a.resol_baja,to_char(a.fecha_baja,'dd/mm/yyyy') as fecha_baja,a.doc_alta,a.valor_lib,a.valor_tasa,
 a.asegurado,a.id_asignado,a.tipo_bien,a.nro_motor,a.nro_chasis,a.placa,a.est_bien ,a.dimension
 from equipos a
 inner join dependencias p on a.id_depact=p.id_dep

@@ -262,7 +262,7 @@ error_reporting(0);
                       <!-- fila 1 -->
                       <div class="input-group m-b-5 ">
                         <span class="input-group-addon input-sm" >Denominación</span>
-                        <select id='select_bienDescripcion' onchange="LlenarDatosBien('select_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" class="default-select2" >
+                      <select id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" class="default-select2" >
 <option value="">-SELECCIONAR-</option>
                         </select>
                         <!-- <input id='txt_bienDescripcion' onchange="LlenarDatosBien('txt_bienDescripcion','txt_prefix','txt_grupo','txt_clase')" type="text" class="form-control input-sm" > -->
@@ -1048,7 +1048,7 @@ error_reporting(0);
   $( "#txt_bienDescripcion").autocomplete({
     source: tipoBien
   });
-var select= document.getElementById('select_bienDescripcion');
+var select= document.getElementById('txt_bienDescripcion');
 for (var i = 0; i < tipoBien.length; i++) {
   var option = document.createElement("option");
   option.text=tipoBien[i];

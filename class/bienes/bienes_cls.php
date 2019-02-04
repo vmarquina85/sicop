@@ -47,7 +47,7 @@ class bien extends conectar
 			$sql=$sql." and a.doc_alta like '%".$DocumentoAlta."%'";
 		}
 		if ($Operativo!='*') {
-			$sql=$sql." and  a.id_depact like '%".$Operativo."%'";
+			$sql=$sql." and  a.id_depact='".$Operativo."'";
 		}
 		if ($Marca!='*') {
 			$sql=$sql." and a.id_marca like '%".$Marca."%'";

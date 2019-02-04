@@ -2,6 +2,7 @@
 require '../class/reportes/Reportes.php' ;
 require '../assets/plugins/fpdf/fpdf.php';
 $reporte= new Reporte;
+
 $rs_reporte=$reporte->Select_Reporte_Bienes($_REQUEST['0'],$_REQUEST['1'],$_REQUEST['2'],$_REQUEST['3'],$_REQUEST['4'],$_REQUEST['5'],$_REQUEST['6'],$_REQUEST['7'],$_REQUEST['8'],$_REQUEST['9']);
 
 class PDF extends FPDF {
@@ -109,6 +110,7 @@ for ($i=0; $i <sizeof($rs_reporte) ; $i++) {
   $pdf->Cell(10, 4, $rs_reporte[$i]['id_asignado'], 'RTB', 1, '');
   $v = $v + $rs_reporte[$i]['valor_lib'];
 }
+pg_close($reporte->con_sinv());
 $pdf->Cell(60, 4, 'TOTAL DE BIENES:', 1, 0, '');
 $pdf->Cell(40, 4, number_format($j, 0, '', ','), 1, 1, '');
 $pdf->Cell(60, 4, 'TOTAL DE VALOR EN LIBROS S/.:', 1, 0, '');

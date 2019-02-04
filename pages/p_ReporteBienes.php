@@ -232,75 +232,96 @@ error_reporting(0);
             <div class="panel-footer text-center">
 
               <!-- <button type="button" onclick="limpiarFormulario('#frm_param')" class='btn btn-primary' name="button" > <img src="" alt="">Limpiar</button> -->
-              <button type="button" onclick="GenerarReporte_excel()" class='btn btn-primary' name="button" > <img src="../assets/img/excel.png" alt=""> Exportar</button>
-              <button type="button" onclick="GenerarReporte()" class='btn btn-primary' name="button" > <img src="../assets/img/notepad.png" style='height:16px;width:16px' alt=""> Generar</button>
-
+              <!-- <button type="button" onclick="" class='btn btn-primary' name="button" > <img src="../assets/img/excel.png" alt=""> Exportar</button>
+              <button type="button" onclick="" class='btn btn-primary' name="button" > <img src="../assets/img/notepad.png" style='height:16px;width:16px' alt="">Reporte General</button>
+              <button type="button" onclick="" class='btn btn-primary' name="button" > <img src="../assets/img/notepad.png" style='height:16px;width:16px' alt=""> Reporte Detallado</button> -->
+              <div class='btn-group'>
+                <a  data-toggle='dropdown' class='btn btn-danger btn-sm dropdown-toggle' aria-expanded='true'>
+                  <img src="../assets/img/vector/pdf.svg" style='height:16px;width:16px' alt="pdf"> Formato pdf <span class='caret'></span></a>
+                  <ul class='dropdown-menu'>
+                    <li>
+                      <a href='javascript:GenerarReporte()'><img src="../assets/img/vector/pdf.svg" style='height:16px;width:16px' alt="pdf"> Reporte General</a>
+                      <a href='javascript:GenerarReporteDetallado()'><img src="../assets/img/vector/pdf.svg" style='height:16px;width:16px' alt="pdf"> Reporte Detallado</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class='btn-group'>
+                  <a  data-toggle='dropdown' class='btn btn-success btn-sm dropdown-toggle' aria-expanded='true'>
+                    <img src="../assets/img/vector/excel.svg" style='height:16px;width:16px' alt="excel"> Exportar xls<span class='caret'></span></a>
+                    <ul class='dropdown-menu'>
+                      <li>
+                        <a href='javascript:GenerarReporte_excel()'><img src="../assets/img/vector/excel.svg" style='height:16px;width:16px' alt="excel">  General</a>
+                        <a href='javascript:GenerarReporte_excel_det()'><img src="../assets/img/vector/excel.svg" style='height:16px;width:16px' alt="excel">  Detallado</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="panel panel-default">
-            <div class="panel-body text-center vertical-center" style='height:470px' >
-              <div id="VisorReporte">
-                <img src="../assets/img/vector/clipboard.svg" stye='margin-left: auto;margin-right: auto;display: block;' alt="">
-                <div class="text-success">
-                  PARA VISUALIZAR TU REPORTE LLENA LOS PARÁMETROS <br> Y HAGA CLICK EN EL BOTON <strong>GENERAR REPORTE</strong>
+
+            <div class="col-md-9">
+              <div class="panel panel-default">
+                <div class="panel-body text-center vertical-center" style='height:470px' >
+                  <div id="VisorReporte">
+                    <img src="../assets/img/vector/clipboard.svg" stye='margin-left: auto;margin-right: auto;display: block;' alt="">
+                    <div class="text-success">
+                      PARA VISUALIZAR TU REPORTE LLENA LOS PARÁMETROS <br> Y HAGA CLICK EN EL BOTON <strong>GENERAR REPORTE</strong>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- end #content -->
+        <!-- begin theme-panel -->
+        <!-- end theme-panel -->
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade hidden-print" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
       </div>
-    </div>
-    <!-- end #content -->
-    <!-- begin theme-panel -->
-    <!-- end theme-panel -->
-    <!-- begin scroll to top btn -->
-    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade hidden-print" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-    <!-- end scroll to top btn -->
-  </div>
-  <!-- end page container -->
-  <!-- ================== BEGIN BASE JS ================== -->
-  <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
-  <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-  <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-  <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
-  <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
-  <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
-  <script src="../assets/plugins/barcode/barcode.js"></script>
-  <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
-  <!-- ================== END BASE JS ================== -->
-  <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-  <script src="../assets/js/apps.min.js"></script>
-  <script src="../class/ajax/ajax.js"></script>
-  <script src="../class/bienes/bienes.js"></script>
-  <script src="../class/reportes/Reportes.js"></script>
-  <script src="../class/parametricas/parametricas.js"></script>
-  <script src="../class/config/config.js"></script>
-  <script src="../class/menu/menu.js"></script>
-  <script src="../class/login/killerSession.js"></script>
-  <!-- ================== END PAGE LEVEL JS ================== -->
-  <script>
-  //globals-----------------------------------------------------
-  var selectedIdUser='';
-  construirMenu();
-  //------------------------------------------------------------
-  $(document).ready(function() {
-    var fila;
-    var datos;
-    var id_tip;
-    App.init();
-    iniciarSelect();
-    $(".datepicker-default").datepicker({
-      todayHighlight: !0,
-      autoclose: true,
-      format: 'dd/mm/yyyy'
-    })
-  });
+      <!-- end page container -->
+      <!-- ================== BEGIN BASE JS ================== -->
+      <script src="../assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+      <script src="../assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+      <script src="../assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+      <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+      <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+      <script src="../assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+      <script src="../assets/plugins/DataTables/media/js/jquery.dataTables.min.js"></script>
+      <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
+      <script src="../assets/plugins/barcode/barcode.js"></script>
+      <script src="../assets/plugins/password-indicator/js/password-indicator.js"></script>
+      <!-- ================== END BASE JS ================== -->
+      <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+      <script src="../assets/js/apps.min.js"></script>
+      <script src="../class/ajax/ajax.js"></script>
+      <script src="../class/bienes/bienes.js"></script>
+      <script src="../class/reportes/Reportes.js"></script>
+      <script src="../class/parametricas/parametricas.js"></script>
+      <script src="../class/config/config.js"></script>
+      <script src="../class/menu/menu.js"></script>
+      <script src="../class/login/killerSession.js"></script>
+      <!-- ================== END PAGE LEVEL JS ================== -->
+      <script>
+      //globals-----------------------------------------------------
+      var selectedIdUser='';
+      construirMenu();
+      //------------------------------------------------------------
+      $(document).ready(function() {
+        var fila;
+        var datos;
+        var id_tip;
+        App.init();
+        iniciarSelect();
+        $(".datepicker-default").datepicker({
+          todayHighlight: !0,
+          autoclose: true,
+          format: 'dd/mm/yyyy'
+        })
+      });
 
-</script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>

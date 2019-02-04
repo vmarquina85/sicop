@@ -177,7 +177,7 @@ function BajaBien(objeto){
     // resultado=obtener_detalle(objeto);
     // if (resultado[0].papeleta!='S'){
     fila=objeto.closest('tr');
-    var id_patrimonial=fila.getElementsByTagName('td')[4].innerHTML;
+    var id_patrimonial=fila.getElementsByTagName('td')[3].innerHTML;
     var causal=document.getElementById('sl_causalBaja').value;
     var fechabaja=document.getElementById('txt_fechaBaja').value;
     var resbaja=document.getElementById('txt_resBaja').value;
@@ -210,7 +210,7 @@ function AltaBien(objeto){
     // resultado=obtener_detalle(objeto);
     // if (resultado[0].papeleta!='S'){
     fila=objeto.closest('tr');
-    var id_patrimonial=fila.getElementsByTagName('td')[4].innerHTML;
+    var id_patrimonial=fila.getElementsByTagName('td')[3].innerHTML;
     if (window.XMLHttpRequest) {
       var http=getXMLHTTPRequest();
     }

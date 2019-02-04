@@ -12,7 +12,7 @@ if ($rs_usuarios[$i]["usr_est"]==0) {
  echo " class='active'";
 }
 echo ">
-    <td id='".$i."' class='p-1 f-s-12 text-center'><div class='btn-group'><a onclick='obtenerObject(this)' data-toggle='dropdown' class='btn btn-primary btn-xs dropdown-toggle' aria-expanded='true'><i class='fa fa-settings'></i>Acciones <span class='caret'></span></a><ul class='dropdown-menu'><li><a href='javascript:opennp(fila);'><img  src='../assets/img/lock-icon.png'/> Nivel y Permisos</a></li>";
+    <td id='".$i."' class='p-1 f-s-12 text-center'><div class='btn-group'><a onclick='obtenerObject(this)' data-toggle='dropdown' class='btn btn-primary btn-xs dropdown-toggle' aria-expanded='true'><i class='fa fa-cog'></i> Acciones <span class='caret'></span></a><ul class='dropdown-menu'><li><a href='javascript:opennp(fila);'><img  src='../assets/img/lock-icon.png'/> Nivel y Permisos</a></li>";
 if ($rs_usuarios[$i]["usr_est"]==1) {
   echo  "<li><a href='javascript:desactivarUsuario(fila);'><img  src='../assets/img/sign-ban-icon.png'/> Desactivar</a></li>";
 }else{

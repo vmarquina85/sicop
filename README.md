@@ -1,5 +1,5 @@
 
-## SICOP Version 3.0
+## SICOP Version 4.0
 SISTEMA DE CONTROL PATRIMONIAL
 
 >ChangeLog:

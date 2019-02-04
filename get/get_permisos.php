@@ -18,5 +18,5 @@ echo "<td class='p-0 text-center'>
 }
 echo  "</tr>";
 }
-
+pg_close($permisos->con_sinv());
 ?>
